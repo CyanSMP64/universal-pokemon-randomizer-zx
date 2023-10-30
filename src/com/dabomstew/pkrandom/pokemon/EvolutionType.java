@@ -42,14 +42,14 @@ public enum EvolutionType {
     LEVEL_CREATE_EXTRA(-1, -1, 13, 13, 14, 14, 14),
     LEVEL_IS_EXTRA(-1, -1, 14, 14, 15, 15, 15),
     LEVEL_HIGH_BEAUTY(-1, -1, 15, 15, 16, 16, 16),
-    STONE_MALE_ONLY(-1, -1, -1, 16, 17, 17, 17),
-    STONE_FEMALE_ONLY(-1, -1, -1, 17, 18, 18, 18),
+    LEVEL_FEMALE_ONLY(-1, -1, 16, 23, 24, 24, 24),
+    LEVEL_MALE_ONLY(-1, -1, 17, 22, 23, 23, 23),
+    STONE_MALE_ONLY(-1, -1, 18, 16, 17, 17, 17),
+    STONE_FEMALE_ONLY(-1, -1, 19, 17, 18, 18, 18),
     LEVEL_ITEM_DAY(-1, -1, -1, 18, 19, 19, 19),
     LEVEL_ITEM_NIGHT(-1, -1, -1, 19, 20, 20, 20),
     LEVEL_WITH_MOVE(-1, -1, -1, 20, 21, 21, 21),
     LEVEL_WITH_OTHER(-1, -1, -1, 21, 22, 22, 22),
-    LEVEL_MALE_ONLY(-1, -1, -1, 22, 23, 23, 23),
-    LEVEL_FEMALE_ONLY(-1, -1, -1, 23, 24, 24, 24),
     LEVEL_ELECTRIFIED_AREA(-1, -1, -1, 24, 25, 25, 25),
     LEVEL_MOSS_ROCK(-1, -1, -1, 25, 26, 26, 26),
     LEVEL_ICY_ROCK(-1, -1, -1, 26, 27, 27, 27),
@@ -72,7 +72,7 @@ public enum EvolutionType {
     /* @formatter:on */
 
     private int[] indexNumbers;
-    private static EvolutionType[][] reverseIndexes = new EvolutionType[7][50];
+    private static EvolutionType[][] reverseIndexes = new EvolutionType[8][50];
 
     static {
         for (EvolutionType et : EvolutionType.values()) {

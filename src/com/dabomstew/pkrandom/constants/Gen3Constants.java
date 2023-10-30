@@ -59,7 +59,9 @@ public class Gen3Constants {
 
     public static final String rseMapLabelsPointerPrefix = "C078288030BC01BC00470000";
 
-    public static final String pokedexOrderPointerPrefix = "0448814208D0481C0004000C05E00000";
+    public static final String pokedexOrderPointerPrefix = "F5D10548814209D0481C0004000C06E0";
+// vanilla : 0448814208D0481C0004000C05E00000
+// modified: F5D10548814209D0481C0004000C06E0
 
     public static final String rsFrontSpritesPointerPrefix = "05E0";
 
@@ -168,7 +170,7 @@ public class Gen3Constants {
 
     public static final int unhackedMaxPokedex = 411, unhackedRealPokedex = 386, hoennPokesStart = 252;
 
-    public static final int evolutionMethodCount = 15;
+    public static final int evolutionMethodCount = 19;
 
     public static final int cacophonyIndex = 76, airLockIndex = 77, highestAbilityIndex = 77;
 
@@ -400,6 +402,7 @@ public class Gen3Constants {
         map.put(Type.ROCK, Arrays.asList(Gen3Items.hardStone));
         map.put(Type.STEEL, Arrays.asList(Gen3Items.metalCoat));
         map.put(Type.WATER, Arrays.asList(Gen3Items.mysticWater, Gen3Items.seaIncense));
+        map.put(Type.FAIRY, Arrays.asList(Gen3Items.fairyFeather));
         map.put(null, Collections.emptyList()); // ??? type
         return Collections.unmodifiableMap(map);
     }
@@ -439,6 +442,7 @@ public class Gen3Constants {
         table[0x0F] = Type.ICE;
         table[0x10] = Type.DRAGON;
         table[0x11] = Type.DARK;
+        table[0x12] = Type.FAIRY;
         return table;
     }
 
@@ -481,6 +485,8 @@ public class Gen3Constants {
             return 0x08;
         case DARK:
             return 0x11;
+        case FAIRY:
+            return 0x12;
         default:
             return 0; // normal by default
         }
@@ -511,10 +517,9 @@ public class Gen3Constants {
         // Unknown blank items
         allowedItems.banRange(Gen3Items.unknown52, 11);
         allowedItems.banRange(Gen3Items.unknown87, 6);
-        allowedItems.banRange(Gen3Items.unknown99, 4);
         allowedItems.banRange(Gen3Items.unknown112, 9);
         allowedItems.banRange(Gen3Items.unknown176, 3);
-        allowedItems.banRange(Gen3Items.unknown226, 28);
+        allowedItems.banRange(Gen3Items.unknown227, 27);
         allowedItems.banRange(Gen3Items.unknown347, 2);
         allowedItems.banSingles(Gen3Items.unknown72, Gen3Items.unknown82, Gen3Items.unknown105, Gen3Items.unknown267);
         // HMs
@@ -525,9 +530,10 @@ public class Gen3Constants {
         // non-bad items
         // ban specific pokemon hold items, berries, apricorns, mail
         nonBadItemsRSE = allowedItems.copy();
-        nonBadItemsRSE.banSingles(Gen3Items.lightBall, Gen3Items.oranBerry, Gen3Items.soulDew);
+        nonBadItemsRSE.banSingles(Gen3Items.dragonScale, Gen3Items.upGrade, Gen3Items.lightBall, Gen3Items.soulDew);
         nonBadItemsRSE.banRange(Gen3Items.orangeMail, 12); // mail
-        nonBadItemsRSE.banRange(Gen3Items.figyBerry, 33); // berries
+        nonBadItemsRSE.banRange(Gen3Items.razzBerry, 28); // berries
+        nonBadItemsRSE.banRange(Gen3Items.tinyMushroom, 8); // 
         nonBadItemsRSE.banRange(Gen3Items.luckyPunch, 4); // pokemon specific
         nonBadItemsRSE.banRange(Gen3Items.redScarf, 5); // contest scarves
 
@@ -1038,10 +1044,10 @@ public class Gen3Constants {
             {Gen3Items.thunderstone, 300},
             {Gen3Items.waterStone, 300},
             {Gen3Items.leafStone, 300},
-            {Gen3Items.unknown99, 0},
-            {Gen3Items.unknown100, 0},
-            {Gen3Items.unknown101, 0},
-            {Gen3Items.unknown102, 0},
+            {Gen3Items.shinyStone, 300},
+            {Gen3Items.duskStone, 300},
+            {Gen3Items.dawnStone, 300},
+            {Gen3Items.iceStone, 300},
             {Gen3Items.tinyMushroom, 50},
             {Gen3Items.bigMushroom, 500},
             {Gen3Items.unknown105, 0},
@@ -1165,7 +1171,7 @@ public class Gen3Constants {
             {Gen3Items.metalPowder, 1},
             {Gen3Items.thickClub, 50},
             {Gen3Items.stick, 20},
-            {Gen3Items.unknown226, 0},
+            {Gen3Items.fairyFeather, 200},
             {Gen3Items.unknown227, 0},
             {Gen3Items.unknown228, 0},
             {Gen3Items.unknown229, 0},

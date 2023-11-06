@@ -299,10 +299,12 @@ public class Pokemon implements Comparable<Pokemon> {
             1165, 1171, 1172, Species.eternatus, 1038, 1054, 1055, 1056, 1057, 1059, 1152, 1151, 1064, 1168, 1169, 1157,
             Species.arceus, 1166, 1066, 1067, 1031, 1032, 1065);
 
-    private static final List<Integer> strongLegendaries = Arrays.asList(Species.mewtwo, Species.lugia, Species.hoOh,
-            Species.kyogre, Species.groudon, Species.rayquaza, Species.dialga, Species.palkia, Species.regigigas,
-            Species.giratina, Species.arceus, Species.reshiram, Species.zekrom, Species.kyurem, Species.xerneas,
-            Species.yveltal, Species.cosmog, Species.cosmoem, Species.solgaleo, Species.lunala);
+    private static final List<Integer> strongLegendaries = Arrays.asList(Species.kyurem, Species.zacian,
+            Species.zamazenta, Species.kyogre, Species.groudon, Species.regigigas, Species.koraidon, Species.miraidon, Species.mewtwo,
+            Species.lugia, Species.hoOh, Species.rayquaza, Species.dialga, 1141, Species.palkia, 1142, Species.giratina, 1143,
+            Species.reshiram, Species.zekrom, Species.xerneas, Species.yveltal, 1158, Species.solgaleo, Species.lunala, 1164,
+            1165, 1171, 1172, Species.eternatus, 1056, 1057, 1152, 1151, 1064, 1168, 1169, 1157,
+            Species.arceus, 1166, 1066, 1067, 1031, 1032, 1065);
 
     private static final List<Integer> ultraBeasts = Arrays.asList(Species.nihilego, Species.buzzwole, Species.pheromosa,
             Species.xurkitree, Species.celesteela, Species.kartana, Species.guzzlord, Species.poipole, Species.naganadel,

@@ -306,9 +306,7 @@ public class Pokemon implements Comparable<Pokemon> {
             1165, 1171, 1172, Species.eternatus, 1056, 1057, 1152, 1151, 1064, 1168, 1169, 1157,
             Species.arceus, 1166, 1066, 1067, 1031, 1032, 1065);
 
-    private static final List<Integer> ultraBeasts = Arrays.asList(Species.nihilego, Species.buzzwole, Species.pheromosa,
-            Species.xurkitree, Species.celesteela, Species.kartana, Species.guzzlord, Species.poipole, Species.naganadel,
-            Species.stakataka, Species.blacephalon);
+    private static final List<Integer> ultraBeasts = Arrays.asList();
 
     public boolean isLegendary() {
         return formeNumber == 0 ? legendaries.contains(this.number) : legendaries.contains(this.baseForme.number);

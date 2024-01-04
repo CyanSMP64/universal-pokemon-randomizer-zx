@@ -93,12 +93,12 @@ public class Gen3Constants {
 
     public static final byte freeSpaceByte = (byte) 0xFF;
 
-    public static final int rseStarter2Offset = 2, rseStarter3Offset = 4, frlgStarter2Offset = 515,
-            frlgStarter3Offset = 461, frlgStarterRepeatOffset = 5;
+    public static final int rseStarter2Offset = 2, rseStarter3Offset = 4, frlgStarter2Offset = 503,
+            frlgStarter3Offset = 449, frlgStarterRepeatOffset = 5;
 
     public static final int frlgBaseStarter1 = 1, frlgBaseStarter2 = 4, frlgBaseStarter3 = 7;
 
-    public static final int frlgStarterItemsOffset = 218;
+    public static final int frlgStarterItemsOffset = 215;
 
     public static final int gbaAddRxOpcode = 0x30, gbaUnconditionalJumpOpcode = 0xE0, gbaSetRxOpcode = 0x20,
             gbaCmpRxOpcode = 0x28, gbaNopOpcode = 0x46C0;
@@ -530,17 +530,22 @@ public class Gen3Constants {
         // non-bad items
         // ban specific pokemon hold items, berries, apricorns, mail
         nonBadItemsRSE = allowedItems.copy();
-        nonBadItemsRSE.banSingles(Gen3Items.dragonScale, Gen3Items.upGrade, Gen3Items.lightBall, Gen3Items.soulDew);
+        nonBadItemsRSE.banSingles(Gen3Items.dragonScale, Gen3Items.upGrade, Gen3Items.lightBall, 
+                                            Gen3Items.soulDew, Gen3Items.enigmaBerry);
         nonBadItemsRSE.banRange(Gen3Items.orangeMail, 12); // mail
-        nonBadItemsRSE.banRange(Gen3Items.razzBerry, 28); // berries
-        nonBadItemsRSE.banRange(Gen3Items.tinyMushroom, 8); // 
+        nonBadItemsRSE.banRange(Gen3Items.razzBerry, 5); // berries
+        nonBadItemsRSE.banRange(Gen3Items.cornnBerry, 9); // berries
+        nonBadItemsRSE.banRange(Gen3Items.pearl, 5); // 
         nonBadItemsRSE.banRange(Gen3Items.luckyPunch, 4); // pokemon specific
         nonBadItemsRSE.banRange(Gen3Items.redScarf, 5); // contest scarves
 
         // FRLG-exclusive bad items
         // Ban Shoal items and Shards, since they don't do anything
         nonBadItemsFRLG = nonBadItemsRSE.copy();
+        nonBadItemsFRLG.banSingles(Gen3Items.heartScale);
         nonBadItemsFRLG.banRange(Gen3Items.shoalSalt, 6);
+
+        nonBadItemsRSE.banRange(Gen3Items.tinyMushroom, 2); // tiny/big mushroom in RSE
 
         regularShopItems = new ArrayList<>();
 

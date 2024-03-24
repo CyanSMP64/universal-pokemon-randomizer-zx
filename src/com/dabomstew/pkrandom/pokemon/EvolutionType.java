@@ -46,6 +46,8 @@ public enum EvolutionType {
     LEVEL_MALE_ONLY(-1, -1, 17, 22, 23, 23, 23),
     STONE_MALE_ONLY(-1, -1, 18, 16, 17, 17, 17),
     STONE_FEMALE_ONLY(-1, -1, 19, 17, 18, 18, 18),
+    STONE_LOW_PV(-1, -1, 20, 11, 12, 12, 12),
+    STONE_HIGH_PV(-1, -1, 21, 12, 13, 13, 13),
     LEVEL_ITEM_DAY(-1, -1, -1, 18, 19, 19, 19),
     LEVEL_ITEM_NIGHT(-1, -1, -1, 19, 20, 20, 20),
     LEVEL_WITH_MOVE(-1, -1, -1, 20, 21, 21, 21),
@@ -72,7 +74,7 @@ public enum EvolutionType {
     /* @formatter:on */
 
     private int[] indexNumbers;
-    private static EvolutionType[][] reverseIndexes = new EvolutionType[8][50];
+    private static EvolutionType[][] reverseIndexes = new EvolutionType[7][50];
 
     static {
         for (EvolutionType et : EvolutionType.values()) {

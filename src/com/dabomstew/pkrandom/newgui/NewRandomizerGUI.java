@@ -2830,7 +2830,7 @@ public class NewRandomizerGUI {
 
             pmsGuaranteedLevel1MovesCheckBox.setVisible(romHandler.supportsFourStartingMoves());
             pmsGuaranteedLevel1MovesSlider.setVisible(romHandler.supportsFourStartingMoves());
-            pmsEvolutionMovesCheckBox.setVisible(pokemonGeneration >= 7);
+            pmsEvolutionMovesCheckBox.setVisible(pokemonGeneration >= 7 || pokemonGeneration == 3);
 
             tpComboBox.setEnabled(true);
             tpAllowAlternateFormesCheckBox.setVisible(romHandler.hasFunctionalFormes());

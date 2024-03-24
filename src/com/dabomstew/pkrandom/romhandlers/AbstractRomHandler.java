@@ -100,57 +100,123 @@ public abstract class AbstractRomHandler implements RomHandler {
 
             if (restrictions.allow_gen1) {
                 addPokesFromRange(mainPokemonList, allPokemon, Species.bulbasaur, Species.mew);
+                if (restrictions.allow_mega) {
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.venusaurMega, Species.mewtwoMegaY);
+                }
             }
 
             if (restrictions.allow_gen2 && allPokemon.size() > Gen2Constants.pokemonCount) {
                 addPokesFromRange(mainPokemonList, allPokemon, Species.chikorita, Species.celebi);
+                if (restrictions.allow_mega) {
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.ampharosMega, Species.tyranitarMega);
+                }
             }
 
             if (restrictions.allow_gen3 && allPokemon.size() > Gen3Constants.pokemonCount) {
                 addPokesFromRange(mainPokemonList, allPokemon, Species.treecko, Species.deoxys);
-                addPokesFromRange(mainPokemonList, allPokemon, 1126, 1131);
+                addPokesFromRange(mainPokemonList, allPokemon, Species.castformF, Species.deoxysS);
+                if (restrictions.allow_mega) {
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.sceptileMega, Species.latiosMega);
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.rayquazaMega, Species.groudonP);
+                }
             }
 
             if (restrictions.allow_gen4 && allPokemon.size() > Gen4Constants.pokemonCount) {
                 addPokesFromRange(mainPokemonList, allPokemon, Species.turtwig, Species.arceus);
-                addPokesFromRange(mainPokemonList, allPokemon, 1132, 1140);
-                addPokesFromRange(mainPokemonList, allPokemon, 1143, 1144);
+                addPokesFromRange(mainPokemonList, allPokemon, Species.burmyS, Species.rotomM);
+                addPokesFromRange(mainPokemonList, allPokemon, Species.giratinaO, Species.shayminS);
+                if (restrictions.allow_gen2) {
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.pichuSpiky, Species.pichuSpiky);
+                }
+                if (restrictions.allow_mega) {
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.lopunnyMega, Species.galladeMega);
+                }
             }
 
             if (restrictions.allow_gen5 && allPokemon.size() > Gen5Constants.pokemonCount) {
                 addPokesFromRange(mainPokemonList, allPokemon, Species.victini, Species.genesect);
-                addPokesFromRange(mainPokemonList, allPokemon, 1145, 1145);
-                addPokesFromRange(mainPokemonList, allPokemon, 1147, 1149);
-                addPokesFromRange(mainPokemonList, allPokemon, 1151, 1153);
+                addPokesFromRange(mainPokemonList, allPokemon, Species.basculinB, Species.basculinB);
+                addPokesFromRange(mainPokemonList, allPokemon, Species.darmanitanZ, Species.darmanitanZ);
+                addPokesFromRange(mainPokemonList, allPokemon, Species.tornadusT, Species.meloettaP);
+                if (restrictions.allow_mega) {
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.audinoMega, Species.audinoMega);
+                }
             }
 
             if (restrictions.allow_gen6 && allPokemon.size() > Gen6Constants.pokemonCount) {
                 addPokesFromRange(mainPokemonList, allPokemon, Species.chespin, Species.volcanion);
-                addPokesFromRange(mainPokemonList, allPokemon, 1018, 1067);
-                addPokesFromRange(mainPokemonList, allPokemon, 1154, 1155);
-                addPokesFromRange(mainPokemonList, allPokemon, 1158, 1158);
+                addPokesFromRange(mainPokemonList, allPokemon, Species.greninjaA, Species.gourgeistSuper);
+                addPokesFromRange(mainPokemonList, allPokemon, Species.hoopaU, Species.hoopaU);
+                if (restrictions.allow_gen1) {
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.pikachuCap, Species.pikachuCap);
+                }
+                if (restrictions.allow_mega) {
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.diancieMega, Species.diancieMega);
+                }
             }
 
             if (restrictions.allow_gen7 && allPokemon.size() > 809) {
                 addPokesFromRange(mainPokemonList, allPokemon, Species.rowlet, Species.melmetal);
-                addPokesFromRange(mainPokemonList, allPokemon, 1068, 1085);
-                addPokesFromRange(mainPokemonList, allPokemon, 1156, 1157);
-                addPokesFromRange(mainPokemonList, allPokemon, 1159, 1166);
+                addPokesFromRange(mainPokemonList, allPokemon, Species.oricorioE, Species.necrozmaU);
+                if (restrictions.allow_gen1) {
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.rattataA, Species.marowakA);
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.pikachuPartner, Species.pikachuPartner);
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.eeveePartner, Species.eeveePartner);
+                }
+                if (restrictions.allow_gen6) {
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.zygarde10, Species.zygardeC);
+                }
             }
 
             if (restrictions.allow_gen8 && allPokemon.size() > 905) {
                 addPokesFromRange(mainPokemonList, allPokemon, Species.grookey, Species.enamorus);
-                addPokesFromRange(mainPokemonList, allPokemon, 1086, 1121);
-                addPokesFromRange(mainPokemonList, allPokemon, 1141, 1142);
-                addPokesFromRange(mainPokemonList, allPokemon, 1146, 1146);
-                addPokesFromRange(mainPokemonList, allPokemon, 1150, 1150);
-                addPokesFromRange(mainPokemonList, allPokemon, 1167, 1172);
+                addPokesFromRange(mainPokemonList, allPokemon, Species.toxtricityL, Species.zamazentaC);
+                addPokesFromRange(mainPokemonList, allPokemon, Species.urshifuR, Species.calyrexS);
+                addPokesFromRange(mainPokemonList, allPokemon, Species.basculegionF, Species.enamorusT);
+                if (restrictions.allow_gen1) {
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.meowthG, Species.moltresG);
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.growlitheH, Species.electrodeH);
+                }
+                if (restrictions.allow_gen2) {
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.slowkingG, Species.corsolaG);
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.typhlosionH, Species.sneaselH);
+                }
+                if (restrictions.allow_gen3) {
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.zigzagoonG, Species.linooneG);
+                }
+                if (restrictions.allow_gen4) {
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.dialgaO, Species.palkiaO);
+                }
+                if (restrictions.allow_gen5) {
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.darumakaG, Species.stunfiskG);
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.samurottH, Species.braviaryH);
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.basculinW, Species.basculinW);
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.darmanitanZG, Species.darmanitanZG);
+                }
+                if (restrictions.allow_gen6) {
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.sliggooH, Species.avaluggH);
+                }
+                if (restrictions.allow_gen7) {
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.decidueyeH, Species.decidueyeH);
+                }
+                if(restrictions.allow_eternamax) {
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.eternatusE, Species.eternatusE);
+                }
             }
 
-            if (restrictions.allow_gen9 && allPokemon.size() > 1017) {
-                addPokesFromRange(mainPokemonList, allPokemon, Species.sprigatito, Species.ogerpon);
-                addPokesFromRange(mainPokemonList, allPokemon, 1122, 1125);
-                addPokesFromRange(mainPokemonList, allPokemon, 1173, 1177);
+            if (restrictions.allow_gen9 && allPokemon.size() > 1025) {
+                addPokesFromRange(mainPokemonList, allPokemon, Species.sprigatito, Species.pecharunt);
+                addPokesFromRange(mainPokemonList, allPokemon, Species.oinkologneF, Species.terapagosS);
+                if (restrictions.allow_gen1) {
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.taurosP, Species.taurosP);
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.taurosPF, Species.taurosPW);
+                }
+                if (restrictions.allow_gen2) {
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.wooperP, Species.wooperP);
+                }
+                if (restrictions.allow_gen8) {
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.ursalunaB, Species.ursalunaB);
+                }
             }
 
             // If the user specified it, add all the evolutionary relatives for everything in the mainPokemonList
@@ -3723,7 +3789,7 @@ public abstract class AbstractRomHandler implements RomHandler {
         allBanned.addAll(this.getIllegalMoves());
 
         for (Move mv : allMoves) {
-            if (mv != null && !GlobalConstants.bannedRandomMoves[mv.number] && !allBanned.contains(mv.number) && mv.valid) {
+            if (mv != null && !GlobalConstants.bannedRandomMoves[mv.number] && !allBanned.contains(mv.number)) {
                 validMoves.add(mv);
                 if (mv.type != null) {
                     if (!validTypeMoves.containsKey(mv.type)) {
@@ -5503,78 +5569,8 @@ public abstract class AbstractRomHandler implements RomHandler {
             for (Pokemon pk : pokemonPool) {
                 for (Evolution ev : pk.evolutionsFrom) {
                     oldEvoPairs.add(new EvolutionPair(ev.from, ev.to));
-                    if (ev.from.number == Species.cosmoem) { // Special case for Cosmoem to add Lunala/Solgaleo since we remove the split evo
+                    if (generationOfPokemon() >= 7 && ev.from.number == Species.cosmoem) { // Special case for Cosmoem to add Lunala/Solgaleo since we remove the split evo
                         int oppositeVersionLegendary = ev.to.number == Species.solgaleo ? Species.lunala : Species.solgaleo;
-                        Pokemon toPkmn = findPokemonInPoolWithSpeciesID(pokemonPool, oppositeVersionLegendary);
-                        if (toPkmn != null) {
-                            oldEvoPairs.add(new EvolutionPair(ev.from, toPkmn));
-                        }
-                    }
-                    if (ev.from.number == Species.pikachu) {
-                        int oppositeVersionLegendary = ev.to.number == Species.raichu ? 1070 : Species.raichu; // 1070 =  alolan raichu
-                        Pokemon toPkmn = findPokemonInPoolWithSpeciesID(pokemonPool, oppositeVersionLegendary);
-                        if (toPkmn != null) {
-                            oldEvoPairs.add(new EvolutionPair(ev.from, toPkmn));
-                        }
-                    }
-                    if (ev.from.number == Species.exeggcute) {
-                        int oppositeVersionLegendary = ev.to.number == Species.exeggutor ? 1084 : Species.exeggutor; // 1084 =  alolan exeggutor
-                        Pokemon toPkmn = findPokemonInPoolWithSpeciesID(pokemonPool, oppositeVersionLegendary);
-                        if (toPkmn != null) {
-                            oldEvoPairs.add(new EvolutionPair(ev.from, toPkmn));
-                        }
-                    }
-                    if (ev.from.number == Species.koffing) {
-                        int oppositeVersionLegendary = ev.to.number == Species.weezing ? 1092 : Species.weezing; // 1092 =  galarian weezing
-                        Pokemon toPkmn = findPokemonInPoolWithSpeciesID(pokemonPool, oppositeVersionLegendary);
-                        if (toPkmn != null) {
-                            oldEvoPairs.add(new EvolutionPair(ev.from, toPkmn));
-                        }
-                    }
-                    if (ev.from.number == Species.mimeJr) {
-                        int oppositeVersionLegendary = ev.to.number == Species.mrMime ? 1093 : Species.mrMime; // 1093 =  galarian mr. mime
-                        Pokemon toPkmn = findPokemonInPoolWithSpeciesID(pokemonPool, oppositeVersionLegendary);
-                        if (toPkmn != null) {
-                            oldEvoPairs.add(new EvolutionPair(ev.from, toPkmn));
-                        }
-                    }
-                    if (ev.from.number == Species.quilava) {
-                        int oppositeVersionLegendary = ev.to.number == Species.typhlosion ? 1109 : Species.typhlosion; // 1109 =  hisuian typhlosion
-                        Pokemon toPkmn = findPokemonInPoolWithSpeciesID(pokemonPool, oppositeVersionLegendary);
-                        if (toPkmn != null) {
-                            oldEvoPairs.add(new EvolutionPair(ev.from, toPkmn));
-                        }
-                    }
-                    if (ev.from.number == Species.dewott) {
-                        int oppositeVersionLegendary = ev.to.number == Species.samurott ? 1112 : Species.samurott; // 1112 =  hisuian samurott
-                        Pokemon toPkmn = findPokemonInPoolWithSpeciesID(pokemonPool, oppositeVersionLegendary);
-                        if (toPkmn != null) {
-                            oldEvoPairs.add(new EvolutionPair(ev.from, toPkmn));
-                        }
-                    }
-                    if (ev.from.number == Species.petilil) {
-                        int oppositeVersionLegendary = ev.to.number == Species.lilligant ? 1113 : Species.lilligant; // 1113 =  hisuian lilligant
-                        Pokemon toPkmn = findPokemonInPoolWithSpeciesID(pokemonPool, oppositeVersionLegendary);
-                        if (toPkmn != null) {
-                            oldEvoPairs.add(new EvolutionPair(ev.from, toPkmn));
-                        }
-                    }
-                    if (ev.from.number == Species.goomy) {
-                        int oppositeVersionLegendary = ev.to.number == Species.sliggoo ? 1118 : Species.sliggoo; // 1118 =  hisuian sliggoo
-                        Pokemon toPkmn = findPokemonInPoolWithSpeciesID(pokemonPool, oppositeVersionLegendary);
-                        if (toPkmn != null) {
-                            oldEvoPairs.add(new EvolutionPair(ev.from, toPkmn));
-                        }
-                    }
-                    if (ev.from.number == Species.bergmite) {
-                        int oppositeVersionLegendary = ev.to.number == Species.bergmite ? 1120 : Species.bergmite; // 1120 =  hisuian avalugg
-                        Pokemon toPkmn = findPokemonInPoolWithSpeciesID(pokemonPool, oppositeVersionLegendary);
-                        if (toPkmn != null) {
-                            oldEvoPairs.add(new EvolutionPair(ev.from, toPkmn));
-                        }
-                    }
-                    if (ev.from.number == Species.dartrix) {
-                        int oppositeVersionLegendary = ev.to.number == Species.decidueye ? 1121 : Species.decidueye; // 1121 =  hisuian decidueye
                         Pokemon toPkmn = findPokemonInPoolWithSpeciesID(pokemonPool, oppositeVersionLegendary);
                         if (toPkmn != null) {
                             oldEvoPairs.add(new EvolutionPair(ev.from, toPkmn));
@@ -5806,78 +5802,8 @@ public abstract class AbstractRomHandler implements RomHandler {
             for (Pokemon pk : pokemonPool) {
                 for (Evolution ev : pk.evolutionsFrom) {
                     oldEvoPairs.add(new EvolutionPair(ev.from, ev.to));
-                    if (ev.from.number == Species.cosmoem) { // Special case for Cosmoem to add Lunala/Solgaleo since we remove the split evo
+                    if (generationOfPokemon() >= 7 && ev.from.number == Species.cosmoem) { // Special case for Cosmoem to add Lunala/Solgaleo since we remove the split evo
                         int oppositeVersionLegendary = ev.to.number == Species.solgaleo ? Species.lunala : Species.solgaleo;
-                        Pokemon toPkmn = findPokemonInPoolWithSpeciesID(pokemonPool, oppositeVersionLegendary);
-                        if (toPkmn != null) {
-                            oldEvoPairs.add(new EvolutionPair(ev.from, toPkmn));
-                        }
-                    }
-                    if (ev.from.number == Species.pikachu) {
-                        int oppositeVersionLegendary = ev.to.number == Species.raichu ? 1070 : Species.raichu; // 1070 =  alolan raichu
-                        Pokemon toPkmn = findPokemonInPoolWithSpeciesID(pokemonPool, oppositeVersionLegendary);
-                        if (toPkmn != null) {
-                            oldEvoPairs.add(new EvolutionPair(ev.from, toPkmn));
-                        }
-                    }
-                    if (ev.from.number == Species.exeggcute) {
-                        int oppositeVersionLegendary = ev.to.number == Species.exeggutor ? 1084 : Species.exeggutor; // 1084 =  alolan exeggutor
-                        Pokemon toPkmn = findPokemonInPoolWithSpeciesID(pokemonPool, oppositeVersionLegendary);
-                        if (toPkmn != null) {
-                            oldEvoPairs.add(new EvolutionPair(ev.from, toPkmn));
-                        }
-                    }
-                    if (ev.from.number == Species.koffing) {
-                        int oppositeVersionLegendary = ev.to.number == Species.weezing ? 1092 : Species.weezing; // 1092 =  galarian weezing
-                        Pokemon toPkmn = findPokemonInPoolWithSpeciesID(pokemonPool, oppositeVersionLegendary);
-                        if (toPkmn != null) {
-                            oldEvoPairs.add(new EvolutionPair(ev.from, toPkmn));
-                        }
-                    }
-                    if (ev.from.number == Species.mimeJr) {
-                        int oppositeVersionLegendary = ev.to.number == Species.mrMime ? 1093 : Species.mrMime; // 1093 =  galarian mr. mime
-                        Pokemon toPkmn = findPokemonInPoolWithSpeciesID(pokemonPool, oppositeVersionLegendary);
-                        if (toPkmn != null) {
-                            oldEvoPairs.add(new EvolutionPair(ev.from, toPkmn));
-                        }
-                    }
-                    if (ev.from.number == Species.quilava) {
-                        int oppositeVersionLegendary = ev.to.number == Species.typhlosion ? 1109 : Species.typhlosion; // 1109 =  hisuian typhlosion
-                        Pokemon toPkmn = findPokemonInPoolWithSpeciesID(pokemonPool, oppositeVersionLegendary);
-                        if (toPkmn != null) {
-                            oldEvoPairs.add(new EvolutionPair(ev.from, toPkmn));
-                        }
-                    }
-                    if (ev.from.number == Species.dewott) {
-                        int oppositeVersionLegendary = ev.to.number == Species.samurott ? 1112 : Species.samurott; // 1112 =  hisuian samurott
-                        Pokemon toPkmn = findPokemonInPoolWithSpeciesID(pokemonPool, oppositeVersionLegendary);
-                        if (toPkmn != null) {
-                            oldEvoPairs.add(new EvolutionPair(ev.from, toPkmn));
-                        }
-                    }
-                    if (ev.from.number == Species.petilil) {
-                        int oppositeVersionLegendary = ev.to.number == Species.lilligant ? 1113 : Species.lilligant; // 1113 =  hisuian lilligant
-                        Pokemon toPkmn = findPokemonInPoolWithSpeciesID(pokemonPool, oppositeVersionLegendary);
-                        if (toPkmn != null) {
-                            oldEvoPairs.add(new EvolutionPair(ev.from, toPkmn));
-                        }
-                    }
-                    if (ev.from.number == Species.goomy) {
-                        int oppositeVersionLegendary = ev.to.number == Species.sliggoo ? 1118 : Species.sliggoo; // 1118 =  hisuian sliggoo
-                        Pokemon toPkmn = findPokemonInPoolWithSpeciesID(pokemonPool, oppositeVersionLegendary);
-                        if (toPkmn != null) {
-                            oldEvoPairs.add(new EvolutionPair(ev.from, toPkmn));
-                        }
-                    }
-                    if (ev.from.number == Species.bergmite) {
-                        int oppositeVersionLegendary = ev.to.number == Species.avalugg ? 1120 : Species.avalugg; // 1120 =  hisuian avalugg
-                        Pokemon toPkmn = findPokemonInPoolWithSpeciesID(pokemonPool, oppositeVersionLegendary);
-                        if (toPkmn != null) {
-                            oldEvoPairs.add(new EvolutionPair(ev.from, toPkmn));
-                        }
-                    }
-                    if (ev.from.number == Species.dartrix) {
-                        int oppositeVersionLegendary = ev.to.number == Species.decidueye ? 1121 : Species.decidueye; // 1121 =  hisuian decidueye
                         Pokemon toPkmn = findPokemonInPoolWithSpeciesID(pokemonPool, oppositeVersionLegendary);
                         if (toPkmn != null) {
                             oldEvoPairs.add(new EvolutionPair(ev.from, toPkmn));

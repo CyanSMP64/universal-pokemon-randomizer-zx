@@ -45,6 +45,8 @@ public class NewGenerationLimitDialog extends javax.swing.JDialog {
     private JPanel mainPanel;
     private JLabel xyWarningLabel;
     private JCheckBox allowEvolutionaryRelativesCheckBox;
+    private JCheckBox megaCheckBox;
+    private JCheckBox eternamaxCheckBox;
 
     private boolean pressedOk;
     private boolean isXY;
@@ -80,6 +82,8 @@ public class NewGenerationLimitDialog extends javax.swing.JDialog {
         gr.allow_gen7 = gen7CheckBox.isSelected();
         gr.allow_gen8 = gen8CheckBox.isSelected();
         gr.allow_gen9 = gen9CheckBox.isSelected();
+        gr.allow_mega = megaCheckBox.isSelected();
+        gr.allow_eternamax = eternamaxCheckBox.isSelected();
         gr.allow_evolutionary_relatives = allowEvolutionaryRelativesCheckBox.isSelected();
         return gr;
     }
@@ -103,6 +107,12 @@ public class NewGenerationLimitDialog extends javax.swing.JDialog {
         //if (generation < 7) {
         //    gen7CheckBox.setVisible(false);
         //}
+        //if (generation < 8) {
+        //    gen8CheckBox.setVisible(false);
+        //}
+        //if (generation < 9) {
+        //    gen9CheckBox.setVisible(false);
+        //}
 
         allowEvolutionaryRelativesCheckBox.setEnabled(false);
         allowEvolutionaryRelativesCheckBox.setSelected(false);
@@ -118,6 +128,8 @@ public class NewGenerationLimitDialog extends javax.swing.JDialog {
         gen7CheckBox.setSelected(restrict.allow_gen7);
         gen8CheckBox.setSelected(restrict.allow_gen8);
         gen9CheckBox.setSelected(restrict.allow_gen9);
+        megaCheckBox.setSelected(restrict.allow_mega);
+        eternamaxCheckBox.setSelected(restrict.allow_eternamax);
         allowEvolutionaryRelativesCheckBox.setSelected(restrict.allow_evolutionary_relatives);
     }
 
@@ -134,6 +146,8 @@ public class NewGenerationLimitDialog extends javax.swing.JDialog {
         gen7CheckBox.addActionListener(ev -> enableAndDisableBoxes());
         gen8CheckBox.addActionListener(ev -> enableAndDisableBoxes());
         gen9CheckBox.addActionListener(ev -> enableAndDisableBoxes());
+        megaCheckBox.addActionListener(ev -> enableAndDisableBoxes());
+        eternamaxCheckBox.addActionListener(ev -> enableAndDisableBoxes());
         allowEvolutionaryRelativesCheckBox.addActionListener(ev -> enableAndDisableBoxes());
         okButton.addActionListener(evt -> okButtonActionPerformed());
         cancelButton.addActionListener(evt -> cancelButtonActionPerformed());
@@ -162,6 +176,21 @@ public class NewGenerationLimitDialog extends javax.swing.JDialog {
         } else {
             allowEvolutionaryRelativesCheckBox.setEnabled(false);
             allowEvolutionaryRelativesCheckBox.setSelected(false);
+        }
+
+        if (gen1CheckBox.isSelected() || gen2CheckBox.isSelected() || gen3CheckBox.isSelected() ||
+                gen4CheckBox.isSelected() || gen5CheckBox.isSelected() || gen6CheckBox.isSelected()) {
+            megaCheckBox.setEnabled(true);
+        } else {
+            megaCheckBox.setEnabled(false);
+            megaCheckBox.setSelected(false);
+        }
+
+        if (gen8CheckBox.isSelected()) {
+            eternamaxCheckBox.setEnabled(true);
+        } else {
+            eternamaxCheckBox.setEnabled(false);
+            eternamaxCheckBox.setSelected(false);
         }
     }
 

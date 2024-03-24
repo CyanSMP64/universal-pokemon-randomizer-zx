@@ -158,11 +158,11 @@ public class Gen3Constants {
 
     public static final String frlgOakAideCheckPrefix = "00B5064800880028";
 
-    public static final String ePokedexScriptIdentifier = "3229610825F00129E40816CD40010003";
+    public static final String ePokedexScriptIdentifier = "3229610825F00129E40816D540010003";
 
     public static final String eNatDexScriptPart1 = "31720167";
 
-    public static final String eNatDexScriptPart2 = "3229610825F00129E40825F30116CD40010003";
+    public static final String eNatDexScriptPart2 = "3229610825F00129E40825F30116D540010003";
 
     public static final String friendshipValueForEvoLocator = "DB2900D8";
 
@@ -170,7 +170,7 @@ public class Gen3Constants {
 
     public static final int unhackedMaxPokedex = 411, unhackedRealPokedex = 386, hoennPokesStart = 252;
 
-    public static final int evolutionMethodCount = 19;
+    public static final int evolutionMethodCount = 21;
 
     public static final int cacophonyIndex = 76, airLockIndex = 77, highestAbilityIndex = 77;
 
@@ -516,7 +516,7 @@ public class Gen3Constants {
         allowedItems.banRange(Gen3Items.oaksParcel, 28);
         // Unknown blank items
         allowedItems.banRange(Gen3Items.unknown52, 11);
-        allowedItems.banRange(Gen3Items.unknown87, 6);
+        allowedItems.banRange(Gen3Items.unknown87, 2);
         allowedItems.banRange(Gen3Items.unknown112, 9);
         allowedItems.banRange(Gen3Items.unknown176, 3);
         allowedItems.banRange(Gen3Items.unknown227, 27);
@@ -530,11 +530,10 @@ public class Gen3Constants {
         // non-bad items
         // ban specific pokemon hold items, berries, apricorns, mail
         nonBadItemsRSE = allowedItems.copy();
-        nonBadItemsRSE.banSingles(Gen3Items.dragonScale, Gen3Items.upGrade, Gen3Items.lightBall, 
-                                            Gen3Items.soulDew, Gen3Items.enigmaBerry);
+        nonBadItemsRSE.banSingles(Gen3Items.lightBall, Gen3Items.soulDew/*, Gen3Items.enigmaBerry*/);
         nonBadItemsRSE.banRange(Gen3Items.orangeMail, 12); // mail
-        nonBadItemsRSE.banRange(Gen3Items.razzBerry, 5); // berries
-        nonBadItemsRSE.banRange(Gen3Items.cornnBerry, 9); // berries
+        nonBadItemsRSE.banRange(Gen3Items.razzBerry, 28); // berries
+        //nonBadItemsRSE.banRange(Gen3Items.cornnBerry, 9); // berries
         nonBadItemsRSE.banRange(Gen3Items.pearl, 5); // 
         nonBadItemsRSE.banRange(Gen3Items.luckyPunch, 4); // pokemon specific
         nonBadItemsRSE.banRange(Gen3Items.redScarf, 5); // contest scarves

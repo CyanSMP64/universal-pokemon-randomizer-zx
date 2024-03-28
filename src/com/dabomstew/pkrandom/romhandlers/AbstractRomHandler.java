@@ -244,13 +244,24 @@ public abstract class AbstractRomHandler implements RomHandler {
         onlyLegendaryAltsList = new ArrayList<>();
         ultraBeastList = new ArrayList<>();
 
+        boolean randomOT = settings.isRandomizeInGameTradesOTs();
         for (Pokemon p : mainPokemonList) {
-            if (p.isLegendary()) {
-                onlyLegendaryList.add(p);
-            } else if (p.isUltraBeast()) {
-                ultraBeastList.add(p);
+            if (!randomOT) {
+                if (p.isBST641Plus()) {
+                    onlyLegendaryList.add(p);
+                } else if (p.isUltraBeast()) {
+                    ultraBeastList.add(p);
+                } else {
+                    noLegendaryList.add(p);
+                }
             } else {
-                noLegendaryList.add(p);
+                if (p.isLegendary()) {
+                    onlyLegendaryList.add(p);
+                } else if (p.isUltraBeast()) {
+                    ultraBeastList.add(p);
+                } else {
+                    noLegendaryList.add(p);
+                }
             }
         }
         for (Pokemon p : mainPokemonListInclFormes) {

@@ -301,6 +301,16 @@ public class Pokemon implements Comparable<Pokemon> {
             Species.mewtwoMegaY, Species.rayquazaMega, Species.archaludon, Species.pecharunt, Species.terapagosT, Species.terapagosS,
             Species.eternatusE);
 
+    private static final List<Integer> bst641Plus = Arrays.asList(Species.palafinH, Species.kyurem, Species.zacian, Species.zamazenta,
+            Species.slaking, Species.kyogre, Species.groudon, Species.regigigas, Species.koraidon, Species.miraidon, Species.mewtwo,
+            Species.lugia, Species.hoOh, Species.rayquaza, Species.dialga, Species.dialgaO, Species.palkia, Species.palkiaO,
+            Species.giratina, Species.giratinaO, Species.reshiram, Species.zekrom, Species.xerneas, Species.yveltal, Species.hoopaU,
+            Species.solgaleo, Species.lunala, Species.necrozmaDM, Species.necrozmaDW, Species.calyrexI, Species.calyrexS, Species.eternatus,
+            Species.tyranitarMega, Species.salamenceMega, Species.metagrossMega, Species.latiasMega, Species.latiosMega,
+            Species.garchompMega, Species.kyuremB, Species.kyuremW, Species.diancieMega, Species.zacianC, Species.zamazentaC,
+            Species.zygardeC, Species.arceus, Species.necrozmaU, Species.kyogreP, Species.groudonP, Species.mewtwoMegaX,
+            Species.mewtwoMegaY, Species.rayquazaMega, Species.terapagosS, Species.eternatusE);
+
     private static final List<Integer> strongLegendaries = Arrays.asList(Species.kyurem, Species.zacian, Species.zamazenta, Species.kyogre,
             Species.groudon, Species.regigigas, Species.koraidon, Species.miraidon, Species.mewtwo, Species.lugia, Species.hoOh,
             Species.rayquaza, Species.dialga, Species.dialgaO, Species.palkia, Species.palkiaO, Species.giratina, Species.giratinaO,
@@ -314,6 +324,10 @@ public class Pokemon implements Comparable<Pokemon> {
 
     public boolean isLegendary() {
         return formeNumber == 0 ? legendaries.contains(this.number) : legendaries.contains(this.baseForme.number);
+    }
+
+    public boolean isBST641Plus() {
+        return formeNumber == 0 ? bst641Plus.contains(this.number) : legendaries.contains(this.baseForme.number);
     }
 
     public boolean isStrongLegendary() {

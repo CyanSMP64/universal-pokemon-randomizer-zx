@@ -361,7 +361,8 @@ public class Gen3Constants {
                 Gen3Items.miracleSeed, Gen3Items.blackGlasses, Gen3Items.blackBelt, Gen3Items.magnet,
                 Gen3Items.mysticWater, Gen3Items.sharpBeak, Gen3Items.poisonBarb, Gen3Items.neverMeltIce,
                 Gen3Items.spellTag, Gen3Items.twistedSpoon, Gen3Items.charcoal, Gen3Items.dragonFang,
-                Gen3Items.silkScarf, Gen3Items.shellBell, Gen3Items.seaIncense, Gen3Items.laxIncense));
+                Gen3Items.silkScarf, Gen3Items.shellBell, Gen3Items.seaIncense, Gen3Items.laxIncense,
+                Gen3Items.razorClaw, Gen3Items.razorFang));
         list.addAll(consumableHeldItems);
         return Collections.unmodifiableList(list);
     }
@@ -378,7 +379,7 @@ public class Gen3Constants {
 
     public static final List<Integer> generalPurposeItems = Collections.unmodifiableList(Arrays.asList(
             Gen3Items.brightPowder, Gen3Items.quickClaw, Gen3Items.kingsRock, Gen3Items.focusBand, Gen3Items.scopeLens,
-            Gen3Items.leftovers, Gen3Items.shellBell, Gen3Items.laxIncense
+            Gen3Items.leftovers, Gen3Items.shellBell, Gen3Items.laxIncense, Gen3Items.razorClaw, Gen3Items.razorFang
     ));
 
     public static final Map<Type, List<Integer>> typeBoostingItems = initializeTypeBoostingItems();
@@ -1038,10 +1039,10 @@ public class Gen3Constants {
             {Gen3Items.repel, 35},
             {Gen3Items.unknown87, 0},
             {Gen3Items.unknown88, 0},
-            {Gen3Items.unknown89, 0},
-            {Gen3Items.unknown90, 0},
-            {Gen3Items.unknown91, 0},
-            {Gen3Items.unknown92, 0},
+            {Gen3Items.dubiousDisc, 300},
+            {Gen3Items.razorClaw, 300},
+            {Gen3Items.razorFang, 300},
+            {Gen3Items.linkingCord, 300},
             {Gen3Items.sunStone, 300},
             {Gen3Items.moonStone, 300},
             {Gen3Items.fireStone, 300},

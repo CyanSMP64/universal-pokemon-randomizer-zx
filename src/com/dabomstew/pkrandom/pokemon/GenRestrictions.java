@@ -30,7 +30,7 @@ import java.util.Set;
 
 public class GenRestrictions {
 
-    public boolean allow_gen1, allow_gen2, allow_gen3, allow_gen4, allow_gen5, allow_gen6, allow_gen7, allow_gen8, allow_gen9, allow_mega, allow_eternamax;
+    public boolean allow_gen1, allow_gen2, allow_gen3, allow_gen4, allow_gen5, allow_gen6, allow_gen7, allow_gen8, allow_gen9, allow_mega, allow_eternamax, allow_regional_forms;
     public boolean allow_evolutionary_relatives;
 
     public GenRestrictions() {
@@ -48,16 +48,17 @@ public class GenRestrictions {
         allow_gen9 = (state & 256) > 0;
         allow_mega = (state & 512) > 0;
         allow_eternamax = (state & 1024) > 0;
-        allow_evolutionary_relatives = (state & 2048) > 0;
+        allow_regional_forms = (state & 2048) > 0;
+        allow_evolutionary_relatives = (state & 4192) > 0;
     }
 
     public boolean nothingSelected() {
-        return !allow_gen1 && !allow_gen2 && !allow_gen3 && !allow_gen4 && !allow_gen5 && !allow_gen6 && !allow_gen7 && !allow_gen8 && !allow_gen9 && !allow_mega && !allow_eternamax;
+        return !allow_gen1 && !allow_gen2 && !allow_gen3 && !allow_gen4 && !allow_gen5 && !allow_gen6 && !allow_gen7 && !allow_gen8 && !allow_gen9 && !allow_mega && !allow_eternamax && !allow_regional_forms;
     }
 
     public int toInt() {
         return makeIntSelected(allow_gen1, allow_gen2, allow_gen3, allow_gen4, allow_gen5, allow_gen6, allow_gen7, allow_gen8, allow_gen9,
-                allow_mega, allow_eternamax, allow_evolutionary_relatives);
+                allow_mega, allow_eternamax, allow_regional_forms, allow_evolutionary_relatives);
     }
 
     public void limitToGen(int generation) {

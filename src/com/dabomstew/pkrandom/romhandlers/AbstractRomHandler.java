@@ -103,12 +103,24 @@ public abstract class AbstractRomHandler implements RomHandler {
                 if (restrictions.allow_mega) {
                     addPokesFromRange(mainPokemonList, allPokemon, Species.venusaurMega, Species.mewtwoMegaY);
                 }
+                if (restrictions.allow_regional_forms) {
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.rattataA, Species.marowakA);
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.meowthG, Species.moltresG);
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.growlitheH, Species.electrodeH);
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.taurosP, Species.taurosP);
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.taurosPF, Species.taurosPW);
+                }
             }
 
             if (restrictions.allow_gen2 && allPokemon.size() > Gen2Constants.pokemonCount) {
                 addPokesFromRange(mainPokemonList, allPokemon, Species.chikorita, Species.celebi);
                 if (restrictions.allow_mega) {
                     addPokesFromRange(mainPokemonList, allPokemon, Species.ampharosMega, Species.tyranitarMega);
+                }
+                if (restrictions.allow_regional_forms) {
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.slowkingG, Species.corsolaG);
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.typhlosionH, Species.sneaselH);
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.wooperP, Species.wooperP);
                 }
             }
 
@@ -118,6 +130,9 @@ public abstract class AbstractRomHandler implements RomHandler {
                 if (restrictions.allow_mega) {
                     addPokesFromRange(mainPokemonList, allPokemon, Species.sceptileMega, Species.latiosMega);
                     addPokesFromRange(mainPokemonList, allPokemon, Species.rayquazaMega, Species.groudonP);
+                }
+                if (restrictions.allow_regional_forms) {
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.zigzagoonG, Species.linooneG);
                 }
             }
 
@@ -141,6 +156,11 @@ public abstract class AbstractRomHandler implements RomHandler {
                 if (restrictions.allow_mega) {
                     addPokesFromRange(mainPokemonList, allPokemon, Species.audinoMega, Species.audinoMega);
                 }
+                if (restrictions.allow_regional_forms) {
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.darumakaG, Species.stunfiskG);
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.samurottH, Species.braviaryH);
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.darmanitanZG, Species.darmanitanZG);
+                }
             }
 
             if (restrictions.allow_gen6 && allPokemon.size() > Gen6Constants.pokemonCount) {
@@ -153,18 +173,23 @@ public abstract class AbstractRomHandler implements RomHandler {
                 if (restrictions.allow_mega) {
                     addPokesFromRange(mainPokemonList, allPokemon, Species.diancieMega, Species.diancieMega);
                 }
+                if (restrictions.allow_regional_forms) {
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.sliggooH, Species.avaluggH);
+                }
             }
 
             if (restrictions.allow_gen7 && allPokemon.size() > 809) {
                 addPokesFromRange(mainPokemonList, allPokemon, Species.rowlet, Species.melmetal);
                 addPokesFromRange(mainPokemonList, allPokemon, Species.oricorioE, Species.necrozmaU);
                 if (restrictions.allow_gen1) {
-                    addPokesFromRange(mainPokemonList, allPokemon, Species.rattataA, Species.marowakA);
                     addPokesFromRange(mainPokemonList, allPokemon, Species.pikachuPartner, Species.pikachuPartner);
                     addPokesFromRange(mainPokemonList, allPokemon, Species.eeveePartner, Species.eeveePartner);
                 }
                 if (restrictions.allow_gen6) {
                     addPokesFromRange(mainPokemonList, allPokemon, Species.zygarde10, Species.zygardeC);
+                }
+                if (restrictions.allow_regional_forms) {
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.decidueyeH, Species.decidueyeH);
                 }
             }
 
@@ -173,31 +198,11 @@ public abstract class AbstractRomHandler implements RomHandler {
                 addPokesFromRange(mainPokemonList, allPokemon, Species.toxtricityL, Species.zamazentaC);
                 addPokesFromRange(mainPokemonList, allPokemon, Species.urshifuR, Species.calyrexS);
                 addPokesFromRange(mainPokemonList, allPokemon, Species.basculegionF, Species.enamorusT);
-                if (restrictions.allow_gen1) {
-                    addPokesFromRange(mainPokemonList, allPokemon, Species.meowthG, Species.moltresG);
-                    addPokesFromRange(mainPokemonList, allPokemon, Species.growlitheH, Species.electrodeH);
-                }
-                if (restrictions.allow_gen2) {
-                    addPokesFromRange(mainPokemonList, allPokemon, Species.slowkingG, Species.corsolaG);
-                    addPokesFromRange(mainPokemonList, allPokemon, Species.typhlosionH, Species.sneaselH);
-                }
-                if (restrictions.allow_gen3) {
-                    addPokesFromRange(mainPokemonList, allPokemon, Species.zigzagoonG, Species.linooneG);
-                }
                 if (restrictions.allow_gen4) {
                     addPokesFromRange(mainPokemonList, allPokemon, Species.dialgaO, Species.palkiaO);
                 }
                 if (restrictions.allow_gen5) {
-                    addPokesFromRange(mainPokemonList, allPokemon, Species.darumakaG, Species.stunfiskG);
-                    addPokesFromRange(mainPokemonList, allPokemon, Species.samurottH, Species.braviaryH);
                     addPokesFromRange(mainPokemonList, allPokemon, Species.basculinW, Species.basculinW);
-                    addPokesFromRange(mainPokemonList, allPokemon, Species.darmanitanZG, Species.darmanitanZG);
-                }
-                if (restrictions.allow_gen6) {
-                    addPokesFromRange(mainPokemonList, allPokemon, Species.sliggooH, Species.avaluggH);
-                }
-                if (restrictions.allow_gen7) {
-                    addPokesFromRange(mainPokemonList, allPokemon, Species.decidueyeH, Species.decidueyeH);
                 }
                 if(restrictions.allow_eternamax) {
                     addPokesFromRange(mainPokemonList, allPokemon, Species.eternatusE, Species.eternatusE);
@@ -207,13 +212,6 @@ public abstract class AbstractRomHandler implements RomHandler {
             if (restrictions.allow_gen9 && allPokemon.size() > 1025) {
                 addPokesFromRange(mainPokemonList, allPokemon, Species.sprigatito, Species.pecharunt);
                 addPokesFromRange(mainPokemonList, allPokemon, Species.oinkologneF, Species.terapagosS);
-                if (restrictions.allow_gen1) {
-                    addPokesFromRange(mainPokemonList, allPokemon, Species.taurosP, Species.taurosP);
-                    addPokesFromRange(mainPokemonList, allPokemon, Species.taurosPF, Species.taurosPW);
-                }
-                if (restrictions.allow_gen2) {
-                    addPokesFromRange(mainPokemonList, allPokemon, Species.wooperP, Species.wooperP);
-                }
                 if (restrictions.allow_gen8) {
                     addPokesFromRange(mainPokemonList, allPokemon, Species.ursalunaB, Species.ursalunaB);
                 }

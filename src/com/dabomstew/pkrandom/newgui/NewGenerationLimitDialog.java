@@ -47,6 +47,7 @@ public class NewGenerationLimitDialog extends javax.swing.JDialog {
     private JCheckBox allowEvolutionaryRelativesCheckBox;
     private JCheckBox megaCheckBox;
     private JCheckBox eternamaxCheckBox;
+    private JCheckBox regionalFormsCheckBox;
 
     private boolean pressedOk;
     private boolean isXY;
@@ -84,6 +85,7 @@ public class NewGenerationLimitDialog extends javax.swing.JDialog {
         gr.allow_gen9 = gen9CheckBox.isSelected();
         gr.allow_mega = megaCheckBox.isSelected();
         gr.allow_eternamax = eternamaxCheckBox.isSelected();
+        gr.allow_regional_forms = regionalFormsCheckBox.isSelected();
         gr.allow_evolutionary_relatives = allowEvolutionaryRelativesCheckBox.isSelected();
         return gr;
     }
@@ -130,6 +132,7 @@ public class NewGenerationLimitDialog extends javax.swing.JDialog {
         gen9CheckBox.setSelected(restrict.allow_gen9);
         megaCheckBox.setSelected(restrict.allow_mega);
         eternamaxCheckBox.setSelected(restrict.allow_eternamax);
+        regionalFormsCheckBox.setSelected(restrict.allow_regional_forms);
         allowEvolutionaryRelativesCheckBox.setSelected(restrict.allow_evolutionary_relatives);
     }
 
@@ -148,6 +151,7 @@ public class NewGenerationLimitDialog extends javax.swing.JDialog {
         gen9CheckBox.addActionListener(ev -> enableAndDisableBoxes());
         megaCheckBox.addActionListener(ev -> enableAndDisableBoxes());
         eternamaxCheckBox.addActionListener(ev -> enableAndDisableBoxes());
+        regionalFormsCheckBox.addActionListener(ev -> enableAndDisableBoxes());
         allowEvolutionaryRelativesCheckBox.addActionListener(ev -> enableAndDisableBoxes());
         okButton.addActionListener(evt -> okButtonActionPerformed());
         cancelButton.addActionListener(evt -> cancelButtonActionPerformed());
@@ -184,6 +188,14 @@ public class NewGenerationLimitDialog extends javax.swing.JDialog {
         } else {
             megaCheckBox.setEnabled(false);
             megaCheckBox.setSelected(false);
+        }
+
+        if (gen1CheckBox.isSelected() || gen2CheckBox.isSelected() || gen3CheckBox.isSelected() ||
+                gen5CheckBox.isSelected() || gen6CheckBox.isSelected() || gen7CheckBox.isSelected()) {
+            regionalFormsCheckBox.setEnabled(true);
+        } else {
+            regionalFormsCheckBox.setEnabled(false);
+            regionalFormsCheckBox.setSelected(false);
         }
 
         if (gen8CheckBox.isSelected()) {

@@ -60,13 +60,7 @@ public class Gen1RomHandler extends AbstractGBCRomHandler {
         }
 
         public boolean isLoadable(String filename) {
-            long fileLength = new File(filename).length();
-            if (fileLength > 8 * 1024 * 1024) {
-                return false;
-            }
-            byte[] loaded = loadFilePartial(filename, 0x1000);
-            // nope
-            return loaded.length != 0 && detectRomInner(loaded, (int) fileLength);
+            return false;
         }
     }
 

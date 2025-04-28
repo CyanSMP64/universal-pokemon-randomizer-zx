@@ -29,6 +29,7 @@ package com.dabomstew.pkrandom.romhandlers;
 /*----------------------------------------------------------------------------*/
 
 import java.io.PrintStream;
+import java.security.KeyStore.TrustedCertificateEntry;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -242,9 +243,9 @@ public abstract class AbstractRomHandler implements RomHandler {
         onlyLegendaryAltsList = new ArrayList<>();
         ultraBeastList = new ArrayList<>();
 
-        boolean randomOT = settings.isRandomizeInGameTradesOTs();
+        int bstLimit = settings.getWildBSTLimit();
         for (Pokemon p : mainPokemonList) {
-            if (!randomOT) {
+            if (bstLimit == 1) {
                 if (p.isBST641Plus()) {
                     onlyLegendaryList.add(p);
                 } else if (p.isUltraBeast()) {
@@ -2024,7 +2025,7 @@ public abstract class AbstractRomHandler implements RomHandler {
 
                 if (shinyChance) {
                     if (this.random.nextInt(256) == 0) {
-                        tp.IVs |= (1 << 30);
+                        tp.monIsShiny = 1;
                     }
                 }
             }
@@ -2279,6 +2280,7 @@ public abstract class AbstractRomHandler implements RomHandler {
         List<Move> moveSelectionPoolAtLevel = allLevelUpMoves.get(getAltFormeOfPokemon(tp.pokemon, tp.forme).number)
                 .stream()
                 .filter(ml -> (ml.level <= tp.level && ml.level != 0) || (ml.level == 0 && tp.level >= 30))
+                .filter(ml -> ml.move != 0)  // Exclude moves where ml.move is 0
                 .map(ml -> moves.get(ml.move))
                 .distinct()
                 .collect(Collectors.toList());
@@ -2296,6 +2298,7 @@ public abstract class AbstractRomHandler implements RomHandler {
                 moveSelectionPoolAtLevel.addAll(allLevelUpMoves.get(preEvo.number)
                         .stream()
                         .filter(ml -> ml.level <= tp.level)
+                        .filter(ml -> ml.move != 0)  // Exclude moves where ml.move is 0
                         .filter(ml -> this.random.nextDouble() < preEvoMoveProbability)
                         .map(ml -> moves.get(ml.move))
                         .distinct()
@@ -3447,6 +3450,10 @@ public abstract class AbstractRomHandler implements RomHandler {
             }
 
             if (generationOfPokemon() >= 3) {
+                // Luster Purge 95 power
+                updateMovePower(moves, Moves.lusterPurge, 95);
+                // Mist Ball 95 power
+                updateMovePower(moves, Moves.mistBall, 95);
                 // Slack Off 5 PP
                 updateMovePP(moves, Moves.slackOff, 5);
             }
@@ -3462,8 +3469,8 @@ public abstract class AbstractRomHandler implements RomHandler {
             }
 
             if (generationOfPokemon() >= 8) {
-                // Grassy Glide 60 Power
-                updateMovePower(moves, Moves.grassyGlide, 60);
+                // Grassy Glide 55 Power
+                updateMovePower(moves, Moves.grassyGlide, 55);
                 // Wicked Blow 75 Power
                 updateMovePower(moves, Moves.wickedBlow, 75);
                 // Glacial Lance 120 Power
@@ -3790,9 +3797,9 @@ public abstract class AbstractRomHandler implements RomHandler {
     private void createSetsOfMoves(boolean noBroken, List<Move> validMoves, List<Move> validDamagingMoves,
                                    Map<Type, List<Move>> validTypeMoves, Map<Type, List<Move>> validTypeDamagingMoves) {
         List<Move> allMoves = this.getMoves();
-        List<Integer> hms = this.getHMMoves();
+//        List<Integer> hms = this.getHMMoves();
         Set<Integer> allBanned = new HashSet<Integer>(noBroken ? this.getGameBreakingMoves() : Collections.EMPTY_SET);
-        allBanned.addAll(hms);
+//        allBanned.addAll(hms);
         allBanned.addAll(this.getMovesBannedFromLevelup());
         allBanned.addAll(GlobalConstants.zMoves);
         allBanned.addAll(this.getIllegalMoves());
@@ -4531,7 +4538,7 @@ public abstract class AbstractRomHandler implements RomHandler {
         // Pick some random TM moves.
         int tmCount = this.getTMCount();
         List<Move> allMoves = this.getMoves();
-        List<Integer> hms = this.getHMMoves();
+        //List<Integer> hms = this.getHMMoves();
         List<Integer> oldTMs = this.getTMMoves();
         @SuppressWarnings("unchecked")
         List<Integer> banned = new ArrayList<Integer>(noBroken ? this.getGameBreakingMoves() : Collections.EMPTY_LIST);
@@ -4556,7 +4563,7 @@ public abstract class AbstractRomHandler implements RomHandler {
 
         for (Move mv : usableMoves) {
             if (GlobalConstants.bannedRandomMoves[mv.number] || GlobalConstants.zMoves.contains(mv.number) ||
-                    hms.contains(mv.number) || banned.contains(mv.number)) {
+                    /*hms.contains(mv.number) ||*/ banned.contains(mv.number)) {
                 unusableMoves.add(mv);
             } else if (GlobalConstants.bannedForDamagingMove[mv.number] || !mv.isGoodDamaging(perfectAccuracy)) {
                 unusableDamagingMoves.add(mv);
@@ -4795,7 +4802,7 @@ public abstract class AbstractRomHandler implements RomHandler {
         List<Integer> tms = this.getTMMoves();
         List<Integer> oldMTs = this.getMoveTutorMoves();
         int mtCount = oldMTs.size();
-        List<Integer> hms = this.getHMMoves();
+        //List<Integer> hms = this.getHMMoves();
         @SuppressWarnings("unchecked")
         List<Integer> banned = new ArrayList<Integer>(noBroken ? this.getGameBreakingMoves() : Collections.EMPTY_LIST);
         banned.addAll(getMovesBannedFromLevelup());
@@ -4818,7 +4825,7 @@ public abstract class AbstractRomHandler implements RomHandler {
         Set<Move> unusableDamagingMoves = new HashSet<>();
 
         for (Move mv : usableMoves) {
-            if (GlobalConstants.bannedRandomMoves[mv.number] || tms.contains(mv.number) || hms.contains(mv.number)
+            if (GlobalConstants.bannedRandomMoves[mv.number] || tms.contains(mv.number) /*|| hms.contains(mv.number)*/
                     || banned.contains(mv.number) || GlobalConstants.zMoves.contains(mv.number)) {
                 unusableMoves.add(mv);
             } else if (GlobalConstants.bannedForDamagingMove[mv.number] || !mv.isGoodDamaging(perfectAccuracy)) {
@@ -4994,7 +5001,7 @@ public abstract class AbstractRomHandler implements RomHandler {
         // Read name lists
         for (String trainername : customNames.getTrainerNames()) {
             int len = this.internalStringLength(trainername);
-            if (len <= 10) {
+            if (len <= 11) {
                 allTrainerNames[0].add(trainername);
                 if (trainerNamesByLength[0].containsKey(len)) {
                     trainerNamesByLength[0].get(len).add(trainername);
@@ -5008,7 +5015,7 @@ public abstract class AbstractRomHandler implements RomHandler {
 
         for (String trainername : customNames.getDoublesTrainerNames()) {
             int len = this.internalStringLength(trainername);
-            if (len <= 10) {
+            if (len <= 11) {
                 allTrainerNames[1].add(trainername);
                 if (trainerNamesByLength[1].containsKey(len)) {
                     trainerNamesByLength[1].get(len).add(trainername);
@@ -7468,7 +7475,7 @@ public abstract class AbstractRomHandler implements RomHandler {
      */
     @Override
     public boolean typeInGame(Type type) {
-        return !type.isHackOnly && !(type == Type.FAIRY && generationOfPokemon() < 6);
+        return !type.isHackOnly && !(type == Type.FAIRY && generationOfPokemon() < 3);
     }
 
     @Override
@@ -7532,7 +7539,7 @@ public abstract class AbstractRomHandler implements RomHandler {
 
     @Override
     public int maxTradeNicknameLength() {
-        return 10;
+        return 12;
     }
 
     @Override

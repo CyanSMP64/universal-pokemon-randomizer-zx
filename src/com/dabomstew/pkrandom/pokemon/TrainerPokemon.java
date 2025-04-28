@@ -57,6 +57,8 @@ public class TrainerPokemon {
     
     public boolean resetMoves = false;
 
+    public int monIsShiny;
+
     public String toString() {
         String s = pokemon.name + formeSuffix;
         if (heldItem != 0) {
@@ -104,6 +106,8 @@ public class TrainerPokemon {
         tpk.formeSuffix = formeSuffix;
 
         tpk.resetMoves = resetMoves;
+
+        tpk.monIsShiny = monIsShiny;
 
         return tpk;
     }

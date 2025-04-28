@@ -28,8 +28,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Version {
-    public static final int VERSION = 906; // Increment by 1 for new version. Updated for 4.6.0.
-    public static final String VERSION_STRING = "4.6.0-END114";
+    public static final int VERSION = 907; // Increment by 1 for new version. Updated for 4.6.0.
+    public static final String VERSION_STRING = "4.6.1-END120";
 
     public static final Map<Integer,String> oldVersions = setupVersionsMap();
 
@@ -62,12 +62,14 @@ public class Version {
         map.put(319, "4.5.0");
         map.put(320, "4.5.1");
         map.put(321, "4.6.0");
+        map.put(322, "4.6.1");
         map.put(900, "4.6.0-END");
         map.put(901, "4.6.0-END102");
         map.put(902, "4.6.0-END110");
         map.put(903, "4.6.0-END111");
         map.put(904, "4.6.0-END112");
         map.put(905, "4.6.0-END113");
+        map.put(906, "4.6.0-END120");
 
         // Latest version - when version is updated, add the old version as an explicit put
         map.put(VERSION, VERSION_STRING);

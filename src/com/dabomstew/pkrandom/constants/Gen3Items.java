@@ -108,7 +108,7 @@ public class Gen3Items {
     public static final int xSpecial = 79;
     public static final int pokeDoll = 80;
     public static final int fluffyTail = 81;
-    public static final int unknown82 = 82;
+    public static final int xSpDef = 82;
     public static final int superRepel = 83;
     public static final int maxRepel = 84;
     public static final int escapeRope = 85;

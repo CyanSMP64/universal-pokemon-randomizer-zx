@@ -55,13 +55,15 @@ public enum Type {
 
     public static List<Type> getAllTypes(int generation) {
         switch (generation) {
-            case 1:
-                return GEN1;
-            case 2:
-            case 3:
-            case 4:
-            case 5:
-                return GEN2THROUGH5;
+            //case 1:
+            //    return GEN1;
+            //case 2:
+            //    return GEN2THROUGH5;
+            //case 3:
+            //    return GEN6PLUS;
+            //case 4:
+            //case 5:
+            //    return GEN2THROUGH5;
             default:
                 return GEN6PLUS;
         }

@@ -51,7 +51,7 @@ public class Gen7RomHandler extends Abstract3DSRomHandler {
         }
 
         public boolean isLoadable(String filename) {
-            return detect3DSRomInner(getProductCodeFromFile(filename), getTitleIdFromFile(filename));
+            return false;
         }
     }
 

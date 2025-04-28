@@ -211,6 +211,7 @@ public class Settings {
     private boolean wildLevelsModified;
     private int wildLevelModifier = 0;
     private boolean allowWildAltFormes;
+    private int wildBSTLimit = 0;
 
     public enum StaticPokemonMod {
         UNCHANGED, RANDOM_MATCHING, COMPLETELY_RANDOM, SIMILAR_STRENGTH
@@ -335,7 +336,7 @@ public class Settings {
             throw new UnsupportedOperationException("Error reading version number from settings string.");
         }
         int version = ByteBuffer.wrap(versionBytes).getInt();
-        if (((version >> 24) & 0xFF) > 0 && ((version >> 24) & 0xFF) <= 172) {
+        if (version <= 906) {
             throw new UnsupportedOperationException("The settings file is too old to update and cannot be loaded.");
         }
         if (version > VERSION) {
@@ -557,7 +558,8 @@ public class Settings {
 
         // 44 - 45: These two get a byte each for future proofing
         out.write(updateBaseStatsToGeneration);
-        out.write(updateMovesToGeneration);
+        out.write(updateMovesToGeneration |
+                (wildBSTLimit << 6));
 
         // 46 Selected EXP curve
         out.write(selectedEXPCurve.toByte());
@@ -847,7 +849,8 @@ public class Settings {
 
         settings.setUpdateBaseStatsToGeneration(data[44]);
 
-        settings.setUpdateMovesToGeneration(data[45]);
+        settings.setUpdateMovesToGeneration((data[45] & 0x3f));
+        settings.setWildBSTLimit((data[45] & 0xc0) >> 6);
 
         settings.setSelectedEXPCurve(ExpCurve.fromByte(data[46]));
 
@@ -1868,6 +1871,14 @@ public class Settings {
 
     public void setAllowWildAltFormes(boolean allowWildAltFormes) {
         this.allowWildAltFormes = allowWildAltFormes;
+    }
+
+    public int getWildBSTLimit() {
+        return wildBSTLimit;
+    }
+
+    public void setWildBSTLimit(int wildBSTLimit) {
+        this.wildBSTLimit = wildBSTLimit;
     }
 
     public StaticPokemonMod getStaticPokemonMod() {

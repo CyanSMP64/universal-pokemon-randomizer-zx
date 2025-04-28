@@ -300,6 +300,7 @@ public class NewRandomizerGUI {
     private JCheckBox paEnsureTwoAbilitiesCheckbox;
     private JCheckBox miscUpdateRotomFormeTypingCheckBox;
     private JCheckBox miscDisableLowHPMusicCheckBox;
+    private JComboBox wpLimitBSTComboBox;
 
     private static JFrame frame;
 
@@ -451,6 +452,7 @@ public class NewRandomizerGUI {
         wpSetMinimumCatchRateCheckBox.addActionListener(e -> enableOrDisableSubControls());
         wpRandomizeHeldItemsCheckBox.addActionListener(e -> enableOrDisableSubControls());
         wpPercentageLevelModifierCheckBox.addActionListener(e -> enableOrDisableSubControls());
+        wpDontUseLegendariesCheckBox.addActionListener(e -> enableOrDisableSubControls());
         tmUnchangedRadioButton.addActionListener(e -> enableOrDisableSubControls());
         tmRandomRadioButton.addActionListener(e -> enableOrDisableSubControls());
         tmForceGoodDamagingCheckBox.addActionListener(e -> enableOrDisableSubControls());
@@ -1344,12 +1346,16 @@ public class NewRandomizerGUI {
                     try {
                         int settingsStringVersionNumber = Integer.parseInt(configString.substring(0, 3));
                         if (settingsStringVersionNumber < Version.VERSION) {
-                            JOptionPane.showMessageDialog(frame,bundle.getString("GUI.settingsStringOlder"));
-                            String updatedSettingsString = new SettingsUpdater().update(settingsStringVersionNumber, configString.substring(3));
-                            Settings settings = Settings.fromString(updatedSettingsString);
-                            settings.tweakForRom(this.romHandler);
-                            restoreStateFromSettings(settings);
-                            JOptionPane.showMessageDialog(frame,bundle.getString("GUI.settingsStringLoaded"));
+                            if (settingsStringVersionNumber < 907) {
+                                JOptionPane.showMessageDialog(frame,bundle.getString("GUI.settingsStringTooOld"));
+                            } else {
+                                JOptionPane.showMessageDialog(frame,bundle.getString("GUI.settingsStringOlder"));
+                                String updatedSettingsString = new SettingsUpdater().update(settingsStringVersionNumber, configString.substring(3));
+                                Settings settings = Settings.fromString(updatedSettingsString);
+                                settings.tweakForRom(this.romHandler);
+                                restoreStateFromSettings(settings);
+                                JOptionPane.showMessageDialog(frame,bundle.getString("GUI.settingsStringLoaded"));
+                            }
                         } else if (settingsStringVersionNumber > Version.VERSION) {
                             JOptionPane.showMessageDialog(frame,bundle.getString("GUI.settingsStringTooNew"));
                         } else {
@@ -1605,6 +1611,7 @@ public class NewRandomizerGUI {
         wpPercentageLevelModifierCheckBox.setSelected(settings.isWildLevelsModified());
         wpPercentageLevelModifierSlider.setValue(settings.getWildLevelModifier());
         wpAllowAltFormesCheckBox.setSelected(settings.isAllowWildAltFormes());
+        wpLimitBSTComboBox.setSelectedIndex(settings.getWildBSTLimit());
 
         stpUnchangedRadioButton.setSelected(settings.getStaticPokemonMod() == Settings.StaticPokemonMod.UNCHANGED);
         stpSwapLegendariesSwapStandardsRadioButton.setSelected(settings.getStaticPokemonMod() == Settings.StaticPokemonMod.RANDOM_MATCHING);
@@ -1707,6 +1714,7 @@ public class NewRandomizerGUI {
         settings.setChangeImpossibleEvolutions(peChangeImpossibleEvosCheckBox.isSelected() && peChangeImpossibleEvosCheckBox.isVisible());
         settings.setUpdateMoves(mdUpdateMovesCheckBox.isSelected() && mdUpdateMovesCheckBox.isVisible());
         settings.setUpdateMovesToGeneration(mdUpdateComboBox.getSelectedIndex() + (romHandler.generationOfPokemon()+1));
+        settings.setWildBSTLimit(wpLimitBSTComboBox.getSelectedIndex());
         settings.setRandomizeTrainerNames(tpRandomizeTrainerNamesCheckBox.isSelected());
         settings.setRandomizeTrainerClassNames(tpRandomizeTrainerClassNamesCheckBox.isSelected());
 
@@ -2480,6 +2488,9 @@ public class NewRandomizerGUI {
         wpAllowAltFormesCheckBox.setVisible(true);
         wpAllowAltFormesCheckBox.setEnabled(false);
         wpAllowAltFormesCheckBox.setSelected(false);
+        wpLimitBSTComboBox.setVisible(true);
+        wpLimitBSTComboBox.setEnabled(false);
+        wpLimitBSTComboBox.setSelectedIndex(0);
         tmUnchangedRadioButton.setVisible(true);
         tmUnchangedRadioButton.setEnabled(false);
         tmUnchangedRadioButton.setSelected(false);
@@ -2615,7 +2626,7 @@ public class NewRandomizerGUI {
         miscFixCritRateCheckBox.setVisible(true);
         miscFixCritRateCheckBox.setEnabled(false);
         miscFixCritRateCheckBox.setSelected(false);
-        miscFastestTextCheckBox.setVisible(true);
+        miscFastestTextCheckBox.setVisible(false);
         miscFastestTextCheckBox.setEnabled(false);
         miscFastestTextCheckBox.setSelected(false);
         miscRunningShoesIndoorsCheckBox.setVisible(true);
@@ -2873,7 +2884,7 @@ public class NewRandomizerGUI {
             tpRandomizeTrainerNamesCheckBox.setEnabled(true);
             tpRandomizeTrainerClassNamesCheckBox.setEnabled(true);
             tpNoEarlyWonderGuardCheckBox.setVisible(pokemonGeneration >= 3);
-            tpRandomShinyTrainerPokemonCheckBox.setVisible(pokemonGeneration >= 7);
+            tpRandomShinyTrainerPokemonCheckBox.setVisible(pokemonGeneration >= 3);
             tpBetterMovesetsCheckBox.setVisible(pokemonGeneration >= 3);
             tpBetterMovesetsCheckBox.setEnabled(pokemonGeneration >= 3);
 
@@ -3524,6 +3535,12 @@ public class NewRandomizerGUI {
         } else {
             wpPercentageLevelModifierSlider.setEnabled(false);
             wpPercentageLevelModifierSlider.setValue(0);
+        }
+
+        if (wpDontUseLegendariesCheckBox.isSelected()) {
+            wpLimitBSTComboBox.setEnabled(true);
+        } else {
+            wpLimitBSTComboBox.setEnabled(false);
         }
 
         if (pmsMetronomeOnlyModeRadioButton.isSelected()) {

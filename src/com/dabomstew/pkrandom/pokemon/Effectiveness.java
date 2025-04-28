@@ -72,7 +72,7 @@ public enum Effectiveness {
         Effectiveness[][] effectivenesses;
         if (generation == 1) {
             effectivenesses = effectivenessUpdated ? gen2Through5Table : gen1Table;
-        } else if (generation >= 2 && generation <= 5) {
+        } else if (generation == 2) {
             effectivenesses = effectivenessUpdated ? gen6PlusTable : gen2Through5Table;
         } else {
             effectivenesses = gen6PlusTable;

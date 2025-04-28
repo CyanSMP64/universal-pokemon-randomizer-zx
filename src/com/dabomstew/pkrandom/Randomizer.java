@@ -798,7 +798,7 @@ public class Randomizer {
                                 .append(moves.get(ml.move).name).append(System.getProperty("line.separator"));
                 //    }
                 } catch (NullPointerException ex) {
-                    sb.append("invalid move at level").append(ml.level);
+                    sb.append("-----").append(System.getProperty("line.separator"));
                 }
             }
             List<Integer> eggMove = eggMoves.get(pkmn.number);

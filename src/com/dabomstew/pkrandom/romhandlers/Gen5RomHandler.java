@@ -55,7 +55,7 @@ public class Gen5RomHandler extends AbstractDSRomHandler {
         }
 
         public boolean isLoadable(String filename) {
-            return detectNDSRomInner(getROMCodeFromFile(filename), getVersionFromFile(filename));
+            return false;
         }
     }
 

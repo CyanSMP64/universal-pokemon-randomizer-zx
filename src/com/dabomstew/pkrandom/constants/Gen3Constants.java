@@ -122,7 +122,7 @@ public class Gen3Constants {
 
     public static final int pointerSearchRadius = 500;
 
-    public static final int itemDataDescriptionOffset = 0x14;
+    public static final int itemDataDescriptionOffset = 0x1c;
 
     public static final String deoxysObeyCode = "CD21490088420FD0";
 
@@ -522,7 +522,7 @@ public class Gen3Constants {
         allowedItems.banRange(Gen3Items.unknown176, 3);
         allowedItems.banRange(Gen3Items.unknown227, 27);
         allowedItems.banRange(Gen3Items.unknown347, 2);
-        allowedItems.banSingles(Gen3Items.unknown72, Gen3Items.unknown82, Gen3Items.unknown105, Gen3Items.unknown267);
+        allowedItems.banSingles(Gen3Items.unknown72, Gen3Items.unknown105, Gen3Items.unknown267);
         // HMs
         allowedItems.banRange(Gen3Items.hm01, 8);
         // TMs
@@ -1032,7 +1032,7 @@ public class Gen3Constants {
             {Gen3Items.xSpecial, 35},
             {Gen3Items.pokeDoll, 100},
             {Gen3Items.fluffyTail, 100},
-            {Gen3Items.unknown82, 0},
+            {Gen3Items.xSpDef, 35},
             {Gen3Items.superRepel, 50},
             {Gen3Items.maxRepel, 70},
             {Gen3Items.escapeRope, 55},

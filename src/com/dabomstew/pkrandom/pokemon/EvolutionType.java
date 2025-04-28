@@ -46,7 +46,7 @@ public enum EvolutionType {
     LEVEL_MALE_ONLY(-1, -1, 17, 22, 23, 23, 23),
     STONE_MALE_ONLY(-1, -1, 18, 16, 17, 17, 17),
     STONE_FEMALE_ONLY(-1, -1, 19, 17, 18, 18, 18),
-    STONE_LOW_PV(-1, -1, 20, 11, 12, 12, 12),
+    STONE_LOW_PV(-1, -1, -1, 11, 12, 12, 12),
     STONE_HIGH_PV(-1, -1, 21, 12, 13, 13, 13),
     LEVEL_ITEM_DAY(-1, -1, -1, 18, 19, 19, 19),
     LEVEL_ITEM_NIGHT(-1, -1, -1, 19, 20, 20, 20),
@@ -70,6 +70,7 @@ public enum EvolutionType {
     LEVEL_DUSK(-1, -1, -1, -1, -1, -1, 40),
     LEVEL_NIGHT_ULTRA(-1, -1, -1, -1, -1, -1, 41),
     STONE_ULTRA(-1, -1, -1, -1, -1, -1, 42),
+    LEVEL_NATURE_LOW_KEY(-1, -1, 20, -1, -1, -1, -1),
     NONE(-1, -1, -1, -1, -1, -1, -1);
     /* @formatter:on */
 
@@ -105,7 +106,8 @@ public enum EvolutionType {
                 || (this == LEVEL_FEMALE_ONLY) || (this == LEVEL_WITH_DARK)|| (this == LEVEL_UPSIDE_DOWN)
                 || (this == LEVEL_RAIN) || (this == LEVEL_DAY)|| (this == LEVEL_NIGHT)|| (this == LEVEL_FEMALE_ESPURR)
                 || (this == LEVEL_GAME) || (this == LEVEL_DAY_GAME) || (this == LEVEL_NIGHT_GAME)
-                || (this == LEVEL_SNOWY) || (this == LEVEL_DUSK) || (this == LEVEL_NIGHT_ULTRA);
+                || (this == LEVEL_SNOWY) || (this == LEVEL_DUSK) || (this == LEVEL_NIGHT_ULTRA)
+                || (this == LEVEL_NATURE_LOW_KEY);
     }
 
     public boolean skipSplitEvo() {

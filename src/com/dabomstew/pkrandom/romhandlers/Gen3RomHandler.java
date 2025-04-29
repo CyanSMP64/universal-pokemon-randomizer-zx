@@ -856,9 +856,9 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
             moves[i].name = readFixedLengthString(nameoffs + i * namelen, namelen);
             moves[i].number = i;
             moves[i].internalId = i;
-            moves[i].effectIndex = (rom[offs + i * 0xC] & 0xFF) | ((rom[offs + i * 0xC + 1] & 0xFF) << 8);
+            moves[i].effectIndex = (rom[offs + i * 0xC + 10] & 0xFF) | ((rom[offs + i * 0xC + 11] & 0xFF) << 8);
             moves[i].hitratio = ((rom[offs + i * 0xC + 3] & 0xFF));
-            moves[i].power = rom[offs + i * 0xC + 9] & 0xFF;
+            moves[i].power = rom[offs + i * 0xC + 1] & 0xFF;
             moves[i].pp = rom[offs + i * 0xC + 4] & 0xFF;
             moves[i].type = Gen3Constants.typeTable[rom[offs + i * 0xC + 2]];
             moves[i].target = rom[offs + i * 0xC + 6] & 0xFF;
@@ -1244,9 +1244,9 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
         int moveCount = romEntry.getValue("MoveCount");
         int offs = romEntry.getValue("MoveData");
         for (int i = 1; i <= moveCount; i++) {
-            rom[offs + i * 0xC] = (byte) (moves[i].effectIndex & 0xFF);          // low byte
-            rom[offs + i * 0xC + 1] = (byte) ((moves[i].effectIndex >> 8) & 0xFF); // high byte
-            rom[offs + i * 0xC + 9] = (byte) moves[i].power;
+            rom[offs + i * 0xC + 10] = (byte) (moves[i].effectIndex & 0xFF);          // low byte
+            rom[offs + i * 0xC + 11] = (byte) ((moves[i].effectIndex >> 8) & 0xFF); // high byte
+            rom[offs + i * 0xC + 1] = (byte) moves[i].power;
             rom[offs + i * 0xC + 2] = Gen3Constants.typeToByte(moves[i].type);
             int hitratio = (int) Math.round(moves[i].hitratio);
             if (hitratio < 0) {

@@ -82,12 +82,12 @@ public class Gen3Constants {
             0x00, 0x00, 0x03, 0x01, (byte) 0xAA, 0x0A, 0x00, 0x00, 0x00, 0x00, (byte) 0xFF, 0x78, 0x00, 0x00, 0x0F,
             0x0F, 0x00, 0x00, 0x00, 0x04, 0x00, 0x00 };
 
-    public static final int baseStatsEntrySize = 0x1C;
+    public static final int baseStatsEntrySize = 0x20;
 
     public static final int bsHPOffset = 0, bsAttackOffset = 1, bsDefenseOffset = 2, bsSpeedOffset = 3,
             bsSpAtkOffset = 4, bsSpDefOffset = 5, bsPrimaryTypeOffset = 6, bsSecondaryTypeOffset = 7,
             bsCatchRateOffset = 8, bsCommonHeldItemOffset = 12, bsRareHeldItemOffset = 14, bsGenderRatioOffset = 16,
-            bsGrowthCurveOffset = 19, bsAbility1Offset = 22, bsAbility2Offset = 23;
+            bsGrowthCurveOffset = 19, bsAbility1Offset = 22, bsAbility2Offset = 24;
 
     public static final int textTerminator = 0xFF, textVariable = 0xFD;
 
@@ -172,7 +172,7 @@ public class Gen3Constants {
 
     public static final int evolutionMethodCount = 21;
 
-    public static final int cacophonyIndex = 76, airLockIndex = 77, highestAbilityIndex = 77;
+    public static final int cacophonyIndex = 76, airLockIndex = 77, highestAbilityIndex = 311;
 
     public static final int emMeteorFallsStevenIndex = 804;
 
@@ -189,7 +189,55 @@ public class Gen3Constants {
         return map;
     }
 
-    public static final List<Integer> uselessAbilities = Arrays.asList(Abilities.forecast, Gen3Constants.cacophonyIndex);
+    public static final List<Integer> uselessAbilities = Arrays.asList(Abilities.forecast, Gen3Constants.cacophonyIndex,
+            Abilities.tangledFeet, Abilities.motorDrive, Abilities.rivalry, Abilities.steadfast, Abilities.snowCloak,
+            Abilities.gluttony, Abilities.angerPoint, Abilities.unburden, Abilities.heatproof, Abilities.simple,
+            Abilities.drySkin, Abilities.download, Abilities.ironFist, Abilities.poisonHeal, Abilities.adaptability,
+            Abilities.skillLink, Abilities.hydration, Abilities.solarPower, Abilities.quickFeet, Abilities.normalize,
+            Abilities.sniper, Abilities.magicGuard, Abilities.noGuard, Abilities.stall, Abilities.technician,
+            Abilities.leafGuard, Abilities.klutz, Abilities.moldBreaker, Abilities.superLuck, Abilities.aftermath,
+            Abilities.anticipation, Abilities.forewarn, Abilities.unaware, Abilities.tintedLens, Abilities.filter,
+            Abilities.slowStart, Abilities.scrappy, Abilities.stormDrain, Abilities.iceBody, Abilities.solidRock,
+            Abilities.snowWarning, Abilities.honeyGather, Abilities.frisk, Abilities.reckless, Abilities.multitype,
+            Abilities.flowerGift, Abilities.badDreams, Abilities.pickpocket, Abilities.sheerForce, Abilities.contrary,
+            Abilities.unnerve, Abilities.defiant, Abilities.defeatist, Abilities.cursedBody, Abilities.healer,
+            Abilities.friendGuard, Abilities.weakArmor, Abilities.heavyMetal, Abilities.lightMetal, Abilities.multiscale,
+            Abilities.toxicBoost, Abilities.flareBoost, Abilities.harvest, Abilities.telepathy, Abilities.moody,
+            Abilities.overcoat, Abilities.poisonTouch, Abilities.regenerator, Abilities.bigPecks, Abilities.sandRush,
+            Abilities.wonderSkin, Abilities.analytic, Abilities.illusion, Abilities.imposter, Abilities.infiltrator,
+            Abilities.mummy, Abilities.moxie, Abilities.justified, Abilities.rattled, Abilities.magicBounce,
+            Abilities.sapSipper, Abilities.prankster, Abilities.sandForce, Abilities.ironBarbs, Abilities.zenMode,
+            Abilities.victoryStar, Abilities.turboblaze, Abilities.teravolt, Abilities.aromaVeil, Abilities.flowerVeil,
+            Abilities.cheekPouch, Abilities.protean, Abilities.furCoat, Abilities.magician, Abilities.bulletproof,
+            Abilities.competitive, Abilities.strongJaw, Abilities.refrigerate, Abilities.sweetVeil, Abilities.stanceChange,
+            Abilities.galeWings, Abilities.megaLauncher, Abilities.grassPelt, Abilities.symbiosis, Abilities.toughClaws,
+            Abilities.pixilate, Abilities.gooey, Abilities.aerilate, Abilities.parentalBond, Abilities.darkAura,
+            Abilities.fairyAura, Abilities.auraBreak, Abilities.primordialSea, Abilities.desolateLand, Abilities.deltaStream,
+            Abilities.stamina, Abilities.wimpOut, Abilities.emergencyExit, Abilities.waterCompaction, Abilities.merciless,
+            Abilities.shieldsDown, Abilities.stakeout, Abilities.waterBubble, Abilities.steelworker, Abilities.berserk,
+            Abilities.slushRush, Abilities.longReach, Abilities.liquidVoice, Abilities.triage, Abilities.galvanize,
+            Abilities.surgeSurfer, Abilities.schooling, Abilities.disguise, Abilities.battleBond, Abilities.powerConstruct,
+            Abilities.corrosion, Abilities.comatose, Abilities.queenlyMajesty, Abilities.innardsOut, Abilities.dancer,
+            Abilities.battery, Abilities.fluffy, Abilities.dazzling, Abilities.soulHeart, Abilities.tanglingHair,
+            Abilities.receiver, Abilities.powerOfAlchemy, Abilities.beastBoost, Abilities.rksSystem, Abilities.electricSurge,
+            Abilities.psychicSurge, Abilities.mistySurge, Abilities.grassySurge, Abilities.fullMetalBody, Abilities.shadowShield,
+            Abilities.prismArmor, Abilities.neuroforce, Abilities.intrepidSword, Abilities.dauntlessShield, Abilities.libero,
+            Abilities.ballFetch, Abilities.cottonDown, Abilities.propellerTail, Abilities.mirrorArmor, Abilities.gulpMissile,
+            Abilities.stalwart, Abilities.steamEngine, Abilities.punkRock, Abilities.sandSpit, Abilities.iceScales,
+            Abilities.ripen, Abilities.iceFace, Abilities.powerSpot, Abilities.mimicry, Abilities.screenCleaner,
+            Abilities.steelySpirit, Abilities.perishBody, Abilities.wanderingSpirit, Abilities.gorillaTactics, Abilities.neutralizingGas,
+            Abilities.pastelVeil, Abilities.hungerSwitch, Abilities.quickDraw, Abilities.unseenFist, Abilities.curiousMedicine,
+            Abilities.transistor, Abilities.dragonsMaw, Abilities.chillingNeigh, Abilities.grimNeigh, Abilities.asOneChillingNeigh,
+            Abilities.asOneGrimNeigh, Abilities.lingeringAroma, Abilities.seedSower, Abilities.thermalExchange, Abilities.angerShell,
+            Abilities.purifyingSalt, Abilities.wellBakedBody, Abilities.windRider, Abilities.guardDog, Abilities.rockyPayload,
+            Abilities.windPower, Abilities.zeroToHero, Abilities.commander, Abilities.electromorphosis, Abilities.protosynthesis,
+            Abilities.quarkDrive, Abilities.goodAsGold, Abilities.vesselOfRuin, Abilities.swordOfRuin, Abilities.tabletsOfRuin,
+            Abilities.beadsOfRuin, Abilities.orichalcumPulse, Abilities.hadronEngine, Abilities.opportunist, Abilities.cudChew,
+            Abilities.sharpness, Abilities.supremeOverlord, Abilities.costar, Abilities.toxicDebris, Abilities.armorTail,
+            Abilities.earthEater, Abilities.myceliumMight, Abilities.hospitality, Abilities.mindsEye, Abilities.embodyAspectTealMask,
+            Abilities.embodyAspectHearthflameMask, Abilities.embodyAspectWellspringMask, Abilities.embodyAspectCornerstoneMask,
+            Abilities.toxicChain, Abilities.supersweetSyrup, Abilities.teraShift, Abilities.teraShell, Abilities.teraformZero,
+            Abilities.poisonPuppeteer);
 
     public static final int frlgMapLabelsStart = 0x58;
 

@@ -1281,8 +1281,10 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
         pkmn.catchRate = rom[offset + Gen3Constants.bsCatchRateOffset] & 0xFF;
         pkmn.growthCurve = ExpCurve.fromByte(rom[offset + Gen3Constants.bsGrowthCurveOffset]);
         // Abilities
-        pkmn.ability1 = rom[offset + Gen3Constants.bsAbility1Offset] & 0xFF;
-        pkmn.ability2 = rom[offset + Gen3Constants.bsAbility2Offset] & 0xFF;
+        pkmn.ability1 = (rom[offset + Gen3Constants.bsAbility1Offset] & 0xFF) | 
+                        ((rom[offset + Gen3Constants.bsAbility1Offset + 1] & 0xFF) << 8);
+        pkmn.ability2 = (rom[offset + Gen3Constants.bsAbility2Offset] & 0xFF) |
+                        ((rom[offset + Gen3Constants.bsAbility2Offset + 1] & 0xFF) << 8);
 
         // Held Items?
         int item1 = readWord(offset + Gen3Constants.bsCommonHeldItemOffset);
@@ -1319,12 +1321,15 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
         rom[offset + Gen3Constants.bsCatchRateOffset] = (byte) pkmn.catchRate;
         rom[offset + Gen3Constants.bsGrowthCurveOffset] = pkmn.growthCurve.toByte();
 
-        rom[offset + Gen3Constants.bsAbility1Offset] = (byte) pkmn.ability1;
+        rom[offset + Gen3Constants.bsAbility1Offset] = (byte) (pkmn.ability1 & 0xFF);
+        rom[offset + Gen3Constants.bsAbility1Offset + 1] = (byte) ((pkmn.ability1 >> 8) & 0xFF);
         if (pkmn.ability2 == 0) {
             // required to not break evos with random ability
-            rom[offset + Gen3Constants.bsAbility2Offset] = (byte) pkmn.ability1;
+            rom[offset + Gen3Constants.bsAbility2Offset] = (byte) (pkmn.ability1 & 0xFF);
+            rom[offset + Gen3Constants.bsAbility2Offset + 1] = (byte) ((pkmn.ability1 >> 8) & 0xFF);
         } else {
-            rom[offset + Gen3Constants.bsAbility2Offset] = (byte) pkmn.ability2;
+            rom[offset + Gen3Constants.bsAbility2Offset] = (byte) (pkmn.ability2 & 0xFF);
+            rom[offset + Gen3Constants.bsAbility2Offset + 1] = (byte) ((pkmn.ability2 >> 8) & 0xFF);
         }
 
         // Held items
@@ -3644,8 +3649,13 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
 
     @Override
     public int getAbilityForTrainerPokemon(TrainerPokemon tp) {
-        // In Gen 3, Trainer Pokemon *always* use the first Ability, no matter what
-        return tp.pokemon.ability1;
+        // modified so that trainers can decide their ability
+        Pokemon pkmn = tp.pokemon;
+        if (tp.abilitySlot == 2 || tp.abilitySlot == 6) {
+            return pkmn.ability2;
+        } else {
+            return pkmn.ability1;
+        }
     }
 
     @Override

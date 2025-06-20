@@ -6651,39 +6651,41 @@ public abstract class AbstractRomHandler implements RomHandler {
             int timesEvolves = numEvolutions(rivalStarter, 2);
             // Yellow does not have abilities
             int abilitySlot = 0;
+            // Yellow does not have shinies either
+            int isShiny = 0;
             // Apply evolutions as appropriate
             if (timesEvolves == 0) {
                 for (int j = 1; j <= 3; j++) {
-                    changeStarterWithTag(currentTrainers, prefix + j + "-0", rivalStarter, abilitySlot);
+                    changeStarterWithTag(currentTrainers, prefix + j + "-0", rivalStarter, abilitySlot, isShiny);
                 }
                 for (int j = 4; j <= 7; j++) {
                     for (int i = 0; i < 3; i++) {
-                        changeStarterWithTag(currentTrainers, prefix + j + "-" + i, rivalStarter, abilitySlot);
+                        changeStarterWithTag(currentTrainers, prefix + j + "-" + i, rivalStarter, abilitySlot, isShiny);
                     }
                 }
             } else if (timesEvolves == 1) {
                 for (int j = 1; j <= 3; j++) {
-                    changeStarterWithTag(currentTrainers, prefix + j + "-0", rivalStarter, abilitySlot);
+                    changeStarterWithTag(currentTrainers, prefix + j + "-0", rivalStarter, abilitySlot, isShiny);
                 }
                 rivalStarter = pickRandomEvolutionOf(rivalStarter, false);
                 for (int j = 4; j <= 7; j++) {
                     for (int i = 0; i < 3; i++) {
-                        changeStarterWithTag(currentTrainers, prefix + j + "-" + i, rivalStarter, abilitySlot);
+                        changeStarterWithTag(currentTrainers, prefix + j + "-" + i, rivalStarter, abilitySlot, isShiny);
                     }
                 }
             } else if (timesEvolves == 2) {
                 for (int j = 1; j <= 2; j++) {
-                    changeStarterWithTag(currentTrainers, prefix + j + "-" + 0, rivalStarter, abilitySlot);
+                    changeStarterWithTag(currentTrainers, prefix + j + "-" + 0, rivalStarter, abilitySlot, isShiny);
                 }
                 rivalStarter = pickRandomEvolutionOf(rivalStarter, true);
-                changeStarterWithTag(currentTrainers, prefix + "3-0", rivalStarter, abilitySlot);
+                changeStarterWithTag(currentTrainers, prefix + "3-0", rivalStarter, abilitySlot, isShiny);
                 for (int i = 0; i < 3; i++) {
-                    changeStarterWithTag(currentTrainers, prefix + "4-" + i, rivalStarter, abilitySlot);
+                    changeStarterWithTag(currentTrainers, prefix + "4-" + i, rivalStarter, abilitySlot, isShiny);
                 }
                 rivalStarter = pickRandomEvolutionOf(rivalStarter, false);
                 for (int j = 5; j <= 7; j++) {
                     for (int i = 0; i < 3; i++) {
-                        changeStarterWithTag(currentTrainers, prefix + j + "-" + i, rivalStarter, abilitySlot);
+                        changeStarterWithTag(currentTrainers, prefix + j + "-" + i, rivalStarter, abilitySlot, isShiny);
                     }
                 }
             }
@@ -6696,6 +6698,11 @@ public abstract class AbstractRomHandler implements RomHandler {
                 Pokemon thisStarter = starters.get(starterToUse);
                 int timesEvolves = numEvolutions(thisStarter, 2);
                 int abilitySlot = getRandomAbilitySlot(thisStarter);
+                int isShiny = 0;
+                // if starter is shiny, it will remain shiny
+                if (this.random.nextInt(256) == 0) {
+                    isShiny = 1;
+                }
                 while (abilitySlot == 3) {
                     // Since starters never have hidden abilities, the rival's starter shouldn't either
                     abilitySlot = getRandomAbilitySlot(thisStarter);
@@ -6704,7 +6711,7 @@ public abstract class AbstractRomHandler implements RomHandler {
                 // Otherwise split by evolutions as appropriate
                 if (timesEvolves == 0) {
                     for (int j = 1; j <= highestRivalNum; j++) {
-                        changeStarterWithTag(currentTrainers, prefix + j + "-" + i, thisStarter, abilitySlot);
+                        changeStarterWithTag(currentTrainers, prefix + j + "-" + i, thisStarter, abilitySlot, isShiny);
                     }
                 } else if (timesEvolves == 1) {
                     int j = 1;
@@ -6712,12 +6719,12 @@ public abstract class AbstractRomHandler implements RomHandler {
                         if (getLevelOfStarter(currentTrainers, prefix + j + "-" + i) >= 30) {
                             break;
                         }
-                        changeStarterWithTag(currentTrainers, prefix + j + "-" + i, thisStarter, abilitySlot);
+                        changeStarterWithTag(currentTrainers, prefix + j + "-" + i, thisStarter, abilitySlot, isShiny);
                     }
                     thisStarter = pickRandomEvolutionOf(thisStarter, false);
                     int evolvedAbilitySlot = getValidAbilitySlotFromOriginal(thisStarter, abilitySlot);
                     for (; j <= highestRivalNum; j++) {
-                        changeStarterWithTag(currentTrainers, prefix + j + "-" + i, thisStarter, evolvedAbilitySlot);
+                        changeStarterWithTag(currentTrainers, prefix + j + "-" + i, thisStarter, evolvedAbilitySlot, isShiny);
                     }
                 } else if (timesEvolves == 2) {
                     int j = 1;
@@ -6725,7 +6732,7 @@ public abstract class AbstractRomHandler implements RomHandler {
                         if (getLevelOfStarter(currentTrainers, prefix + j + "-" + i) >= 16) {
                             break;
                         }
-                        changeStarterWithTag(currentTrainers, prefix + j + "-" + i, thisStarter, abilitySlot);
+                        changeStarterWithTag(currentTrainers, prefix + j + "-" + i, thisStarter, abilitySlot, isShiny);
                     }
                     thisStarter = pickRandomEvolutionOf(thisStarter, true);
                     int evolvedAbilitySlot = getValidAbilitySlotFromOriginal(thisStarter, abilitySlot);
@@ -6733,12 +6740,12 @@ public abstract class AbstractRomHandler implements RomHandler {
                         if (getLevelOfStarter(currentTrainers, prefix + j + "-" + i) >= 36) {
                             break;
                         }
-                        changeStarterWithTag(currentTrainers, prefix + j + "-" + i, thisStarter, evolvedAbilitySlot);
+                        changeStarterWithTag(currentTrainers, prefix + j + "-" + i, thisStarter, evolvedAbilitySlot, isShiny);
                     }
                     thisStarter = pickRandomEvolutionOf(thisStarter, false);
                     evolvedAbilitySlot = getValidAbilitySlotFromOriginal(thisStarter, abilitySlot);
                     for (; j <= highestRivalNum; j++) {
-                        changeStarterWithTag(currentTrainers, prefix + j + "-" + i, thisStarter, evolvedAbilitySlot);
+                        changeStarterWithTag(currentTrainers, prefix + j + "-" + i, thisStarter, evolvedAbilitySlot, isShiny);
                     }
                 }
             }
@@ -6787,7 +6794,7 @@ public abstract class AbstractRomHandler implements RomHandler {
         return 0;
     }
 
-    private void changeStarterWithTag(List<Trainer> currentTrainers, String tag, Pokemon starter, int abilitySlot) {
+    private void changeStarterWithTag(List<Trainer> currentTrainers, String tag, Pokemon starter, int abilitySlot, int isShiny) {
         for (Trainer t : currentTrainers) {
             if (t.tag != null && t.tag.equals(tag)) {
 
@@ -6812,6 +6819,8 @@ public abstract class AbstractRomHandler implements RomHandler {
                 setFormeForTrainerPokemon(bestPoke,starter);
                 bestPoke.resetMoves = true;
                 bestPoke.abilitySlot = abilitySlot;
+                // if starter is shiny, it will remain shiny
+                bestPoke.monIsShiny = isShiny;
             }
         }
 

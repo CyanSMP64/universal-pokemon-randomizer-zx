@@ -3370,7 +3370,7 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
     public List<PickupItem> getPickupItems() {
         List<PickupItem> pickupItems = new ArrayList<>();
         int pickupItemCount = romEntry.getValue("PickupItemCount");
-        int sizeOfPickupEntry = romEntry.romType == Gen3Constants.RomType_Em ? 2 : 4;
+        int sizeOfPickupEntry = 2; // 4 in RS / vanilla FRLG
 
         // If we haven't found the pickup table for this ROM already, find it.
         if (pickupItemsTableOffset == 0) {
@@ -3403,19 +3403,19 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
                         pickupItems.get(i).probabilities[levelRange] = 10;
                     }
                 }
-            } else if (romEntry.romType == Gen3Constants.RomType_FRLG) {
-                for (int levelRange = 0; levelRange < 10; levelRange++) {
-                    pickupItems.get(0).probabilities[levelRange] = 15;
-                    for (int i = 1; i < 7; i++) {
-                        pickupItems.get(i).probabilities[levelRange] = 10;
-                    }
-                    for (int i = 7; i < 11; i++) {
-                        pickupItems.get(i).probabilities[levelRange] = 5;
-                    }
-                    for (int i = 11; i < 16; i++) {
-                        pickupItems.get(i).probabilities[levelRange] = 1;
-                    }
-                }
+            //} else if (romEntry.romType == Gen3Constants.RomType_FRLG) {
+            //    for (int levelRange = 0; levelRange < 10; levelRange++) {
+            //        pickupItems.get(0).probabilities[levelRange] = 15;
+            //        for (int i = 1; i < 7; i++) {
+            //            pickupItems.get(i).probabilities[levelRange] = 10;
+            //        }
+            //        for (int i = 7; i < 11; i++) {
+            //            pickupItems.get(i).probabilities[levelRange] = 5;
+            //        }
+            //        for (int i = 11; i < 16; i++) {
+            //            pickupItems.get(i).probabilities[levelRange] = 1;
+            //        }
+            //    }
             } else {
                 for (int levelRange = 0; levelRange < 10; levelRange++) {
                     int startingCommonItemOffset = levelRange;
@@ -3436,7 +3436,7 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
 
     @Override
     public void setPickupItems(List<PickupItem> pickupItems) {
-        int sizeOfPickupEntry = romEntry.romType == Gen3Constants.RomType_Em ? 2 : 4;
+        int sizeOfPickupEntry = 2; // 4 in RS / vanilla FRLG
         if (pickupItemsTableOffset > 0) {
             for (int i = 0; i < pickupItems.size(); i++) {
                 int itemOffset = pickupItemsTableOffset + (sizeOfPickupEntry * i);

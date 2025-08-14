@@ -93,8 +93,8 @@ public class Gen3Constants {
 
     public static final byte freeSpaceByte = (byte) 0xFF;
 
-    public static final int rseStarter2Offset = 2, rseStarter3Offset = 4, frlgStarter2Offset = 503,
-            frlgStarter3Offset = 449, frlgStarterRepeatOffset = 5;
+    public static final int rseStarter2Offset = 2, rseStarter3Offset = 4, frlgStarter2Offset = 511,
+            frlgStarter3Offset = 457, frlgStarterRepeatOffset = 5;
 
     public static final int frlgBaseStarter1 = 1, frlgBaseStarter2 = 4, frlgBaseStarter3 = 7;
 

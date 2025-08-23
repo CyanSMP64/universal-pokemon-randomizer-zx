@@ -564,7 +564,7 @@ public class Gen3Constants {
         allowedItems.banRange(Gen3Items.machBike, 30);
         allowedItems.banRange(Gen3Items.oaksParcel, 28);
         // Unknown blank items
-        allowedItems.banRange(Gen3Items.unknown52, 11);
+        allowedItems.banRange(Gen3Items.unknown53, 10);
         allowedItems.banRange(Gen3Items.unknown87, 2);
         allowedItems.banRange(Gen3Items.unknown112, 9);
         allowedItems.banRange(Gen3Items.unknown176, 3);
@@ -1050,7 +1050,7 @@ public class Gen3Constants {
             {Gen3Items.blueShard, 40},
             {Gen3Items.yellowShard, 40},
             {Gen3Items.greenShard, 40},
-            {Gen3Items.unknown52, 0},
+            {Gen3Items.regionalMineral, 300},
             {Gen3Items.unknown53, 0},
             {Gen3Items.unknown54, 0},
             {Gen3Items.unknown55, 0},

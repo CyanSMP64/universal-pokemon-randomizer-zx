@@ -78,7 +78,7 @@ public class Gen3Items {
     public static final int blueShard = 49;
     public static final int yellowShard = 50;
     public static final int greenShard = 51;
-    public static final int unknown52 = 52;
+    public static final int regionalMineral = 52;
     public static final int unknown53 = 53;
     public static final int unknown54 = 54;
     public static final int unknown55 = 55;

@@ -71,6 +71,8 @@ public enum EvolutionType {
     LEVEL_NIGHT_ULTRA(-1, -1, -1, -1, -1, -1, 41),
     STONE_ULTRA(-1, -1, -1, -1, -1, -1, 42),
     LEVEL_NATURE_LOW_KEY(-1, -1, 20, -1, -1, -1, -1),
+    LEVEL_REGIONAL_ROCK(-1, -1, 22, -1, -1, -1, -1),
+    STONE_REGIONAL_ROCK(-1, -1, 23, -1, -1, -1, -1),
     NONE(-1, -1, -1, -1, -1, -1, -1);
     /* @formatter:on */
 
@@ -107,7 +109,7 @@ public enum EvolutionType {
                 || (this == LEVEL_RAIN) || (this == LEVEL_DAY)|| (this == LEVEL_NIGHT)|| (this == LEVEL_FEMALE_ESPURR)
                 || (this == LEVEL_GAME) || (this == LEVEL_DAY_GAME) || (this == LEVEL_NIGHT_GAME)
                 || (this == LEVEL_SNOWY) || (this == LEVEL_DUSK) || (this == LEVEL_NIGHT_ULTRA)
-                || (this == LEVEL_NATURE_LOW_KEY);
+                || (this == LEVEL_NATURE_LOW_KEY) || (this == LEVEL_REGIONAL_ROCK);
     }
 
     public boolean skipSplitEvo() {

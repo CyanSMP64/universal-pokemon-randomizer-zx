@@ -443,6 +443,7 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
             romEntry.entries.put("PokemonStats", readPointer(Gen3Constants.efrlgPokemonStatsPointer));
             romEntry.entries.put("FrontSprites", readPointer(Gen3Constants.efrlgFrontSpritesPointer));
             romEntry.entries.put("PokemonPalettes", readPointer(Gen3Constants.efrlgPokemonPalettesPointer));
+            romEntry.entries.put("PokemonShinyPalettes", readPointer(Gen3Constants.efrlgPokemonShinyPalettesPointer));
             romEntry.entries.put("MoveTutorCompatibility",
                     romEntry.getValue("MoveTutorData") + romEntry.getValue("MoveTutorMoves") * 2);
         }
@@ -4166,24 +4167,25 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
 
     @Override
     public int miscTweaksAvailable() {
-        int available = MiscTweak.LOWER_CASE_POKEMON_NAMES.getValue();
-        available |= MiscTweak.NATIONAL_DEX_AT_START.getValue();
-        available |= MiscTweak.UPDATE_TYPE_EFFECTIVENESS.getValue();
-        if (romEntry.getValue("RunIndoorsTweakOffset") > 0) {
-            available |= MiscTweak.RUNNING_SHOES_INDOORS.getValue();
-        }
-        if (romEntry.getValue("TextSpeedValuesOffset") > 0 || romEntry.codeTweaks.get("InstantTextTweak") != null) {
-            available |= MiscTweak.FASTEST_TEXT.getValue();
-        }
-        if (romEntry.getValue("CatchingTutorialOpponentMonOffset") > 0
-                || romEntry.getValue("CatchingTutorialPlayerMonOffset") > 0) {
-            available |= MiscTweak.RANDOMIZE_CATCHING_TUTORIAL.getValue();
-        }
+        int available = 0;
+//        available |= MiscTweak.LOWER_CASE_POKEMON_NAMES.getValue();
+//        available |= MiscTweak.NATIONAL_DEX_AT_START.getValue();
+//        available |= MiscTweak.UPDATE_TYPE_EFFECTIVENESS.getValue();
+//        if (romEntry.getValue("RunIndoorsTweakOffset") > 0) {
+//            available |= MiscTweak.RUNNING_SHOES_INDOORS.getValue();
+//        }
+//        if (romEntry.getValue("TextSpeedValuesOffset") > 0 || romEntry.codeTweaks.get("InstantTextTweak") != null) {
+//            available |= MiscTweak.FASTEST_TEXT.getValue();
+//        }
+//        if (romEntry.getValue("CatchingTutorialOpponentMonOffset") > 0
+//                || romEntry.getValue("CatchingTutorialPlayerMonOffset") > 0) {
+//            available |= MiscTweak.RANDOMIZE_CATCHING_TUTORIAL.getValue();
+//        }
         if (romEntry.getValue("PCPotionOffset") != 0) {
             available |= MiscTweak.RANDOMIZE_PC_POTION.getValue();
         }
         available |= MiscTweak.BAN_LUCKY_EGG.getValue();
-        available |= MiscTweak.RUN_WITHOUT_RUNNING_SHOES.getValue();
+//        available |= MiscTweak.RUN_WITHOUT_RUNNING_SHOES.getValue();
         if (romEntry.romType == Gen3Constants.RomType_FRLG) {
             available |= MiscTweak.BALANCE_STATIC_LEVELS.getValue();
         }
@@ -4192,7 +4194,7 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
 
     @Override
     public void applyMiscTweak(MiscTweak tweak) {
-        if (tweak == MiscTweak.RUNNING_SHOES_INDOORS) {
+        if /*(tweak == MiscTweak.RUNNING_SHOES_INDOORS) {
             applyRunningShoesIndoorsPatch();
         } else if (tweak == MiscTweak.FASTEST_TEXT) {
             applyFastestTextPatch();
@@ -4202,20 +4204,20 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
             patchForNationalDex();
         } else if (tweak == MiscTweak.RANDOMIZE_CATCHING_TUTORIAL) {
             randomizeCatchingTutorial();
-        } else if (tweak == MiscTweak.BAN_LUCKY_EGG) {
+        } else if */(tweak == MiscTweak.BAN_LUCKY_EGG) {
             allowedItems.banSingles(Gen3Items.luckyEgg);
             nonBadItems.banSingles(Gen3Items.luckyEgg);
         } else if (tweak == MiscTweak.RANDOMIZE_PC_POTION) {
             randomizePCPotion();
-        } else if (tweak == MiscTweak.RUN_WITHOUT_RUNNING_SHOES) {
-            applyRunWithoutRunningShoesPatch();
+//        } else if (tweak == MiscTweak.RUN_WITHOUT_RUNNING_SHOES) {
+//            applyRunWithoutRunningShoesPatch();
         } else if (tweak == MiscTweak.BALANCE_STATIC_LEVELS) {
             int[] fossilLevelOffsets = romEntry.arrayEntries.get("FossilLevelOffsets");
             for (int fossilLevelOffset : fossilLevelOffsets) {
                 writeWord(rom, fossilLevelOffset, 30);
             }
-        } else if (tweak == MiscTweak.UPDATE_TYPE_EFFECTIVENESS) {
-            updateTypeEffectiveness();
+//        } else if (tweak == MiscTweak.UPDATE_TYPE_EFFECTIVENESS) {
+//            updateTypeEffectiveness();
         }
     }
 
@@ -4433,6 +4435,10 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
         int mascotPokemon = pokedexToInternal[mascotPk.number];
         int frontSprites = romEntry.getValue("FrontSprites");
         int palettes = romEntry.getValue("PokemonPalettes");
+        if (random.nextInt(10) == 0) {
+            // shiny
+            palettes = romEntry.getValue("PokemonShinyPalettes");
+        }
         int fsOffset = readPointer(frontSprites + mascotPokemon * 8);
         int palOffset = readPointer(palettes + mascotPokemon * 8);
 

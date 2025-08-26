@@ -5540,17 +5540,12 @@ public abstract class AbstractRomHandler implements RomHandler {
         boolean sameType = settings.isEvosSameTyping();
         boolean limitToThreeStages = settings.isEvosMaxThreeStages();
         boolean forceChange = settings.isEvosForceChange();
-        boolean allowAltFormes = settings.isEvosAllowAltFormes();
-        boolean banIrregularAltFormes = settings.isBanIrregularAltFormes();
+        boolean evoTypeTarget = settings.isEvosMatchPostEvoTyping();
+//        boolean banIrregularAltFormes = settings.isBanIrregularAltFormes();
         boolean abilitiesAreRandomized = settings.getAbilitiesMod() == Settings.AbilitiesMod.RANDOMIZE;
 
         checkPokemonRestrictions();
-        List<Pokemon> pokemonPool;
-        if (this.altFormesCanHaveDifferentEvolutions()) {
-            pokemonPool = new ArrayList<>(mainPokemonListInclFormes);
-        } else {
-            pokemonPool = new ArrayList<>(mainPokemonList);
-        }
+        List<Pokemon> pokemonPool = new ArrayList<>(mainPokemonList);
         List<Pokemon> actuallyCosmeticPokemonPool = new ArrayList<>();
         int stageLimit = limitToThreeStages ? 3 : 10;
 
@@ -5559,9 +5554,9 @@ public abstract class AbstractRomHandler implements RomHandler {
             List<Pokemon> abilityDependentFormes = getAbilityDependentFormes();
             banned.addAll(abilityDependentFormes);
         }
-        if (banIrregularAltFormes) {
-            banned.addAll(getIrregularFormes());
-        }
+//        if (banIrregularAltFormes) {
+//            banned.addAll(getIrregularFormes());
+//        }
 
         for (int i = 0; i < pokemonPool.size(); i++) {
             Pokemon pk = pokemonPool.get(i);
@@ -5617,13 +5612,7 @@ public abstract class AbstractRomHandler implements RomHandler {
                     // Pick a Pokemon as replacement
                     replacements.clear();
 
-                    List<Pokemon> chosenList =
-                            allowAltFormes ?
-                            mainPokemonListInclFormes
-                                    .stream()
-                                    .filter(pk -> !pk.actuallyCosmetic)
-                                    .collect(Collectors.toList()) :
-                            mainPokemonList;
+                    List<Pokemon> chosenList = mainPokemonList;
                     // Step 1: base filters
                     for (Pokemon pk : chosenList) {
                         // Prevent evolving into oneself (mandatory)
@@ -5701,17 +5690,27 @@ public abstract class AbstractRomHandler implements RomHandler {
                     if (replacements.size() > 1 && sameType) {
                         Set<Pokemon> includeType = new HashSet<>();
                         for (Pokemon pk : replacements) {
-                            // Special case for Eevee
-                            if (fromPK.number == Species.eevee) {
+                            // NATDEX: target evo type can be that of the vanilla evolution with a setting
+                            if (evoTypeTarget) {
                                 if (pk.primaryType == ev.to.primaryType
-                                        || (pk.secondaryType != null) && pk.secondaryType == ev.to.primaryType) {
+                                        || (ev.to.secondaryType != null && pk.primaryType == ev.to.secondaryType)
+                                        || (pk.secondaryType != null && pk.secondaryType == ev.to.primaryType)
+                                        || (ev.to.secondaryType != null && pk.secondaryType != null && pk.secondaryType == ev.to.secondaryType)) {
                                     includeType.add(pk);
                                 }
-                            } else if (pk.primaryType == fromPK.primaryType
-                                    || (fromPK.secondaryType != null && pk.primaryType == fromPK.secondaryType)
-                                    || (pk.secondaryType != null && pk.secondaryType == fromPK.primaryType)
-                                    || (fromPK.secondaryType != null && pk.secondaryType != null && pk.secondaryType == fromPK.secondaryType)) {
-                                includeType.add(pk);
+                            } else {
+                                // Special case for Eevee
+                                if (fromPK.number == Species.eevee) {
+                                    if (pk.primaryType == ev.to.primaryType
+                                            || (pk.secondaryType != null) && pk.secondaryType == ev.to.primaryType) {
+                                        includeType.add(pk);
+                                    }
+                                } else if (pk.primaryType == fromPK.primaryType
+                                        || (fromPK.secondaryType != null && pk.primaryType == fromPK.secondaryType)
+                                        || (pk.secondaryType != null && pk.secondaryType == fromPK.primaryType)
+                                        || (fromPK.secondaryType != null && pk.secondaryType != null && pk.secondaryType == fromPK.secondaryType)) {
+                                    includeType.add(pk);
+                                }
                             }
                         }
 
@@ -5785,16 +5784,11 @@ public abstract class AbstractRomHandler implements RomHandler {
     public void randomizeEvolutionsEveryLevel(Settings settings) {
         boolean sameType = settings.isEvosSameTyping();
         boolean forceChange = settings.isEvosForceChange();
-        boolean allowAltFormes = settings.isEvosAllowAltFormes();
+        boolean allowAltFormes = settings.isEvosMatchPostEvoTyping();
         boolean abilitiesAreRandomized = settings.getAbilitiesMod() == Settings.AbilitiesMod.RANDOMIZE;
 
         checkPokemonRestrictions();
-        List<Pokemon> pokemonPool;
-        if (this.altFormesCanHaveDifferentEvolutions()) {
-            pokemonPool = new ArrayList<>(mainPokemonListInclFormes);
-        } else {
-            pokemonPool = new ArrayList<>(mainPokemonList);
-        }
+        List<Pokemon> pokemonPool = new ArrayList<>(mainPokemonList);
         List<Pokemon> actuallyCosmeticPokemonPool = new ArrayList<>();
 
         List<Pokemon> banned = this.getBannedFormesForPlayerPokemon();
@@ -5847,13 +5841,7 @@ public abstract class AbstractRomHandler implements RomHandler {
                 // Pick a Pokemon as replacement
                 replacements.clear();
 
-                List<Pokemon> chosenList =
-                        allowAltFormes ?
-                                mainPokemonListInclFormes
-                                        .stream()
-                                        .filter(pk -> !pk.actuallyCosmetic)
-                                        .collect(Collectors.toList()) :
-                                mainPokemonList;
+                List<Pokemon> chosenList = mainPokemonList;
                 // Step 1: base filters
                 for (Pokemon pk : chosenList) {
                     // Prevent evolving into oneself (mandatory)
@@ -6600,8 +6588,7 @@ public abstract class AbstractRomHandler implements RomHandler {
             // Determine weightings
             for (Type t : Type.values()) {
                 if (typeInGame(t)) {
-                    List<Pokemon> pokemonOfType = allowAltFormes ? pokemonOfTypeInclFormes(t, noLegendaries) :
-                            pokemonOfType(t, noLegendaries);
+                    List<Pokemon> pokemonOfType = pokemonOfType(t, noLegendaries);
                     int pkWithTyping = pokemonOfType.size();
                     typeWeightings.put(t, pkWithTyping);
                     totalTypeWeighting += pkWithTyping;

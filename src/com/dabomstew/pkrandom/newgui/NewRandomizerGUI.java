@@ -244,7 +244,7 @@ public class NewRandomizerGUI {
     private JSpinner tpImportantTrainersSpinner;
     private JSpinner tpRegularTrainersSpinner;
     private JLabel tpAdditionalPokemonForLabel;
-    private JCheckBox peAllowAltFormesCheckBox;
+    private JCheckBox peMatchPostEvoTypingCheckBox;
     private JCheckBox miscSOSBattlesCheckBox;
     private JCheckBox tpRandomShinyTrainerPokemonCheckBox;
     private JRadioButton totpUnchangedRadioButton;
@@ -423,7 +423,8 @@ public class NewRandomizerGUI {
         peUnchangedRadioButton.addActionListener(e -> enableOrDisableSubControls());
         peRandomRadioButton.addActionListener(e -> enableOrDisableSubControls());
         peRandomEveryLevelRadioButton.addActionListener(e -> enableOrDisableSubControls());
-        peAllowAltFormesCheckBox.addActionListener(e -> enableOrDisableSubControls());
+        peSameTypingCheckBox.addActionListener(e -> enableOrDisableSubControls());
+        peMatchPostEvoTypingCheckBox.addActionListener(e -> enableOrDisableSubControls());
         spUnchangedRadioButton.addActionListener(e -> enableOrDisableSubControls());
         spCustomRadioButton.addActionListener(e -> enableOrDisableSubControls());
         spRandomCompletelyRadioButton.addActionListener(e -> enableOrDisableSubControls());
@@ -1524,7 +1525,7 @@ public class NewRandomizerGUI {
         peSameTypingCheckBox.setSelected(settings.isEvosSameTyping());
         peLimitEvolutionsToThreeCheckBox.setSelected(settings.isEvosMaxThreeStages());
         peForceChangeCheckBox.setSelected(settings.isEvosForceChange());
-        peAllowAltFormesCheckBox.setSelected(settings.isEvosAllowAltFormes());
+        peMatchPostEvoTypingCheckBox.setSelected(settings.isEvosMatchPostEvoTyping());
 
         mdRandomizeMoveAccuracyCheckBox.setSelected(settings.isRandomizeMoveAccuracies());
         mdRandomizeMoveCategoryCheckBox.setSelected(settings.isRandomizeMoveCategory());
@@ -1765,7 +1766,7 @@ public class NewRandomizerGUI {
         settings.setEvosSameTyping(peSameTypingCheckBox.isSelected());
         settings.setEvosMaxThreeStages(peLimitEvolutionsToThreeCheckBox.isSelected());
         settings.setEvosForceChange(peForceChangeCheckBox.isSelected());
-        settings.setEvosAllowAltFormes(peAllowAltFormesCheckBox.isSelected() && peAllowAltFormesCheckBox.isVisible());
+        settings.setEvosMatchPostEvoTyping(peMatchPostEvoTypingCheckBox.isSelected() && peMatchPostEvoTypingCheckBox.isVisible());
 
         settings.setRandomizeMoveAccuracies(mdRandomizeMoveAccuracyCheckBox.isSelected());
         settings.setRandomizeMoveCategory(mdRandomizeMoveCategoryCheckBox.isSelected());
@@ -2151,9 +2152,9 @@ public class NewRandomizerGUI {
         peRemoveTimeBasedEvolutionsCheckBox.setVisible(true);
         peRemoveTimeBasedEvolutionsCheckBox.setEnabled(false);
         peRemoveTimeBasedEvolutionsCheckBox.setSelected(false);
-        peAllowAltFormesCheckBox.setVisible(true);
-        peAllowAltFormesCheckBox.setEnabled(false);
-        peAllowAltFormesCheckBox.setSelected(false);
+        peMatchPostEvoTypingCheckBox.setVisible(true);
+        peMatchPostEvoTypingCheckBox.setEnabled(false);
+        peMatchPostEvoTypingCheckBox.setSelected(false);
         spUnchangedRadioButton.setVisible(true);
         spUnchangedRadioButton.setEnabled(false);
         spUnchangedRadioButton.setSelected(false);
@@ -2708,11 +2709,11 @@ public class NewRandomizerGUI {
             pbsShuffleRadioButton.setEnabled(true);
             pbsRandomRadioButton.setEnabled(true);
 
-            pbsStandardizeEXPCurvesCheckBox.setEnabled(true);
+            pbsStandardizeEXPCurvesCheckBox.setEnabled(false);
             pbsLegendariesSlowRadioButton.setSelected(true);
-            pbsUpdateBaseStatsCheckBox.setEnabled(pokemonGeneration < GlobalConstants.HIGHEST_POKEMON_GEN);
+            pbsUpdateBaseStatsCheckBox.setEnabled(false);
             pbsFollowMegaEvosCheckBox.setVisible(romHandler.hasMegaEvolutions());
-            pbsUpdateComboBox.setVisible(pokemonGeneration < 8);
+            pbsUpdateComboBox.setVisible(false);
             ExpCurve[] expCurves = getEXPCurvesForGeneration(pokemonGeneration);
             String[] expCurveNames = new String[expCurves.length];
             for (int i = 0; i < expCurves.length; i++) {
@@ -2753,10 +2754,12 @@ public class NewRandomizerGUI {
             peRandomRadioButton.setEnabled(true);
             peRandomEveryLevelRadioButton.setVisible(pokemonGeneration >= 3);
             peRandomEveryLevelRadioButton.setEnabled(pokemonGeneration >= 3);
-            peChangeImpossibleEvosCheckBox.setEnabled(true);
+            peChangeImpossibleEvosCheckBox.setVisible(false);
+            peChangeImpossibleEvosCheckBox.setEnabled(false);
             peMakeEvolutionsEasierCheckBox.setEnabled(true);
-            peRemoveTimeBasedEvolutionsCheckBox.setEnabled(true);
-            peAllowAltFormesCheckBox.setVisible(pokemonGeneration >= 7);
+            peRemoveTimeBasedEvolutionsCheckBox.setVisible(false);
+            peRemoveTimeBasedEvolutionsCheckBox.setEnabled(false);
+            peMatchPostEvoTypingCheckBox.setVisible(pokemonGeneration >= 3);
 
             // Starters, Statics & Trades
 
@@ -3066,7 +3069,7 @@ public class NewRandomizerGUI {
         }
 
         boolean followEvolutionControlsEnabled = !peRandomEveryLevelRadioButton.isSelected();
-        boolean followMegaEvolutionControlsEnabled = !(peRandomEveryLevelRadioButton.isSelected() && !noIrregularAltFormesCheckBox.isSelected() && peAllowAltFormesCheckBox.isSelected());
+        boolean followMegaEvolutionControlsEnabled = !(peRandomEveryLevelRadioButton.isSelected() && !noIrregularAltFormesCheckBox.isSelected() /*&& peMatchPostEvoTypingCheckBox.isSelected()*/);
 
         if (peRandomEveryLevelRadioButton.isSelected()) {
             // If Evolve Every Level is enabled, unselect all "Follow Evolutions" controls
@@ -3202,19 +3205,21 @@ public class NewRandomizerGUI {
         }
 
         if (peRandomRadioButton.isSelected()) {
+            pbsStandardizeEXPCurvesCheckBox.setEnabled(true);
             peSimilarStrengthCheckBox.setEnabled(true);
             peSameTypingCheckBox.setEnabled(true);
             peLimitEvolutionsToThreeCheckBox.setEnabled(true);
             peForceChangeCheckBox.setEnabled(true);
-            peAllowAltFormesCheckBox.setEnabled(true);
+            peMatchPostEvoTypingCheckBox.setEnabled(true);
         } else if (peRandomEveryLevelRadioButton.isSelected()) {
+            pbsStandardizeEXPCurvesCheckBox.setEnabled(true);
             peSimilarStrengthCheckBox.setEnabled(false);
             peSimilarStrengthCheckBox.setSelected(false);
             peSameTypingCheckBox.setEnabled(true);
             peLimitEvolutionsToThreeCheckBox.setEnabled(false);
             peLimitEvolutionsToThreeCheckBox.setSelected(false);
             peForceChangeCheckBox.setEnabled(true);
-            peAllowAltFormesCheckBox.setEnabled(true);
+            peMatchPostEvoTypingCheckBox.setEnabled(true);
         } else {
             peSimilarStrengthCheckBox.setEnabled(false);
             peSimilarStrengthCheckBox.setSelected(false);
@@ -3224,8 +3229,22 @@ public class NewRandomizerGUI {
             peLimitEvolutionsToThreeCheckBox.setSelected(false);
             peForceChangeCheckBox.setEnabled(false);
             peForceChangeCheckBox.setSelected(false);
-            peAllowAltFormesCheckBox.setEnabled(false);
-            peAllowAltFormesCheckBox.setSelected(false);
+            peMatchPostEvoTypingCheckBox.setEnabled(false);
+            peMatchPostEvoTypingCheckBox.setSelected(false);
+        }
+
+        if (peUnchangedRadioButton.isSelected()) {
+            pbsStandardizeEXPCurvesCheckBox.setEnabled(false);
+            pbsLegendariesSlowRadioButton.setEnabled(false);
+            pbsLegendariesSlowRadioButton.setSelected(true);
+            pbsStrongLegendariesSlowRadioButton.setEnabled(false);
+            pbsAllMediumFastRadioButton.setEnabled(false);
+            pbsEXPCurveComboBox.setEnabled(false);
+        }
+
+        peMatchPostEvoTypingCheckBox.setEnabled(peSameTypingCheckBox.isSelected());
+        if (!peSameTypingCheckBox.isSelected()) {
+            peMatchPostEvoTypingCheckBox.setSelected(false);
         }
 
         boolean spCustomStatus = spCustomRadioButton.isSelected();

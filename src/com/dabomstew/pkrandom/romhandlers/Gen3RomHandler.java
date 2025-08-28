@@ -1856,6 +1856,7 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
                     thisPoke.level = readWord(pointerToPokes + poke * 8 + 2) & 0xff;
                     thisPoke.abilitySlot = (readWord(pointerToPokes + poke * 8 + 3) & 0x03);
                     thisPoke.monIsShiny = (readWord(pointerToPokes + poke * 8 + 3) & 0x04) >> 2;
+                    thisPoke.forcedGenderFlag = (readWord(pointerToPokes + poke * 8 + 3) & 0x38) >> 3;
                     thisPoke.pokemon = pokesInternal[readWord(pointerToPokes + poke * 8 + 4)];
                     tr.pokemon.add(thisPoke);
                 }
@@ -1867,6 +1868,7 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
                     thisPoke.level = readWord(pointerToPokes + poke * 8 + 2) & 0xff;
                     thisPoke.abilitySlot = (readWord(pointerToPokes + poke * 8 + 3) & 0x03);
                     thisPoke.monIsShiny = (readWord(pointerToPokes + poke * 8 + 3) & 0x04) >> 2;
+                    thisPoke.forcedGenderFlag = (readWord(pointerToPokes + poke * 8 + 3) & 0x38) >> 3;
                     thisPoke.pokemon = pokesInternal[readWord(pointerToPokes + poke * 8 + 4)];
                     thisPoke.heldItem = readWord(pointerToPokes + poke * 8 + 6);
                     tr.pokemon.add(thisPoke);
@@ -1879,6 +1881,7 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
                     thisPoke.level = readWord(pointerToPokes + poke * 16 + 2) & 0xff;
                     thisPoke.abilitySlot = (readWord(pointerToPokes + poke * 16 + 3) & 0x03);
                     thisPoke.monIsShiny = (readWord(pointerToPokes + poke * 16 + 3) & 0x04) >> 2;
+                    thisPoke.forcedGenderFlag = (readWord(pointerToPokes + poke * 8 + 3) & 0x38) >> 3;
                     thisPoke.pokemon = pokesInternal[readWord(pointerToPokes + poke * 16 + 4)];
                     for (int move = 0; move < 4; move++) {
                         thisPoke.moves[move] = readWord(pointerToPokes + poke * 16 + 6 + (move*2));
@@ -1893,6 +1896,7 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
                     thisPoke.level = readWord(pointerToPokes + poke * 16 + 2) & 0xff;
                     thisPoke.abilitySlot = (readWord(pointerToPokes + poke * 16 + 3) & 0x03);
                     thisPoke.monIsShiny = (readWord(pointerToPokes + poke * 16 + 3) & 0x04) >> 2;
+                    thisPoke.forcedGenderFlag = (readWord(pointerToPokes + poke * 8 + 3) & 0x38) >> 3;
                     thisPoke.pokemon = pokesInternal[readWord(pointerToPokes + poke * 16 + 4)];
                     thisPoke.heldItem = readWord(pointerToPokes + poke * 16 + 6);
                     for (int move = 0; move < 4; move++) {
@@ -2023,6 +2027,7 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
                     if (tp.monIsShiny == 1) {
                         abilityShiny += 4;
                     }
+                    abilityShiny += (8 * tp.forcedGenderFlag);
                     rom[pointerToPokes + poke * 16 + 3] = (byte) abilityShiny;
                     writeWord(pointerToPokes + poke * 16 + 4, pokedexToInternal[tp.pokemon.number]);
                     int movesStart;
@@ -2055,6 +2060,7 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
                     if (tp.monIsShiny == 1) {
                         abilityShiny += 4;
                     }
+                    abilityShiny += (8 * tp.forcedGenderFlag);
                     rom[pointerToPokes + poke * 8 + 3] = (byte) abilityShiny;
                     writeWord(pointerToPokes + poke * 8 + 4, pokedexToInternal[tp.pokemon.number]);
                     if (tr.pokemonHaveItems()) {
@@ -3652,7 +3658,7 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
     public int getAbilityForTrainerPokemon(TrainerPokemon tp) {
         // modified so that trainers can decide their ability
         Pokemon pkmn = tp.pokemon;
-        if (tp.abilitySlot == 2 || tp.abilitySlot == 6) {
+        if ((tp.abilitySlot & 0x03) == 2) {
             return pkmn.ability2;
         } else {
             return pkmn.ability1;

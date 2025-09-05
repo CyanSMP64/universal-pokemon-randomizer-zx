@@ -1527,6 +1527,8 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
         // Support Deoxys/Mew starters in E/FR/LG
         attemptObedienceEvolutionPatches();
         int baseOffset = romEntry.getValue("StarterPokemon");
+        int scriptsStart = romEntry.getValue("EventScriptsStart");
+        int scriptsEnd = romEntry.getValue("EventScriptsEnd");
 
         int starter0 = pokedexToInternal[newStarters.get(0).number];
         int starter1 = pokedexToInternal[newStarters.get(1).number];
@@ -1555,9 +1557,9 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
             if (romEntry.romCode.charAt(3) != 'J' && romEntry.romCode.charAt(3) != 'B') {
                 // Update PROF. Oak's descriptions for each starter
                 // First result for each STARTERNAME is the text we need
-                List<Integer> bulbasaurFoundTexts = RomFunctions.search(rom, 0xA000D0, 0xA7FFFF, translateString(pokes[Gen3Constants.frlgBaseStarter1].name));
-                List<Integer> charmanderFoundTexts = RomFunctions.search(rom, 0xA000D0, 0xA7FFFF, translateString(pokes[Gen3Constants.frlgBaseStarter2].name));
-                List<Integer> squirtleFoundTexts = RomFunctions.search(rom, 0xA000D0, 0xA7FFFF, translateString(pokes[Gen3Constants.frlgBaseStarter3].name));
+                List<Integer> bulbasaurFoundTexts = RomFunctions.search(rom, scriptsStart, scriptsEnd, translateString(pokes[Gen3Constants.frlgBaseStarter1].name));
+                List<Integer> charmanderFoundTexts = RomFunctions.search(rom, scriptsStart, scriptsEnd, translateString(pokes[Gen3Constants.frlgBaseStarter2].name));
+                List<Integer> squirtleFoundTexts = RomFunctions.search(rom, scriptsStart, scriptsEnd, translateString(pokes[Gen3Constants.frlgBaseStarter3].name));
                 writeFRLGStarterText(bulbasaurFoundTexts, newStarters.get(0), "you want to go with\\nthe ");
                 writeFRLGStarterText(charmanderFoundTexts, newStarters.get(1), "you’re claiming the\\n");
                 writeFRLGStarterText(squirtleFoundTexts, newStarters.get(2), "you’ve decided on the\\n");
@@ -3854,7 +3856,7 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
                     if (pCount > 0) {
                         int peopleOffset = readPointer(eventOffset + 4);
                         for (int p = 0; p < pCount; p++) {
-                            int pSprite = rom[peopleOffset + p * 24 + 1];
+                            int pSprite = (rom[peopleOffset + p * 24 + 2] & 0xFF) | (rom[peopleOffset + p * 24 + 3] << 8);
                             if ((pSprite == itemBall || pSprite == tmBall) && readPointer(peopleOffset + p * 24 + 16) >= 0) {
                                 // Get script and look inside
                                 int scriptOffset = readPointer(peopleOffset + p * 24 + 16);

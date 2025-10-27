@@ -448,6 +448,11 @@ public class Randomizer {
             trainersChanged = true;
         }
 
+        if (settings.isSwapTrainerMegaEvos()) {
+            romHandler.smartAiMode();
+            trainersChanged = true;
+        }
+
         switch(settings.getTrainersMod()) {
             case RANDOM:
             case DISTRIBUTED:

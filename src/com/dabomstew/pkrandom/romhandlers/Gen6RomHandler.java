@@ -2007,7 +2007,7 @@ public class Gen6RomHandler extends Abstract3DSRomHandler {
     }
 
     @Override
-    public void setTrainers(List<Trainer> trainerData, boolean doubleBattleMode) {
+    public void setTrainers(List<Trainer> trainerData, boolean doubleBattleMode, boolean smartAiMode) {
         Iterator<Trainer> allTrainers = trainerData.iterator();
         boolean isORAS = romEntry.romType == Gen6Constants.Type_ORAS;
         try {

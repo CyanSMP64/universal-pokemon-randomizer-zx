@@ -1818,7 +1818,7 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
             // Class; 1 byte
             // Encounter Music and gender; 1 byte
             // Battle Sprite; 1 byte
-            // Name; 12 bytes; 0xff terminated
+            // Name; 16 bytes; 0xff terminated // NATDEX: increased char count
             // Items; 2 bytes each, 4 item slots
             // Battle Mode; 1 byte; 0 means single, 1 means double.
             // 3 bytes not used
@@ -1837,6 +1837,7 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
 
             int pokeDataType = rom[trOffset] & 0xFF;
             boolean doubleBattle = rom[trOffset + (entryLen - 16)] == 0x01;
+            int aiFlags = rom[trOffset + (entryLen - 12)] & 0xFF;
             int numPokes = rom[trOffset + (entryLen - 8)] & 0xFF;
             int pointerToPokes = readPointer(trOffset + (entryLen - 4));
             tr.poketype = pokeDataType;
@@ -1972,7 +1973,7 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
 
 
     @Override
-    public void setTrainers(List<Trainer> trainerData, boolean doubleBattleMode) {
+    public void setTrainers(List<Trainer> trainerData, boolean doubleBattleMode, boolean smartAiMode) {
         int baseOffset = romEntry.getValue("TrainerData");
         int amount = romEntry.getValue("TrainerCount");
         int entryLen = romEntry.getValue("TrainerEntrySize");
@@ -2000,6 +2001,10 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
                 if (!tr.skipImportant()) {
                     rom[trOffset + (entryLen - 16)] = 0x01;
                 }
+            }
+
+            if (smartAiMode) {
+                rom[trOffset + (entryLen - 12)] |= 0x07;
             }
 
             // now, do we need to repoint?
@@ -4176,56 +4181,38 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
     @Override
     public int miscTweaksAvailable() {
         int available = 0;
-//        available |= MiscTweak.LOWER_CASE_POKEMON_NAMES.getValue();
-//        available |= MiscTweak.NATIONAL_DEX_AT_START.getValue();
-//        available |= MiscTweak.UPDATE_TYPE_EFFECTIVENESS.getValue();
-//        if (romEntry.getValue("RunIndoorsTweakOffset") > 0) {
-//            available |= MiscTweak.RUNNING_SHOES_INDOORS.getValue();
-//        }
-//        if (romEntry.getValue("TextSpeedValuesOffset") > 0 || romEntry.codeTweaks.get("InstantTextTweak") != null) {
-//            available |= MiscTweak.FASTEST_TEXT.getValue();
-//        }
-//        if (romEntry.getValue("CatchingTutorialOpponentMonOffset") > 0
-//                || romEntry.getValue("CatchingTutorialPlayerMonOffset") > 0) {
-//            available |= MiscTweak.RANDOMIZE_CATCHING_TUTORIAL.getValue();
-//        }
         if (romEntry.getValue("PCPotionOffset") != 0) {
             available |= MiscTweak.RANDOMIZE_PC_POTION.getValue();
         }
         available |= MiscTweak.BAN_LUCKY_EGG.getValue();
-//        available |= MiscTweak.RUN_WITHOUT_RUNNING_SHOES.getValue();
         if (romEntry.romType == Gen3Constants.RomType_FRLG) {
             available |= MiscTweak.BALANCE_STATIC_LEVELS.getValue();
         }
+        // repurposed for hidden item sparkles
+        available |= MiscTweak.DISABLE_LOW_HP_MUSIC.getValue();
+        available |= MiscTweak.BW_EXP_PATCH.getValue();
+        // repurposed for force highest level encounters
+        available |= MiscTweak.ALLOW_PIKACHU_EVOLUTION.getValue();
         return available;
     }
 
     @Override
     public void applyMiscTweak(MiscTweak tweak) {
-        if /*(tweak == MiscTweak.RUNNING_SHOES_INDOORS) {
-            applyRunningShoesIndoorsPatch();
-        } else if (tweak == MiscTweak.FASTEST_TEXT) {
-            applyFastestTextPatch();
-        } else if (tweak == MiscTweak.LOWER_CASE_POKEMON_NAMES) {
-            applyCamelCaseNames();
-        } else if (tweak == MiscTweak.NATIONAL_DEX_AT_START) {
-            patchForNationalDex();
-        } else if (tweak == MiscTweak.RANDOMIZE_CATCHING_TUTORIAL) {
-            randomizeCatchingTutorial();
-        } else if */(tweak == MiscTweak.BAN_LUCKY_EGG) {
+        if (tweak == MiscTweak.BAN_LUCKY_EGG) {
             allowedItems.banSingles(Gen3Items.luckyEgg);
             nonBadItems.banSingles(Gen3Items.luckyEgg);
         } else if (tweak == MiscTweak.RANDOMIZE_PC_POTION) {
             randomizePCPotion();
-//        } else if (tweak == MiscTweak.RUN_WITHOUT_RUNNING_SHOES) {
-//            applyRunWithoutRunningShoesPatch();
         } else if (tweak == MiscTweak.BALANCE_STATIC_LEVELS) {
             int[] fossilLevelOffsets = romEntry.arrayEntries.get("FossilLevelOffsets");
             for (int fossilLevelOffset : fossilLevelOffsets) {
                 writeWord(rom, fossilLevelOffset, 30);
             }
-//        } else if (tweak == MiscTweak.UPDATE_TYPE_EFFECTIVENESS) {
-//            updateTypeEffectiveness();
+        // repurposed for hidden item sparkles
+        } else if (tweak == MiscTweak.DISABLE_LOW_HP_MUSIC) {
+            enableHiddenItemSparkles();
+        } else if (tweak == MiscTweak.BW_EXP_PATCH) {
+            setModernExpScaleFlag();
         }
     }
 
@@ -4311,6 +4298,20 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
     private void randomizePCPotion() {
         if (romEntry.getValue("PCPotionOffset") != 0) {
             writeWord(romEntry.getValue("PCPotionOffset"), this.getNonBadItems().randomNonTM(this.random));
+        }
+    }
+
+    private void enableHiddenItemSparkles() {
+        int offset = romEntry.getValue("HiddenItemSparkleFlagScript");
+        if (offset > 0 && offset < rom.length) {
+            rom[offset] = (byte) 0x29;
+        }
+    }
+
+    private void setModernExpScaleFlag() {
+        int offset = romEntry.getValue("ModernExpFlagScript");
+        if (offset > 0 && offset < rom.length) {
+            rom[offset] = (byte) 0x29;
         }
     }
 

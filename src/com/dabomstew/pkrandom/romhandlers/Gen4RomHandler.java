@@ -2906,7 +2906,7 @@ public class Gen4RomHandler extends AbstractDSRomHandler {
     }
 
     @Override
-    public void setTrainers(List<Trainer> trainerData, boolean doubleBattleMode) {
+    public void setTrainers(List<Trainer> trainerData, boolean doubleBattleMode, boolean smartAiMode) {
         if (romEntry.romType == Gen4Constants.Type_HGSS) {
             fixAbilitySlotValuesForHGSS(trainerData);
         }

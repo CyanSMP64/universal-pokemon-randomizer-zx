@@ -1514,7 +1514,7 @@ public class Gen5RomHandler extends AbstractDSRomHandler {
         }
 
     @Override
-    public void setTrainers(List<Trainer> trainerData, boolean doubleBattleMode) {
+    public void setTrainers(List<Trainer> trainerData, boolean doubleBattleMode, boolean smartAiMode) {
         Iterator<Trainer> allTrainers = trainerData.iterator();
         try {
             NARCArchive trainers = this.readNARC(romEntry.getFile("TrainerData"));

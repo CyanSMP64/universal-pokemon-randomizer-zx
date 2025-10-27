@@ -1715,7 +1715,7 @@ public class Gen7RomHandler extends Abstract3DSRomHandler {
     }
 
     @Override
-    public void setTrainers(List<Trainer> trainerData, boolean doubleBattleMode) {
+    public void setTrainers(List<Trainer> trainerData, boolean doubleBattleMode, boolean smartAiMode) {
         Iterator<Trainer> allTrainers = trainerData.iterator();
         try {
             GARCArchive trainers = this.readGARC(romEntry.getFile("TrainerData"),true);

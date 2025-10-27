@@ -2850,7 +2850,7 @@ public class NewRandomizerGUI {
             tpAllowAlternateFormesCheckBox.setVisible(romHandler.hasFunctionalFormes());
             tpForceFullyEvolvedAtCheckBox.setEnabled(true);
             tpPercentageLevelModifierCheckBox.setEnabled(true);
-            tpSwapMegaEvosCheckBox.setVisible(romHandler.hasMegaEvolutions());
+            tpSwapMegaEvosCheckBox.setVisible(true);
             tpDoubleBattleModeCheckBox.setVisible(pokemonGeneration >= 3);
 
             boolean additionalPokemonAvailable = pokemonGeneration >= 3;
@@ -3395,7 +3395,7 @@ public class NewRandomizerGUI {
                     romHandler.forceSwapStaticMegaEvos(), isTrainerSetting(TRAINER_TYPE_THEMED))) {
                 tpSwapMegaEvosCheckBox.setEnabled(true);
             } else {
-                tpSwapMegaEvosCheckBox.setEnabled(false);
+                tpSwapMegaEvosCheckBox.setEnabled(true);
                 tpSwapMegaEvosCheckBox.setSelected(false);
             }
             tpRandomShinyTrainerPokemonCheckBox.setEnabled(true);

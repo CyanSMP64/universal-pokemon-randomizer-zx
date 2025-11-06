@@ -397,6 +397,40 @@ public abstract class AbstractRomHandler implements RomHandler {
                 }
             }
         }
+        // cases for certain alt forms
+        List<Pokemon> pokemonList = this.getPokemon();
+        if (pokemonList != null && pokemonList.size() > 0) {
+            Pokemon burmy = null;
+            if (Species.burmy >= 0 && Species.burmy < pokemonList.size()) {
+                burmy = pokemonList.get(Species.burmy);
+            }
+            if (burmy != null) {
+                if (Species.burmyS >= 0 && Species.burmyS < pokemonList.size()) {
+                    Pokemon bs = pokemonList.get(Species.burmyS);
+                    if (bs != null) {
+                        bs.hp = burmy.hp;
+                        bs.attack = burmy.attack;
+                        bs.defense = burmy.defense;
+                        bs.spatk = burmy.spatk;
+                        bs.spdef = burmy.spdef;
+                        bs.speed = burmy.speed;
+                        bs.special = burmy.special;
+                    }
+                }
+                if (Species.burmyT >= 0 && Species.burmyT < pokemonList.size()) {
+                    Pokemon bt = pokemonList.get(Species.burmyT);
+                    if (bt != null) {
+                        bt.hp = burmy.hp;
+                        bt.attack = burmy.attack;
+                        bt.defense = burmy.defense;
+                        bt.spatk = burmy.spatk;
+                        bt.spdef = burmy.spdef;
+                        bt.speed = burmy.speed;
+                        bt.special = burmy.special;
+                    }
+                }
+            }
+        }
     }
 
     @Override
@@ -601,6 +635,30 @@ public abstract class AbstractRomHandler implements RomHandler {
                 }
             }
         }
+        // cases for certain alt forms
+        List<Pokemon> pokemonList = this.getPokemon();
+        if (pokemonList != null && pokemonList.size() > 0) {
+            Pokemon burmy = null;
+            if (Species.burmy >= 0 && Species.burmy < pokemonList.size()) {
+                burmy = pokemonList.get(Species.burmy);
+            }
+            if (burmy != null) {
+                if (Species.burmyS >= 0 && Species.burmyS < pokemonList.size()) {
+                    Pokemon bs = pokemonList.get(Species.burmyS);
+                    if (bs != null) {
+                        bs.primaryType = burmy.primaryType;
+                        bs.secondaryType = burmy.secondaryType;
+                    }
+                }
+                if (Species.burmyT >= 0 && Species.burmyT < pokemonList.size()) {
+                    Pokemon bt = pokemonList.get(Species.burmyT);
+                    if (bt != null) {
+                        bt.primaryType = burmy.primaryType;
+                        bt.secondaryType = burmy.secondaryType;
+                    }
+                }
+            }
+        }
     }
 
     @Override
@@ -735,6 +793,32 @@ public abstract class AbstractRomHandler implements RomHandler {
                 megaEvo.to.ability1 = megaEvo.from.ability1;
                 megaEvo.to.ability2 = megaEvo.from.ability2;
                 megaEvo.to.ability3 = megaEvo.from.ability3;
+            }
+        }
+        // cases for certain alt forms
+        List<Pokemon> pokemonList = this.getPokemon();
+        if (pokemonList != null && pokemonList.size() > 0) {
+            Pokemon burmy = null;
+            if (Species.burmy >= 0 && Species.burmy < pokemonList.size()) {
+                burmy = pokemonList.get(Species.burmy);
+            }
+            if (burmy != null) {
+                if (Species.burmyS >= 0 && Species.burmyS < pokemonList.size()) {
+                    Pokemon bs = pokemonList.get(Species.burmyS);
+                    if (bs != null) {
+                        bs.ability1 = burmy.ability1;
+                        bs.ability2 = burmy.ability2;
+                        bs.ability3 = burmy.ability3;
+                    }
+                }
+                if (Species.burmyT >= 0 && Species.burmyT < pokemonList.size()) {
+                    Pokemon bt = pokemonList.get(Species.burmyT);
+                    if (bt != null) {
+                        bt.ability1 = burmy.ability1;
+                        bt.ability2 = burmy.ability2;
+                        bt.ability3 = burmy.ability3;
+                    }
+                }
             }
         }
     }
@@ -3755,6 +3839,37 @@ public abstract class AbstractRomHandler implements RomHandler {
                 }
             }
         }
+        // cases for certain alt forms
+        if (movesets != null) {
+            Map<Integer, List<MoveLearnt>> ms = movesets;
+            List<Pokemon> pokemonList = this.getPokemon();
+            if (pokemonList != null && pokemonList.size() > 0 && Species.burmy >= 0 && Species.burmy < pokemonList.size()) {
+                List<MoveLearnt> baseMoves = ms.get(Species.burmy);
+                if (baseMoves != null) {
+                    if (Species.burmyS >= 0) {
+                        List<MoveLearnt> copy = new ArrayList<>();
+                        for (MoveLearnt ml : baseMoves) {
+                            MoveLearnt n = new MoveLearnt();
+                            n.move = ml.move;
+                            n.level = ml.level;
+                            copy.add(n);
+                        }
+                        ms.put(Species.burmyS, copy);
+                    }
+                    if (Species.burmyT >= 0) {
+                        List<MoveLearnt> copy = new ArrayList<>();
+                        for (MoveLearnt ml : baseMoves) {
+                            MoveLearnt n = new MoveLearnt();
+                            n.move = ml.move;
+                            n.level = ml.level;
+                            copy.add(n);
+                        }
+                        ms.put(Species.burmyT, copy);
+                    }
+                }
+            }
+        }
+
         // Done, save
         this.setMovesLearnt(movesets);
 
@@ -3876,6 +3991,23 @@ public abstract class AbstractRomHandler implements RomHandler {
                 moves.set(i, learnt.get(i));
             }
         }
+        // cases for certain alt forms
+        if (movesets != null) {
+            Map<Integer, List<Integer>> em = movesets;
+            List<Pokemon> pokemonList = this.getPokemon();
+            if (pokemonList != null && pokemonList.size() > 0 && Species.burmy >= 0 && Species.burmy < pokemonList.size()) {
+                List<Integer> baseEgg = em.get(Species.burmy);
+                if (baseEgg != null) {
+                    if (Species.burmyS >= 0) {
+                        em.put(Species.burmyS, new ArrayList<>(baseEgg));
+                    }
+                    if (Species.burmyT >= 0) {
+                        em.put(Species.burmyT, new ArrayList<>(baseEgg));
+                    }
+                }
+            }
+        }
+
         // Done, save
         this.setEggMoves(movesets);
     }
@@ -4179,6 +4311,9 @@ public abstract class AbstractRomHandler implements RomHandler {
         if (banIrregularAltFormes) {
             banned.addAll(getIrregularFormes());
         }
+        List<Pokemon> pokemonList = this.getPokemon();
+        banned.add(pokemonList.get(Species.burmyS));
+        banned.add(pokemonList.get(Species.burmyT));
         for (int i = 0; i < starterCount; i++) {
             Pokemon pkmn = allowAltFormes ? randomPokemonInclFormes() : randomPokemon();
             while (pickedStarters.contains(pkmn) || banned.contains(pkmn) || pkmn.actuallyCosmetic) {
@@ -4727,6 +4862,45 @@ public abstract class AbstractRomHandler implements RomHandler {
 
         // Set the new compatibility
         this.setTMHMCompatibility(compat);
+        // cases for certain alt forms
+        List<Pokemon> pokemonList = this.getPokemon();
+        if (pokemonList != null && pokemonList.size() > 0) {
+            Pokemon burmy = null;
+            if (Species.burmy >= 0 && Species.burmy < pokemonList.size()) {
+                burmy = pokemonList.get(Species.burmy);
+            }
+            if (burmy != null) {
+                boolean[] baseFlags = compat.get(burmy);
+                if (baseFlags != null) {
+                    if (Species.burmyS >= 0 && Species.burmyS < pokemonList.size()) {
+                        Pokemon bs = pokemonList.get(Species.burmyS);
+                        if (bs != null) {
+                            boolean[] bsFlags = compat.get(bs);
+                            if (bsFlags == null || bsFlags.length != baseFlags.length) {
+                                compat.put(bs, Arrays.copyOf(baseFlags, baseFlags.length));
+                            } else {
+                                for (int i = 1; i < Math.min(bsFlags.length, baseFlags.length); i++) {
+                                    bsFlags[i] = baseFlags[i];
+                                }
+                            }
+                        }
+                    }
+                    if (Species.burmyT >= 0 && Species.burmyT < pokemonList.size()) {
+                        Pokemon bt = pokemonList.get(Species.burmyT);
+                        if (bt != null) {
+                            boolean[] btFlags = compat.get(bt);
+                            if (btFlags == null || btFlags.length != baseFlags.length) {
+                                compat.put(bt, Arrays.copyOf(baseFlags, baseFlags.length));
+                            } else {
+                                for (int i = 1; i < Math.min(btFlags.length, baseFlags.length); i++) {
+                                    btFlags[i] = baseFlags[i];
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     private void randomizePokemonMoveCompatibility(Pokemon pkmn, boolean[] moveCompatibilityFlags,
@@ -4992,6 +5166,45 @@ public abstract class AbstractRomHandler implements RomHandler {
 
         // Set the new compatibility
         this.setMoveTutorCompatibility(compat);
+        // cases for certain alt forms
+        List<Pokemon> pokemonList = this.getPokemon();
+        if (pokemonList != null && pokemonList.size() > 0) {
+            Pokemon burmy = null;
+            if (Species.burmy >= 0 && Species.burmy < pokemonList.size()) {
+                burmy = pokemonList.get(Species.burmy);
+            }
+            if (burmy != null) {
+                boolean[] baseFlags = compat.get(burmy);
+                if (baseFlags != null) {
+                    if (Species.burmyS >= 0 && Species.burmyS < pokemonList.size()) {
+                        Pokemon bs = pokemonList.get(Species.burmyS);
+                        if (bs != null) {
+                            boolean[] bsFlags = compat.get(bs);
+                            if (bsFlags == null || bsFlags.length != baseFlags.length) {
+                                compat.put(bs, Arrays.copyOf(baseFlags, baseFlags.length));
+                            } else {
+                                for (int i = 1; i < Math.min(bsFlags.length, baseFlags.length); i++) {
+                                    bsFlags[i] = baseFlags[i];
+                                }
+                            }
+                        }
+                    }
+                    if (Species.burmyT >= 0 && Species.burmyT < pokemonList.size()) {
+                        Pokemon bt = pokemonList.get(Species.burmyT);
+                        if (bt != null) {
+                            boolean[] btFlags = compat.get(bt);
+                            if (btFlags == null || btFlags.length != baseFlags.length) {
+                                compat.put(bt, Arrays.copyOf(baseFlags, baseFlags.length));
+                            } else {
+                                for (int i = 1; i < Math.min(btFlags.length, baseFlags.length); i++) {
+                                    btFlags[i] = baseFlags[i];
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     @Override
@@ -5636,6 +5849,9 @@ public abstract class AbstractRomHandler implements RomHandler {
         int stageLimit = limitToThreeStages ? 3 : 10;
 
         List<Pokemon> banned = this.getBannedFormesForPlayerPokemon();
+        List<Pokemon> pokemonList = this.getPokemon();
+        banned.add(pokemonList.get(Species.burmyS));
+        banned.add(pokemonList.get(Species.burmyT));
         if (!abilitiesAreRandomized) {
             List<Pokemon> abilityDependentFormes = getAbilityDependentFormes();
             banned.addAll(abilityDependentFormes);
@@ -5674,6 +5890,18 @@ public abstract class AbstractRomHandler implements RomHandler {
                         }
                     }
                 }
+            }
+            // case for burmy
+            Pokemon burmy = findPokemonInPoolWithSpeciesID(pokemonPool, Species.burmy);
+            Pokemon burmyS = findPokemonInPoolWithSpeciesID(pokemonPool, Species.burmyS);
+            Pokemon burmyT = findPokemonInPoolWithSpeciesID(pokemonPool, Species.burmyT);
+            int[] wormadamSpecies = { Species.wormadam, Species.wormadamS, Species.wormadamT };
+            for (int wSpec : wormadamSpecies) {
+                Pokemon wormadam = findPokemonInPoolWithSpeciesID(pokemonPool, wSpec);
+                if (wormadam == null) continue;
+                if (burmy != null) oldEvoPairs.add(new EvolutionPair(burmy, wormadam));
+                if (burmyS != null) oldEvoPairs.add(new EvolutionPair(burmyS, wormadam));
+                if (burmyT != null) oldEvoPairs.add(new EvolutionPair(burmyT, wormadam));
             }
         }
 

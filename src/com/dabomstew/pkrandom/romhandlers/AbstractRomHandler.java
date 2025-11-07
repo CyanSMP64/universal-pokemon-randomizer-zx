@@ -399,38 +399,9 @@ public abstract class AbstractRomHandler implements RomHandler {
         }
         // cases for certain alt forms
         List<Pokemon> pokemonList = this.getPokemon();
-        if (pokemonList != null && pokemonList.size() > 0) {
-            Pokemon burmy = null;
-            if (Species.burmy >= 0 && Species.burmy < pokemonList.size()) {
-                burmy = pokemonList.get(Species.burmy);
-            }
-            if (burmy != null) {
-                if (Species.burmyS >= 0 && Species.burmyS < pokemonList.size()) {
-                    Pokemon bs = pokemonList.get(Species.burmyS);
-                    if (bs != null) {
-                        bs.hp = burmy.hp;
-                        bs.attack = burmy.attack;
-                        bs.defense = burmy.defense;
-                        bs.spatk = burmy.spatk;
-                        bs.spdef = burmy.spdef;
-                        bs.speed = burmy.speed;
-                        bs.special = burmy.special;
-                    }
-                }
-                if (Species.burmyT >= 0 && Species.burmyT < pokemonList.size()) {
-                    Pokemon bt = pokemonList.get(Species.burmyT);
-                    if (bt != null) {
-                        bt.hp = burmy.hp;
-                        bt.attack = burmy.attack;
-                        bt.defense = burmy.defense;
-                        bt.spatk = burmy.spatk;
-                        bt.spdef = burmy.spdef;
-                        bt.speed = burmy.speed;
-                        bt.special = burmy.special;
-                    }
-                }
-            }
-        }
+        pokemonList.get(Species.burmyS).copyBaseStats(pokemonList.get(Species.burmy));
+        pokemonList.get(Species.burmyT).copyBaseStats(pokemonList.get(Species.burmy));
+        pokemonList.get(Species.cherrimS).copyBaseStats(pokemonList.get(Species.cherrim));
     }
 
     @Override
@@ -637,28 +608,9 @@ public abstract class AbstractRomHandler implements RomHandler {
         }
         // cases for certain alt forms
         List<Pokemon> pokemonList = this.getPokemon();
-        if (pokemonList != null && pokemonList.size() > 0) {
-            Pokemon burmy = null;
-            if (Species.burmy >= 0 && Species.burmy < pokemonList.size()) {
-                burmy = pokemonList.get(Species.burmy);
-            }
-            if (burmy != null) {
-                if (Species.burmyS >= 0 && Species.burmyS < pokemonList.size()) {
-                    Pokemon bs = pokemonList.get(Species.burmyS);
-                    if (bs != null) {
-                        bs.primaryType = burmy.primaryType;
-                        bs.secondaryType = burmy.secondaryType;
-                    }
-                }
-                if (Species.burmyT >= 0 && Species.burmyT < pokemonList.size()) {
-                    Pokemon bt = pokemonList.get(Species.burmyT);
-                    if (bt != null) {
-                        bt.primaryType = burmy.primaryType;
-                        bt.secondaryType = burmy.secondaryType;
-                    }
-                }
-            }
-        }
+        pokemonList.get(Species.burmyS).copyTypes(pokemonList.get(Species.burmy));
+        pokemonList.get(Species.burmyT).copyTypes(pokemonList.get(Species.burmy));
+        pokemonList.get(Species.cherrimS).copyTypes(pokemonList.get(Species.cherrim));
     }
 
     @Override
@@ -797,30 +749,9 @@ public abstract class AbstractRomHandler implements RomHandler {
         }
         // cases for certain alt forms
         List<Pokemon> pokemonList = this.getPokemon();
-        if (pokemonList != null && pokemonList.size() > 0) {
-            Pokemon burmy = null;
-            if (Species.burmy >= 0 && Species.burmy < pokemonList.size()) {
-                burmy = pokemonList.get(Species.burmy);
-            }
-            if (burmy != null) {
-                if (Species.burmyS >= 0 && Species.burmyS < pokemonList.size()) {
-                    Pokemon bs = pokemonList.get(Species.burmyS);
-                    if (bs != null) {
-                        bs.ability1 = burmy.ability1;
-                        bs.ability2 = burmy.ability2;
-                        bs.ability3 = burmy.ability3;
-                    }
-                }
-                if (Species.burmyT >= 0 && Species.burmyT < pokemonList.size()) {
-                    Pokemon bt = pokemonList.get(Species.burmyT);
-                    if (bt != null) {
-                        bt.ability1 = burmy.ability1;
-                        bt.ability2 = burmy.ability2;
-                        bt.ability3 = burmy.ability3;
-                    }
-                }
-            }
-        }
+        pokemonList.get(Species.burmyS).copyAbilities(pokemonList.get(Species.burmy));
+        pokemonList.get(Species.burmyT).copyAbilities(pokemonList.get(Species.burmy));
+        pokemonList.get(Species.cherrimS).copyAbilities(pokemonList.get(Species.cherrim));
     }
 
     private int pickRandomAbility(int maxAbility, List<Integer> bannedAbilities, boolean useVariations,
@@ -2127,6 +2058,7 @@ public abstract class AbstractRomHandler implements RomHandler {
                 if (willForceEvolve) {
                     bannedList.addAll(evolvesIntoTheWrongType);
                 }
+                bannedList.add(getPokemon().get(Species.cherrimS));
 
                 Pokemon newPK = pickTrainerPokeReplacement(
                                 oldPK,
@@ -3840,39 +3772,29 @@ public abstract class AbstractRomHandler implements RomHandler {
             }
         }
         // cases for certain alt forms
-        if (movesets != null) {
-            Map<Integer, List<MoveLearnt>> ms = movesets;
-            List<Pokemon> pokemonList = this.getPokemon();
-            if (pokemonList != null && pokemonList.size() > 0 && Species.burmy >= 0 && Species.burmy < pokemonList.size()) {
-                List<MoveLearnt> baseMoves = ms.get(Species.burmy);
-                if (baseMoves != null) {
-                    if (Species.burmyS >= 0) {
-                        List<MoveLearnt> copy = new ArrayList<>();
-                        for (MoveLearnt ml : baseMoves) {
-                            MoveLearnt n = new MoveLearnt();
-                            n.move = ml.move;
-                            n.level = ml.level;
-                            copy.add(n);
-                        }
-                        ms.put(Species.burmyS, copy);
-                    }
-                    if (Species.burmyT >= 0) {
-                        List<MoveLearnt> copy = new ArrayList<>();
-                        for (MoveLearnt ml : baseMoves) {
-                            MoveLearnt n = new MoveLearnt();
-                            n.move = ml.move;
-                            n.level = ml.level;
-                            copy.add(n);
-                        }
-                        ms.put(Species.burmyT, copy);
-                    }
-                }
-            }
-        }
+        Map<Integer, List<MoveLearnt>> ms = movesets;
+        copyMoveset(ms, Species.burmy, Species.burmyS);
+        copyMoveset(ms, Species.burmy, Species.burmyT);
+        copyMoveset(ms, Species.cherrim, Species.cherrimS);
 
         // Done, save
         this.setMovesLearnt(movesets);
 
+    }
+
+    /**
+     * Deep copies the moveset from a source species to a target species in the map.
+     * @param movesets The map of species to movesets.
+     * @param sourceSpecies The species to copy from.
+     * @param targetSpecies The species to copy to.
+     */
+    private void copyMoveset(Map<Integer, List<MoveLearnt>> movesets, int sourceSpecies, int targetSpecies) {
+        List<MoveLearnt> baseMoves = movesets.get(sourceSpecies);
+        List<MoveLearnt> copy = new ArrayList<>();
+        for (MoveLearnt ml : baseMoves) {
+            copy.add(new MoveLearnt(ml));
+        }
+        movesets.put(targetSpecies, copy);
     }
 
     @Override
@@ -3992,24 +3914,22 @@ public abstract class AbstractRomHandler implements RomHandler {
             }
         }
         // cases for certain alt forms
-        if (movesets != null) {
-            Map<Integer, List<Integer>> em = movesets;
-            List<Pokemon> pokemonList = this.getPokemon();
-            if (pokemonList != null && pokemonList.size() > 0 && Species.burmy >= 0 && Species.burmy < pokemonList.size()) {
-                List<Integer> baseEgg = em.get(Species.burmy);
-                if (baseEgg != null) {
-                    if (Species.burmyS >= 0) {
-                        em.put(Species.burmyS, new ArrayList<>(baseEgg));
-                    }
-                    if (Species.burmyT >= 0) {
-                        em.put(Species.burmyT, new ArrayList<>(baseEgg));
-                    }
-                }
-            }
-        }
+//        Map<Integer, List<Integer>> em = movesets;
+//        copyEggMoves(em, Species.source, Species.target);
 
         // Done, save
         this.setEggMoves(movesets);
+    }
+    
+    /**
+     * Copies the Egg Moves from a source species to a target species in the map.
+     * @param eggMovesMap The Map containing all egg movesets (species ID -> list of move IDs).
+     * @param sourceSpecies The species to copy from.
+     * @param targetSpecies The species to copy to.
+     */
+    private void copyEggMoves(Map<Integer, List<Integer>> eggMovesMap, int sourceSpecies, int targetSpecies) {
+        List<Integer> baseMoves = eggMovesMap.get(sourceSpecies);
+        eggMovesMap.put(targetSpecies, new ArrayList<>(baseMoves));
     }
 
     private void createSetsOfMoves(boolean noBroken, List<Move> validMoves, List<Move> validDamagingMoves,
@@ -4314,6 +4234,7 @@ public abstract class AbstractRomHandler implements RomHandler {
         List<Pokemon> pokemonList = this.getPokemon();
         banned.add(pokemonList.get(Species.burmyS));
         banned.add(pokemonList.get(Species.burmyT));
+        banned.add(pokemonList.get(Species.cherrimS));
         for (int i = 0; i < starterCount; i++) {
             Pokemon pkmn = allowAltFormes ? randomPokemonInclFormes() : randomPokemon();
             while (pickedStarters.contains(pkmn) || banned.contains(pkmn) || pkmn.actuallyCosmetic) {
@@ -4859,48 +4780,26 @@ public abstract class AbstractRomHandler implements RomHandler {
                         requiredEarlyOn, preferSameType);
             }
         }
+        // cases for certain alt forms
+        List<Pokemon> pokemonList = this.getPokemon();
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.burmy), pokemonList.get(Species.burmyS));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.burmy), pokemonList.get(Species.burmyT));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.cherrim), pokemonList.get(Species.cherrimS));
 
         // Set the new compatibility
         this.setTMHMCompatibility(compat);
-        // cases for certain alt forms
-        List<Pokemon> pokemonList = this.getPokemon();
-        if (pokemonList != null && pokemonList.size() > 0) {
-            Pokemon burmy = null;
-            if (Species.burmy >= 0 && Species.burmy < pokemonList.size()) {
-                burmy = pokemonList.get(Species.burmy);
-            }
-            if (burmy != null) {
-                boolean[] baseFlags = compat.get(burmy);
-                if (baseFlags != null) {
-                    if (Species.burmyS >= 0 && Species.burmyS < pokemonList.size()) {
-                        Pokemon bs = pokemonList.get(Species.burmyS);
-                        if (bs != null) {
-                            boolean[] bsFlags = compat.get(bs);
-                            if (bsFlags == null || bsFlags.length != baseFlags.length) {
-                                compat.put(bs, Arrays.copyOf(baseFlags, baseFlags.length));
-                            } else {
-                                for (int i = 1; i < Math.min(bsFlags.length, baseFlags.length); i++) {
-                                    bsFlags[i] = baseFlags[i];
-                                }
-                            }
-                        }
-                    }
-                    if (Species.burmyT >= 0 && Species.burmyT < pokemonList.size()) {
-                        Pokemon bt = pokemonList.get(Species.burmyT);
-                        if (bt != null) {
-                            boolean[] btFlags = compat.get(bt);
-                            if (btFlags == null || btFlags.length != baseFlags.length) {
-                                compat.put(bt, Arrays.copyOf(baseFlags, baseFlags.length));
-                            } else {
-                                for (int i = 1; i < Math.min(btFlags.length, baseFlags.length); i++) {
-                                    btFlags[i] = baseFlags[i];
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+    }
+
+    /**
+     * Copies the TM/HM or Move Tutor compatibility array from a source
+     * Pokemon to a target Pokemon in the provided compatibility map.
+     * @param compatibilityMap The map containing Pokemon and their TM/HM or Move Tutor compatibility arrays.
+     * @param sourcePokemon The Pokemon from which to copy the compatibility array.
+     * @param targetPokemon The Pokemon to which the compatibility array will be copied.
+     */
+    private void copyTMHMTutorCompatibility(Map<Pokemon, boolean[]> compatibilityMap, Pokemon sourcePokemon, Pokemon targetPokemon) {
+        boolean[] baseFlags = compatibilityMap.get(sourcePokemon);
+        compatibilityMap.put(targetPokemon, Arrays.copyOf(baseFlags, baseFlags.length));
     }
 
     private void randomizePokemonMoveCompatibility(Pokemon pkmn, boolean[] moveCompatibilityFlags,
@@ -5163,48 +5062,14 @@ public abstract class AbstractRomHandler implements RomHandler {
                 randomizePokemonMoveCompatibility(compatEntry.getKey(), compatEntry.getValue(), mts, priorityTutors, preferSameType);
             }
         }
+        // cases for certain alt forms
+        List<Pokemon> pokemonList = this.getPokemon();
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.burmy), pokemonList.get(Species.burmyS));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.burmy), pokemonList.get(Species.burmyT));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.cherrim), pokemonList.get(Species.cherrimS));
 
         // Set the new compatibility
         this.setMoveTutorCompatibility(compat);
-        // cases for certain alt forms
-        List<Pokemon> pokemonList = this.getPokemon();
-        if (pokemonList != null && pokemonList.size() > 0) {
-            Pokemon burmy = null;
-            if (Species.burmy >= 0 && Species.burmy < pokemonList.size()) {
-                burmy = pokemonList.get(Species.burmy);
-            }
-            if (burmy != null) {
-                boolean[] baseFlags = compat.get(burmy);
-                if (baseFlags != null) {
-                    if (Species.burmyS >= 0 && Species.burmyS < pokemonList.size()) {
-                        Pokemon bs = pokemonList.get(Species.burmyS);
-                        if (bs != null) {
-                            boolean[] bsFlags = compat.get(bs);
-                            if (bsFlags == null || bsFlags.length != baseFlags.length) {
-                                compat.put(bs, Arrays.copyOf(baseFlags, baseFlags.length));
-                            } else {
-                                for (int i = 1; i < Math.min(bsFlags.length, baseFlags.length); i++) {
-                                    bsFlags[i] = baseFlags[i];
-                                }
-                            }
-                        }
-                    }
-                    if (Species.burmyT >= 0 && Species.burmyT < pokemonList.size()) {
-                        Pokemon bt = pokemonList.get(Species.burmyT);
-                        if (bt != null) {
-                            boolean[] btFlags = compat.get(bt);
-                            if (btFlags == null || btFlags.length != baseFlags.length) {
-                                compat.put(bt, Arrays.copyOf(baseFlags, baseFlags.length));
-                            } else {
-                                for (int i = 1; i < Math.min(btFlags.length, baseFlags.length); i++) {
-                                    btFlags[i] = baseFlags[i];
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
     }
 
     @Override
@@ -5852,6 +5717,7 @@ public abstract class AbstractRomHandler implements RomHandler {
         List<Pokemon> pokemonList = this.getPokemon();
         banned.add(pokemonList.get(Species.burmyS));
         banned.add(pokemonList.get(Species.burmyT));
+        banned.add(pokemonList.get(Species.cherrimS));
         if (!abilitiesAreRandomized) {
             List<Pokemon> abilityDependentFormes = getAbilityDependentFormes();
             banned.addAll(abilityDependentFormes);
@@ -5892,16 +5758,17 @@ public abstract class AbstractRomHandler implements RomHandler {
                 }
             }
             // case for burmy
-            Pokemon burmy = findPokemonInPoolWithSpeciesID(pokemonPool, Species.burmy);
-            Pokemon burmyS = findPokemonInPoolWithSpeciesID(pokemonPool, Species.burmyS);
-            Pokemon burmyT = findPokemonInPoolWithSpeciesID(pokemonPool, Species.burmyT);
-            int[] wormadamSpecies = { Species.wormadam, Species.wormadamS, Species.wormadamT };
-            for (int wSpec : wormadamSpecies) {
-                Pokemon wormadam = findPokemonInPoolWithSpeciesID(pokemonPool, wSpec);
-                if (wormadam == null) continue;
-                if (burmy != null) oldEvoPairs.add(new EvolutionPair(burmy, wormadam));
-                if (burmyS != null) oldEvoPairs.add(new EvolutionPair(burmyS, wormadam));
-                if (burmyT != null) oldEvoPairs.add(new EvolutionPair(burmyT, wormadam));
+            int[] burmyFormes = { Species.burmy, Species.burmyS, Species.burmyT };
+            int[] wormadamFormes = { Species.wormadam, Species.wormadamS, Species.wormadamT };
+            for (int j : burmyFormes) {
+                Pokemon fromPkmn = findPokemonInPoolWithSpeciesID(pokemonPool, j);
+                if (fromPkmn == null) continue;
+                for (int k : wormadamFormes) {
+                    Pokemon toPkmn = findPokemonInPoolWithSpeciesID(pokemonPool, k);
+                    if (toPkmn != null) {
+                        oldEvoPairs.add(new EvolutionPair(fromPkmn, toPkmn));
+                    }
+                }
             }
         }
 

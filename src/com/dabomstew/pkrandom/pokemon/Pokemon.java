@@ -230,10 +230,34 @@ public class Pokemon implements Comparable<Pokemon> {
         spdef = baseForme.spdef;
     }
 
+    public void copyBaseStats(Pokemon source) {
+        this.hp = source.hp;
+        this.attack = source.attack;
+        this.defense = source.defense;
+        this.speed = source.speed;
+        this.spatk = source.spatk;
+        this.spdef = source.spdef;
+    }
+
+    public void copyBaseHpStat(Pokemon source) {
+        this.hp = source.hp;
+    }
+
+    public void copyTypes(Pokemon source) {
+        this.primaryType = source.primaryType;
+        this.secondaryType = source.secondaryType;
+    }
+
     public void copyBaseFormeAbilities(Pokemon baseForme) {
         ability1 = baseForme.ability1;
         ability2 = baseForme.ability2;
         ability3 = baseForme.ability3;
+    }
+
+    public void copyAbilities(Pokemon source) {
+        this.ability1 = source.ability1;
+        this.ability2 = source.ability2;
+        this.ability3 = source.ability3;
     }
 
     public void copyBaseFormeEvolutions(Pokemon baseForme) {

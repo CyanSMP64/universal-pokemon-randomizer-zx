@@ -1800,6 +1800,7 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
         List<Pokemon> banned = new ArrayList<>();
         banned.add(pokes[Species.burmyS]);
         banned.add(pokes[Species.burmyT]);
+        banned.add(pokes[Species.cherrimS]);
         return banned;
     }
 
@@ -1808,6 +1809,7 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
         List<Pokemon> banned = new ArrayList<>();
         banned.add(pokes[Species.burmyS]);
         banned.add(pokes[Species.burmyT]);
+        banned.add(pokes[Species.cherrimS]);
         return banned;
     }
 

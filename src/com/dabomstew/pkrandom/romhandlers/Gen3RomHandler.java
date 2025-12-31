@@ -1796,20 +1796,40 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
     }
 
     @Override
-    public List<Pokemon> bannedForWildEncounters() {
+    public List<Pokemon> bannedForWildEncounters(Settings settings) {
+        boolean abilitiesAreRandomized = settings.getAbilitiesMod() == Settings.AbilitiesMod.RANDOMIZE;
         List<Pokemon> banned = new ArrayList<>();
+        banned.add(pokes[Species.pikachuCap]);
+        banned.add(pokes[Species.pichuSpiky]);
         banned.add(pokes[Species.burmyS]);
         banned.add(pokes[Species.burmyT]);
         banned.add(pokes[Species.cherrimS]);
+        banned.add(pokes[Species.shayminS]);
+        banned.add(pokes[Species.morpekoH]);
+        if (!abilitiesAreRandomized) {
+            banned.add(pokes[Species.castformF]);
+            banned.add(pokes[Species.castformW]);
+            banned.add(pokes[Species.castformI]);
+        }
         return banned;
     }
 
     @Override
-    public List<Pokemon> bannedForStaticPokemon() {
+    public List<Pokemon> bannedForStaticPokemon(Settings settings) {
+        boolean abilitiesAreRandomized = settings.getAbilitiesMod() == Settings.AbilitiesMod.RANDOMIZE;
         List<Pokemon> banned = new ArrayList<>();
+        banned.add(pokes[Species.pikachuCap]);
+        banned.add(pokes[Species.pichuSpiky]);
         banned.add(pokes[Species.burmyS]);
         banned.add(pokes[Species.burmyT]);
         banned.add(pokes[Species.cherrimS]);
+        banned.add(pokes[Species.shayminS]);
+        banned.add(pokes[Species.morpekoH]);
+        if (!abilitiesAreRandomized) {
+            banned.add(pokes[Species.castformF]);
+            banned.add(pokes[Species.castformW]);
+            banned.add(pokes[Species.castformI]);
+        }
         return banned;
     }
 

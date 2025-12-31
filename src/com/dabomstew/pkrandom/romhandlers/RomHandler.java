@@ -229,7 +229,7 @@ public interface RomHandler {
 
     boolean hasWildAltFormes();
 
-    List<Pokemon> bannedForWildEncounters();
+    List<Pokemon> bannedForWildEncounters(Settings settings);
 
     void randomizeWildHeldItems(Settings settings);
 
@@ -343,7 +343,7 @@ public interface RomHandler {
 
     boolean hasStaticAltFormes();
 
-    List<Pokemon> bannedForStaticPokemon();
+    List<Pokemon> bannedForStaticPokemon(Settings settings);
 
     boolean forceSwapStaticMegaEvos();
 

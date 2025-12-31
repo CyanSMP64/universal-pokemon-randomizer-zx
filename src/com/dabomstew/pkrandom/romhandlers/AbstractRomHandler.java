@@ -399,9 +399,79 @@ public abstract class AbstractRomHandler implements RomHandler {
         }
         // cases for certain alt forms
         List<Pokemon> pokemonList = this.getPokemon();
+        pokemonList.get(Species.venusaurMega).copyBaseHpStat(pokemonList.get(Species.venusaur));
+        pokemonList.get(Species.charizardMegaX).copyBaseHpStat(pokemonList.get(Species.charizard));
+        pokemonList.get(Species.charizardMegaY).copyBaseHpStat(pokemonList.get(Species.charizard));
+        pokemonList.get(Species.blastoiseMega).copyBaseHpStat(pokemonList.get(Species.blastoise));
+        pokemonList.get(Species.beedrillMega).copyBaseHpStat(pokemonList.get(Species.beedrill));
+        pokemonList.get(Species.pidgeotMega).copyBaseHpStat(pokemonList.get(Species.pidgeot));
+        pokemonList.get(Species.alakazamMega).copyBaseHpStat(pokemonList.get(Species.alakazam));
+        pokemonList.get(Species.slowbroMega).copyBaseHpStat(pokemonList.get(Species.slowbro));
+        pokemonList.get(Species.gengarMega).copyBaseHpStat(pokemonList.get(Species.gengar));
+        pokemonList.get(Species.kangaskhanMega).copyBaseHpStat(pokemonList.get(Species.kangaskhan));
+        pokemonList.get(Species.pinsirMega).copyBaseHpStat(pokemonList.get(Species.pinsir));
+        pokemonList.get(Species.gyaradosMega).copyBaseHpStat(pokemonList.get(Species.gyarados));
+        pokemonList.get(Species.aerodactylMega).copyBaseHpStat(pokemonList.get(Species.aerodactyl));
+        pokemonList.get(Species.mewtwoMegaX).copyBaseHpStat(pokemonList.get(Species.mewtwo));
+        pokemonList.get(Species.mewtwoMegaY).copyBaseHpStat(pokemonList.get(Species.mewtwo));
+        pokemonList.get(Species.ampharosMega).copyBaseHpStat(pokemonList.get(Species.ampharos));
+        pokemonList.get(Species.steelixMega).copyBaseHpStat(pokemonList.get(Species.steelix));
+        pokemonList.get(Species.scizorMega).copyBaseHpStat(pokemonList.get(Species.scizor));
+        pokemonList.get(Species.heracrossMega).copyBaseHpStat(pokemonList.get(Species.heracross));
+        pokemonList.get(Species.houndoomMega).copyBaseHpStat(pokemonList.get(Species.houndoom));
+        pokemonList.get(Species.tyranitarMega).copyBaseHpStat(pokemonList.get(Species.tyranitar));
+        pokemonList.get(Species.sceptileMega).copyBaseHpStat(pokemonList.get(Species.sceptile));
+        pokemonList.get(Species.blazikenMega).copyBaseHpStat(pokemonList.get(Species.blaziken));
+        pokemonList.get(Species.swampertMega).copyBaseHpStat(pokemonList.get(Species.swampert));
+        pokemonList.get(Species.gardevoirMega).copyBaseHpStat(pokemonList.get(Species.gardevoir));
+        pokemonList.get(Species.sableyeMega).copyBaseHpStat(pokemonList.get(Species.sableye));
+        pokemonList.get(Species.mawileMega).copyBaseHpStat(pokemonList.get(Species.mawile));
+        pokemonList.get(Species.aggronMega).copyBaseHpStat(pokemonList.get(Species.aggron));
+        pokemonList.get(Species.medichamMega).copyBaseHpStat(pokemonList.get(Species.medicham));
+        pokemonList.get(Species.manectricMega).copyBaseHpStat(pokemonList.get(Species.manectric));
+        pokemonList.get(Species.sharpedoMega).copyBaseHpStat(pokemonList.get(Species.sharpedo));
+        pokemonList.get(Species.cameruptMega).copyBaseHpStat(pokemonList.get(Species.camerupt));
+        pokemonList.get(Species.altariaMega).copyBaseHpStat(pokemonList.get(Species.altaria));
+        pokemonList.get(Species.banetteMega).copyBaseHpStat(pokemonList.get(Species.banette));
+        pokemonList.get(Species.absolMega).copyBaseHpStat(pokemonList.get(Species.absol));
+        pokemonList.get(Species.glalieMega).copyBaseHpStat(pokemonList.get(Species.glalie));
+        pokemonList.get(Species.salamenceMega).copyBaseHpStat(pokemonList.get(Species.salamence));
+        pokemonList.get(Species.metagrossMega).copyBaseHpStat(pokemonList.get(Species.metagross));
+        pokemonList.get(Species.latiasMega).copyBaseHpStat(pokemonList.get(Species.latias));
+        pokemonList.get(Species.latiosMega).copyBaseHpStat(pokemonList.get(Species.latios));
+        pokemonList.get(Species.rayquazaMega).copyBaseHpStat(pokemonList.get(Species.rayquaza));
+        pokemonList.get(Species.lopunnyMega).copyBaseHpStat(pokemonList.get(Species.lopunny));
+        pokemonList.get(Species.garchompMega).copyBaseHpStat(pokemonList.get(Species.garchomp));
+        pokemonList.get(Species.lucarioMega).copyBaseHpStat(pokemonList.get(Species.lucario));
+        pokemonList.get(Species.abomasnowMega).copyBaseHpStat(pokemonList.get(Species.abomasnow));
+        pokemonList.get(Species.galladeMega).copyBaseHpStat(pokemonList.get(Species.gallade));
+        pokemonList.get(Species.audinoMega).copyBaseHpStat(pokemonList.get(Species.audino));
+        pokemonList.get(Species.diancieMega).copyBaseHpStat(pokemonList.get(Species.diancie));
+        pokemonList.get(Species.kyogreP).copyBaseHpStat(pokemonList.get(Species.kyogre));
+        pokemonList.get(Species.groudonP).copyBaseHpStat(pokemonList.get(Species.groudon));
+
+        pokemonList.get(Species.pikachuCap).copyBaseStats(pokemonList.get(Species.pikachu));
+        pokemonList.get(Species.pichuSpiky).copyBaseStats(pokemonList.get(Species.pichu));
+        pokemonList.get(Species.castformF).copyBaseStats(pokemonList.get(Species.castform));
+        pokemonList.get(Species.castformW).copyBaseStats(pokemonList.get(Species.castform));
+        pokemonList.get(Species.castformI).copyBaseStats(pokemonList.get(Species.castform));
+        pokemonList.get(Species.deoxysA).copyBaseHpStat(pokemonList.get(Species.deoxys));
+        pokemonList.get(Species.deoxysD).copyBaseHpStat(pokemonList.get(Species.deoxys));
+        pokemonList.get(Species.deoxysS).copyBaseHpStat(pokemonList.get(Species.deoxys));
         pokemonList.get(Species.burmyS).copyBaseStats(pokemonList.get(Species.burmy));
         pokemonList.get(Species.burmyT).copyBaseStats(pokemonList.get(Species.burmy));
         pokemonList.get(Species.cherrimS).copyBaseStats(pokemonList.get(Species.cherrim));
+        pokemonList.get(Species.rotomH).copyBaseHpStat(pokemonList.get(Species.rotom));
+        pokemonList.get(Species.rotomW).copyBaseHpStat(pokemonList.get(Species.rotom));
+        pokemonList.get(Species.rotomFr).copyBaseHpStat(pokemonList.get(Species.rotom));
+        pokemonList.get(Species.rotomFa).copyBaseHpStat(pokemonList.get(Species.rotom));
+        pokemonList.get(Species.rotomM).copyBaseHpStat(pokemonList.get(Species.rotom));
+        pokemonList.get(Species.rotomW).copyBaseStats(pokemonList.get(Species.rotomH));
+        pokemonList.get(Species.rotomFr).copyBaseStats(pokemonList.get(Species.rotomH));
+        pokemonList.get(Species.rotomFa).copyBaseStats(pokemonList.get(Species.rotomH));
+        pokemonList.get(Species.rotomM).copyBaseStats(pokemonList.get(Species.rotomH));
+        pokemonList.get(Species.shayminS).copyBaseHpStat(pokemonList.get(Species.shaymin));
+        pokemonList.get(Species.morpekoH).copyBaseStats(pokemonList.get(Species.morpeko));
     }
 
     @Override
@@ -608,9 +678,18 @@ public abstract class AbstractRomHandler implements RomHandler {
         }
         // cases for certain alt forms
         List<Pokemon> pokemonList = this.getPokemon();
+        pokemonList.get(Species.pikachuCap).copyTypes(pokemonList.get(Species.pikachu));
+        pokemonList.get(Species.pichuSpiky).copyTypes(pokemonList.get(Species.pichu));
+        pokemonList.get(Species.deoxysA).copyTypes(pokemonList.get(Species.deoxys));
+        pokemonList.get(Species.deoxysD).copyTypes(pokemonList.get(Species.deoxys));
+        pokemonList.get(Species.deoxysS).copyTypes(pokemonList.get(Species.deoxys));
         pokemonList.get(Species.burmyS).copyTypes(pokemonList.get(Species.burmy));
         pokemonList.get(Species.burmyT).copyTypes(pokemonList.get(Species.burmy));
         pokemonList.get(Species.cherrimS).copyTypes(pokemonList.get(Species.cherrim));
+        pokemonList.get(Species.dialgaO).copyTypes(pokemonList.get(Species.dialga));
+        pokemonList.get(Species.palkiaO).copyTypes(pokemonList.get(Species.palkia));
+        pokemonList.get(Species.giratinaO).copyTypes(pokemonList.get(Species.giratina));
+        pokemonList.get(Species.morpekoH).copyTypes(pokemonList.get(Species.morpeko));
     }
 
     @Override
@@ -749,9 +828,27 @@ public abstract class AbstractRomHandler implements RomHandler {
         }
         // cases for certain alt forms
         List<Pokemon> pokemonList = this.getPokemon();
+        pokemonList.get(Species.pikachuCap).copyAbilities(pokemonList.get(Species.pikachu));
+        pokemonList.get(Species.pichuSpiky).copyAbilities(pokemonList.get(Species.pichu));
+        pokemonList.get(Species.castformF).copyAbilities(pokemonList.get(Species.castform));
+        pokemonList.get(Species.castformW).copyAbilities(pokemonList.get(Species.castform));
+        pokemonList.get(Species.castformI).copyAbilities(pokemonList.get(Species.castform));
+        pokemonList.get(Species.deoxysA).copyAbilities(pokemonList.get(Species.deoxys));
+        pokemonList.get(Species.deoxysD).copyAbilities(pokemonList.get(Species.deoxys));
+        pokemonList.get(Species.deoxysS).copyAbilities(pokemonList.get(Species.deoxys));
         pokemonList.get(Species.burmyS).copyAbilities(pokemonList.get(Species.burmy));
         pokemonList.get(Species.burmyT).copyAbilities(pokemonList.get(Species.burmy));
+        pokemonList.get(Species.wormadamS).copyAbilities(pokemonList.get(Species.wormadam));
+        pokemonList.get(Species.wormadamT).copyAbilities(pokemonList.get(Species.wormadam));
         pokemonList.get(Species.cherrimS).copyAbilities(pokemonList.get(Species.cherrim));
+        pokemonList.get(Species.rotomH).copyAbilities(pokemonList.get(Species.rotom));
+        pokemonList.get(Species.rotomW).copyAbilities(pokemonList.get(Species.rotom));
+        pokemonList.get(Species.rotomFr).copyAbilities(pokemonList.get(Species.rotom));
+        pokemonList.get(Species.rotomFa).copyAbilities(pokemonList.get(Species.rotom));
+        pokemonList.get(Species.rotomM).copyAbilities(pokemonList.get(Species.rotom));
+        pokemonList.get(Species.dialgaO).copyAbilities(pokemonList.get(Species.dialga));
+        pokemonList.get(Species.palkiaO).copyAbilities(pokemonList.get(Species.palkia));
+        pokemonList.get(Species.morpekoH).copyAbilities(pokemonList.get(Species.morpeko));
     }
 
     private int pickRandomAbility(int maxAbility, List<Integer> bannedAbilities, boolean useVariations,
@@ -822,7 +919,7 @@ public abstract class AbstractRomHandler implements RomHandler {
         List<EncounterSet> scrambledEncounters = new ArrayList<>(currentEncounters);
         Collections.shuffle(scrambledEncounters, this.random);
 
-        List<Pokemon> banned = this.bannedForWildEncounters();
+        List<Pokemon> banned = this.bannedForWildEncounters(settings);
         banned.addAll(this.getBannedFormesForPlayerPokemon());
         if (!abilitiesAreRandomized) {
             List<Pokemon> abilityDependentFormes = getAbilityDependentFormes();
@@ -1029,7 +1126,7 @@ public abstract class AbstractRomHandler implements RomHandler {
         boolean abilitiesAreRandomized = settings.getAbilitiesMod() == Settings.AbilitiesMod.RANDOMIZE;
 
         checkPokemonRestrictions();
-        List<Pokemon> banned = this.bannedForWildEncounters();
+        List<Pokemon> banned = this.bannedForWildEncounters(settings);
         banned.addAll(this.getBannedFormesForPlayerPokemon());
         if (!abilitiesAreRandomized) {
             List<Pokemon> abilityDependentFormes = getAbilityDependentFormes();
@@ -1339,7 +1436,7 @@ public abstract class AbstractRomHandler implements RomHandler {
             remainingRight = noLegendaries ? new ArrayList<>(noLegendaryList)
                     : new ArrayList<>(mainPokemonList);
         }
-        List<Pokemon> banned = this.bannedForWildEncounters();
+        List<Pokemon> banned = this.bannedForWildEncounters(settings);
         banned.addAll(this.getBannedFormesForPlayerPokemon());
         if (!abilitiesAreRandomized) {
             List<Pokemon> abilityDependentFormes = getAbilityDependentFormes();
@@ -1472,7 +1569,7 @@ public abstract class AbstractRomHandler implements RomHandler {
         boolean banIrregularAltFormes = settings.isBanIrregularAltFormes();
         boolean abilitiesAreRandomized = settings.getAbilitiesMod() == Settings.AbilitiesMod.RANDOMIZE;
 
-        List<Pokemon> banned = this.bannedForWildEncounters();
+        List<Pokemon> banned = this.bannedForWildEncounters(settings);
         if (!abilitiesAreRandomized) {
             List<Pokemon> abilityDependentFormes = getAbilityDependentFormes();
             banned.addAll(abilityDependentFormes);
@@ -2058,7 +2155,15 @@ public abstract class AbstractRomHandler implements RomHandler {
                 if (willForceEvolve) {
                     bannedList.addAll(evolvesIntoTheWrongType);
                 }
+                bannedList.add(getPokemon().get(Species.pikachuCap));
+                bannedList.add(getPokemon().get(Species.pichuSpiky));
                 bannedList.add(getPokemon().get(Species.cherrimS));
+                bannedList.add(getPokemon().get(Species.morpekoH));
+                if (!abilitiesAreRandomized) {
+                    bannedList.add(getPokemon().get(Species.castformF));
+                    bannedList.add(getPokemon().get(Species.castformW));
+                    bannedList.add(getPokemon().get(Species.castformI));
+                }
 
                 Pokemon newPK = pickTrainerPokeReplacement(
                                 oldPK,
@@ -3773,9 +3878,74 @@ public abstract class AbstractRomHandler implements RomHandler {
         }
         // cases for certain alt forms
         Map<Integer, List<MoveLearnt>> ms = movesets;
+        copyMoveset(ms, Species.venusaur, Species.venusaurMega);
+        copyMoveset(ms, Species.charizard, Species.charizardMegaX);
+        copyMoveset(ms, Species.charizard, Species.charizardMegaY);
+        copyMoveset(ms, Species.blastoise, Species.blastoiseMega);
+        copyMoveset(ms, Species.beedrill, Species.beedrillMega);
+        copyMoveset(ms, Species.pidgeot, Species.pidgeotMega);
+        copyMoveset(ms, Species.alakazam, Species.alakazamMega);
+        copyMoveset(ms, Species.slowbro, Species.slowbroMega);
+        copyMoveset(ms, Species.gengar, Species.gengarMega);
+        copyMoveset(ms, Species.kangaskhan, Species.kangaskhanMega);
+        copyMoveset(ms, Species.pinsir, Species.pinsirMega);
+        copyMoveset(ms, Species.gyarados, Species.gyaradosMega);
+        copyMoveset(ms, Species.aerodactyl, Species.aerodactylMega);
+        copyMoveset(ms, Species.mewtwo, Species.mewtwoMegaX);
+        copyMoveset(ms, Species.mewtwo, Species.mewtwoMegaY);
+        copyMoveset(ms, Species.ampharos, Species.ampharosMega);
+        copyMoveset(ms, Species.steelix, Species.steelixMega);
+        copyMoveset(ms, Species.scizor, Species.scizorMega);
+        copyMoveset(ms, Species.heracross, Species.heracrossMega);
+        copyMoveset(ms, Species.houndoom, Species.houndoomMega);
+        copyMoveset(ms, Species.tyranitar, Species.tyranitarMega);
+        copyMoveset(ms, Species.sceptile, Species.sceptileMega);
+        copyMoveset(ms, Species.blaziken, Species.blazikenMega);
+        copyMoveset(ms, Species.swampert, Species.swampertMega);
+        copyMoveset(ms, Species.gardevoir, Species.gardevoirMega);
+        copyMoveset(ms, Species.sableye, Species.sableyeMega);
+        copyMoveset(ms, Species.mawile, Species.mawileMega);
+        copyMoveset(ms, Species.aggron, Species.aggronMega);
+        copyMoveset(ms, Species.medicham, Species.medichamMega);
+        copyMoveset(ms, Species.manectric, Species.manectricMega);
+        copyMoveset(ms, Species.sharpedo, Species.sharpedoMega);
+        copyMoveset(ms, Species.camerupt, Species.cameruptMega);
+        copyMoveset(ms, Species.altaria, Species.altariaMega);
+        copyMoveset(ms, Species.banette, Species.banetteMega);
+        copyMoveset(ms, Species.absol, Species.absolMega);
+        copyMoveset(ms, Species.glalie, Species.glalieMega);
+        copyMoveset(ms, Species.salamence, Species.salamenceMega);
+        copyMoveset(ms, Species.metagross, Species.metagrossMega);
+        copyMoveset(ms, Species.latias, Species.latiasMega);
+        copyMoveset(ms, Species.latios, Species.latiosMega);
+        copyMoveset(ms, Species.rayquaza, Species.rayquazaMega);
+        copyMoveset(ms, Species.lopunny, Species.lopunnyMega);
+        copyMoveset(ms, Species.garchomp, Species.garchompMega);
+        copyMoveset(ms, Species.lucario, Species.lucarioMega);
+        copyMoveset(ms, Species.abomasnow, Species.abomasnowMega);
+        copyMoveset(ms, Species.gallade, Species.galladeMega);
+        copyMoveset(ms, Species.audino, Species.audinoMega);
+        copyMoveset(ms, Species.diancie, Species.diancieMega);
+        copyMoveset(ms, Species.kyogre, Species.kyogreP);
+        copyMoveset(ms, Species.groudon, Species.groudonP);
+
+        copyMoveset(ms, Species.pikachu, Species.pikachuCap);
+        copyMoveset(ms, Species.pichu, Species.pichuSpiky);
+        copyMoveset(ms, Species.castform, Species.castformF);
+        copyMoveset(ms, Species.castform, Species.castformW);
+        copyMoveset(ms, Species.castform, Species.castformI);
         copyMoveset(ms, Species.burmy, Species.burmyS);
         copyMoveset(ms, Species.burmy, Species.burmyT);
         copyMoveset(ms, Species.cherrim, Species.cherrimS);
+        copyMoveset(ms, Species.rotom, Species.rotomH);
+        copyMoveset(ms, Species.rotom, Species.rotomW);
+        copyMoveset(ms, Species.rotom, Species.rotomFr);
+        copyMoveset(ms, Species.rotom, Species.rotomFa);
+        copyMoveset(ms, Species.rotom, Species.rotomM);
+        copyMoveset(ms, Species.dialga, Species.dialgaO);
+        copyMoveset(ms, Species.palkia, Species.palkiaO);
+        copyMoveset(ms, Species.giratina, Species.giratinaO);
+        copyMoveset(ms, Species.morpeko, Species.morpekoH);
 
         // Done, save
         this.setMovesLearnt(movesets);
@@ -4232,9 +4402,18 @@ public abstract class AbstractRomHandler implements RomHandler {
             banned.addAll(getIrregularFormes());
         }
         List<Pokemon> pokemonList = this.getPokemon();
+        banned.add(pokemonList.get(Species.pikachuCap));
+        banned.add(pokemonList.get(Species.pichuSpiky));
         banned.add(pokemonList.get(Species.burmyS));
         banned.add(pokemonList.get(Species.burmyT));
         banned.add(pokemonList.get(Species.cherrimS));
+        banned.add(pokemonList.get(Species.shayminS));
+        banned.add(pokemonList.get(Species.morpekoH));
+        if (abilitiesUnchanged) {
+            banned.add(pokemonList.get(Species.castformF));
+            banned.add(pokemonList.get(Species.castformW));
+            banned.add(pokemonList.get(Species.castformI));
+        }
         for (int i = 0; i < starterCount; i++) {
             Pokemon pkmn = allowAltFormes ? randomPokemonInclFormes() : randomPokemon();
             while (pickedStarters.contains(pkmn) || banned.contains(pkmn) || pkmn.actuallyCosmetic) {
@@ -4294,7 +4473,7 @@ public abstract class AbstractRomHandler implements RomHandler {
         checkPokemonRestrictions();
         List<StaticEncounter> currentStaticPokemon = this.getStaticPokemon();
         List<StaticEncounter> replacements = new ArrayList<>();
-        List<Pokemon> banned = this.bannedForStaticPokemon();
+        List<Pokemon> banned = this.bannedForStaticPokemon(settings);
         banned.addAll(this.getBannedFormesForPlayerPokemon());
         if (!abilitiesAreRandomized) {
             List<Pokemon> abilityDependentFormes = getAbilityDependentFormes();
@@ -4782,9 +4961,74 @@ public abstract class AbstractRomHandler implements RomHandler {
         }
         // cases for certain alt forms
         List<Pokemon> pokemonList = this.getPokemon();
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.venusaur), pokemonList.get(Species.venusaurMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.charizard), pokemonList.get(Species.charizardMegaX));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.charizard), pokemonList.get(Species.charizardMegaY));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.blastoise), pokemonList.get(Species.blastoiseMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.beedrill), pokemonList.get(Species.beedrillMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.pidgeot), pokemonList.get(Species.pidgeotMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.alakazam), pokemonList.get(Species.alakazamMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.slowbro), pokemonList.get(Species.slowbroMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.gengar), pokemonList.get(Species.gengarMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.kangaskhan), pokemonList.get(Species.kangaskhanMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.pinsir), pokemonList.get(Species.pinsirMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.gyarados), pokemonList.get(Species.gyaradosMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.aerodactyl), pokemonList.get(Species.aerodactylMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.mewtwo), pokemonList.get(Species.mewtwoMegaX));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.mewtwo), pokemonList.get(Species.mewtwoMegaY));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.ampharos), pokemonList.get(Species.ampharosMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.steelix), pokemonList.get(Species.steelixMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.scizor), pokemonList.get(Species.scizorMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.heracross), pokemonList.get(Species.heracrossMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.houndoom), pokemonList.get(Species.houndoomMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.tyranitar), pokemonList.get(Species.tyranitarMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.sceptile), pokemonList.get(Species.sceptileMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.blaziken), pokemonList.get(Species.blazikenMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.swampert), pokemonList.get(Species.swampertMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.gardevoir), pokemonList.get(Species.gardevoirMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.sableye), pokemonList.get(Species.sableyeMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.mawile), pokemonList.get(Species.mawileMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.aggron), pokemonList.get(Species.aggronMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.medicham), pokemonList.get(Species.medichamMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.manectric), pokemonList.get(Species.manectricMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.sharpedo), pokemonList.get(Species.sharpedoMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.camerupt), pokemonList.get(Species.cameruptMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.altaria), pokemonList.get(Species.altariaMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.banette), pokemonList.get(Species.banetteMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.absol), pokemonList.get(Species.absolMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.glalie), pokemonList.get(Species.glalieMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.salamence), pokemonList.get(Species.salamenceMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.metagross), pokemonList.get(Species.metagrossMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.latias), pokemonList.get(Species.latiasMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.latios), pokemonList.get(Species.latiosMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.rayquaza), pokemonList.get(Species.rayquazaMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.lopunny), pokemonList.get(Species.lopunnyMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.garchomp), pokemonList.get(Species.garchompMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.lucario), pokemonList.get(Species.lucarioMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.abomasnow), pokemonList.get(Species.abomasnowMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.gallade), pokemonList.get(Species.galladeMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.audino), pokemonList.get(Species.audinoMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.diancie), pokemonList.get(Species.diancieMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.kyogre), pokemonList.get(Species.kyogreP));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.groudon), pokemonList.get(Species.groudonP));
+
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.pikachu), pokemonList.get(Species.pikachuCap));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.pichu), pokemonList.get(Species.pichuSpiky));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.castform), pokemonList.get(Species.castformF));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.castform), pokemonList.get(Species.castformW));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.castform), pokemonList.get(Species.castformI));
         copyTMHMTutorCompatibility(compat, pokemonList.get(Species.burmy), pokemonList.get(Species.burmyS));
         copyTMHMTutorCompatibility(compat, pokemonList.get(Species.burmy), pokemonList.get(Species.burmyT));
         copyTMHMTutorCompatibility(compat, pokemonList.get(Species.cherrim), pokemonList.get(Species.cherrimS));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.rotom), pokemonList.get(Species.rotomH));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.rotom), pokemonList.get(Species.rotomW));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.rotom), pokemonList.get(Species.rotomFr));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.rotom), pokemonList.get(Species.rotomFa));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.rotom), pokemonList.get(Species.rotomM));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.dialga), pokemonList.get(Species.dialgaO));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.palkia), pokemonList.get(Species.palkiaO));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.giratina), pokemonList.get(Species.giratinaO));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.morpeko), pokemonList.get(Species.morpekoH));
 
         // Set the new compatibility
         this.setTMHMCompatibility(compat);
@@ -5064,9 +5308,74 @@ public abstract class AbstractRomHandler implements RomHandler {
         }
         // cases for certain alt forms
         List<Pokemon> pokemonList = this.getPokemon();
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.venusaur), pokemonList.get(Species.venusaurMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.charizard), pokemonList.get(Species.charizardMegaX));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.charizard), pokemonList.get(Species.charizardMegaY));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.blastoise), pokemonList.get(Species.blastoiseMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.beedrill), pokemonList.get(Species.beedrillMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.pidgeot), pokemonList.get(Species.pidgeotMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.alakazam), pokemonList.get(Species.alakazamMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.slowbro), pokemonList.get(Species.slowbroMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.gengar), pokemonList.get(Species.gengarMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.kangaskhan), pokemonList.get(Species.kangaskhanMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.pinsir), pokemonList.get(Species.pinsirMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.gyarados), pokemonList.get(Species.gyaradosMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.aerodactyl), pokemonList.get(Species.aerodactylMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.mewtwo), pokemonList.get(Species.mewtwoMegaX));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.mewtwo), pokemonList.get(Species.mewtwoMegaY));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.ampharos), pokemonList.get(Species.ampharosMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.steelix), pokemonList.get(Species.steelixMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.scizor), pokemonList.get(Species.scizorMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.heracross), pokemonList.get(Species.heracrossMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.houndoom), pokemonList.get(Species.houndoomMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.tyranitar), pokemonList.get(Species.tyranitarMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.sceptile), pokemonList.get(Species.sceptileMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.blaziken), pokemonList.get(Species.blazikenMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.swampert), pokemonList.get(Species.swampertMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.gardevoir), pokemonList.get(Species.gardevoirMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.sableye), pokemonList.get(Species.sableyeMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.mawile), pokemonList.get(Species.mawileMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.aggron), pokemonList.get(Species.aggronMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.medicham), pokemonList.get(Species.medichamMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.manectric), pokemonList.get(Species.manectricMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.sharpedo), pokemonList.get(Species.sharpedoMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.camerupt), pokemonList.get(Species.cameruptMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.altaria), pokemonList.get(Species.altariaMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.banette), pokemonList.get(Species.banetteMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.absol), pokemonList.get(Species.absolMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.glalie), pokemonList.get(Species.glalieMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.salamence), pokemonList.get(Species.salamenceMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.metagross), pokemonList.get(Species.metagrossMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.latias), pokemonList.get(Species.latiasMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.latios), pokemonList.get(Species.latiosMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.rayquaza), pokemonList.get(Species.rayquazaMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.lopunny), pokemonList.get(Species.lopunnyMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.garchomp), pokemonList.get(Species.garchompMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.lucario), pokemonList.get(Species.lucarioMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.abomasnow), pokemonList.get(Species.abomasnowMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.gallade), pokemonList.get(Species.galladeMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.audino), pokemonList.get(Species.audinoMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.diancie), pokemonList.get(Species.diancieMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.kyogre), pokemonList.get(Species.kyogreP));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.groudon), pokemonList.get(Species.groudonP));
+
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.pikachu), pokemonList.get(Species.pikachuCap));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.pichu), pokemonList.get(Species.pichuSpiky));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.castform), pokemonList.get(Species.castformF));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.castform), pokemonList.get(Species.castformW));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.castform), pokemonList.get(Species.castformI));
         copyTMHMTutorCompatibility(compat, pokemonList.get(Species.burmy), pokemonList.get(Species.burmyS));
         copyTMHMTutorCompatibility(compat, pokemonList.get(Species.burmy), pokemonList.get(Species.burmyT));
         copyTMHMTutorCompatibility(compat, pokemonList.get(Species.cherrim), pokemonList.get(Species.cherrimS));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.rotom), pokemonList.get(Species.rotomH));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.rotom), pokemonList.get(Species.rotomW));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.rotom), pokemonList.get(Species.rotomFr));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.rotom), pokemonList.get(Species.rotomFa));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.rotom), pokemonList.get(Species.rotomM));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.dialga), pokemonList.get(Species.dialgaO));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.palkia), pokemonList.get(Species.palkiaO));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.giratina), pokemonList.get(Species.giratinaO));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.morpeko), pokemonList.get(Species.morpekoH));
 
         // Set the new compatibility
         this.setMoveTutorCompatibility(compat);
@@ -5715,12 +6024,20 @@ public abstract class AbstractRomHandler implements RomHandler {
 
         List<Pokemon> banned = this.getBannedFormesForPlayerPokemon();
         List<Pokemon> pokemonList = this.getPokemon();
+        banned.add(pokemonList.get(Species.pikachuCap));
+        banned.add(pokemonList.get(Species.pichuSpiky));
         banned.add(pokemonList.get(Species.burmyS));
         banned.add(pokemonList.get(Species.burmyT));
         banned.add(pokemonList.get(Species.cherrimS));
+        banned.add(pokemonList.get(Species.shayminS));
+        banned.add(pokemonList.get(Species.morpekoH));
         if (!abilitiesAreRandomized) {
             List<Pokemon> abilityDependentFormes = getAbilityDependentFormes();
             banned.addAll(abilityDependentFormes);
+
+            banned.add(pokemonList.get(Species.castformF));
+            banned.add(pokemonList.get(Species.castformW));
+            banned.add(pokemonList.get(Species.castformI));
         }
 //        if (banIrregularAltFormes) {
 //            banned.addAll(getIrregularFormes());
@@ -7392,7 +7709,7 @@ public abstract class AbstractRomHandler implements RomHandler {
         checkPokemonRestrictions();
         List<TotemPokemon> currentTotemPokemon = this.getTotemPokemon();
         List<TotemPokemon> replacements = new ArrayList<>();
-        List<Pokemon> banned = this.bannedForStaticPokemon();
+        List<Pokemon> banned = this.bannedForStaticPokemon(settings);
         if (!abilitiesAreRandomized) {
             List<Pokemon> abilityDependentFormes = getAbilityDependentFormes();
             banned.addAll(abilityDependentFormes);
@@ -7681,7 +7998,7 @@ public abstract class AbstractRomHandler implements RomHandler {
     }
 
     @Override
-    public List<Pokemon> bannedForWildEncounters() {
+    public List<Pokemon> bannedForWildEncounters(Settings settings) {
         return new ArrayList<>();
     }
 
@@ -7691,7 +8008,7 @@ public abstract class AbstractRomHandler implements RomHandler {
     }
 
     @Override
-    public List<Pokemon> bannedForStaticPokemon() {
+    public List<Pokemon> bannedForStaticPokemon(Settings settings) {
         return new ArrayList<>();
     }
 

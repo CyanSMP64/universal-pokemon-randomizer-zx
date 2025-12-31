@@ -83,7 +83,7 @@ public class Gen3Constants {
             0x00, 0x00, 0x03, 0x01, (byte) 0xAA, 0x0A, 0x00, 0x00, 0x00, 0x00, (byte) 0xFF, 0x78, 0x00, 0x00, 0x0F,
             0x0F, 0x00, 0x00, 0x00, 0x04, 0x00, 0x00 };
 
-    public static final int baseStatsEntrySize = 0x20;
+    public static final int baseStatsEntrySize = 0x24;
 
     public static final int bsHPOffset = 0, bsAttackOffset = 1, bsDefenseOffset = 2, bsSpeedOffset = 3,
             bsSpAtkOffset = 4, bsSpDefOffset = 5, bsPrimaryTypeOffset = 6, bsSecondaryTypeOffset = 7,
@@ -560,10 +560,10 @@ public class Gen3Constants {
     }
 
     private static void setupAllowedItems() {
-        allowedItems = new ItemList(Gen3Items.oldSeaMap);
+        allowedItems = new ItemList(Gen3Items.gracidea);
         // Key items (+1 unknown item)
         allowedItems.banRange(Gen3Items.machBike, 30);
-        allowedItems.banRange(Gen3Items.oaksParcel, 28);
+        allowedItems.banRange(Gen3Items.oaksParcel, 29);
         // Unknown blank items
         allowedItems.banRange(Gen3Items.unknown53, 10);
         allowedItems.banRange(Gen3Items.unknown87, 2);
@@ -1376,5 +1376,6 @@ public class Gen3Constants {
             {Gen3Items.sapphire, 0},
             {Gen3Items.magmaEmblem, 0},
             {Gen3Items.oldSeaMap, 0},
+            {Gen3Items.gracidea, 0},
     }).collect(Collectors.toMap(kv -> kv[0], kv -> kv[1]));
 }

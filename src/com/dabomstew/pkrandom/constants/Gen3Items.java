@@ -407,4 +407,7 @@ public class Gen3Items {
     /* Exclusive to Emerald */
     public static final int magmaEmblem = 375;
     public static final int oldSeaMap = 376;
+
+    /* Exclusive to nat dex */
+    public static final int gracidea = 377;
 }

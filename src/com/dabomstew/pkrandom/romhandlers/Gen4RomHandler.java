@@ -3102,7 +3102,7 @@ public class Gen4RomHandler extends AbstractDSRomHandler {
     }
 
     @Override
-    public List<Pokemon> bannedForWildEncounters() {
+    public List<Pokemon> bannedForWildEncounters(Settings settings) {
         // Ban Unown in DPPt because you can't get certain letters outside of Solaceon Ruins.
         // Ban Unown in HGSS because they don't show up unless you complete a puzzle in the Ruins of Alph.
         return new ArrayList<>(Collections.singletonList(pokes[Species.unown]));

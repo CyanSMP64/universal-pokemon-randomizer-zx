@@ -3043,7 +3043,7 @@ public class Gen6RomHandler extends Abstract3DSRomHandler {
     }
 
     @Override
-    public List<Pokemon> bannedForStaticPokemon() {
+    public List<Pokemon> bannedForStaticPokemon(Settings settings) {
         return Gen6Constants.actuallyCosmeticForms
                 .stream()
                 .filter(index -> index < Gen6Constants.pokemonCount + Gen6Constants.getFormeCount(romEntry.romType))

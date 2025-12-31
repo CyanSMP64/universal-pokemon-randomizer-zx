@@ -240,7 +240,35 @@ public class Pokemon implements Comparable<Pokemon> {
     }
 
     public void copyBaseHpStat(Pokemon source) {
+        if (source.hp == this.hp) {
+            return;
+        }
+        
+        int originalBST = this.bst();
         this.hp = source.hp;
+        int remainingBST = originalBST - this.hp - 55;
+        Random random = new Random();
+        
+        while (true) {
+            // Make weightings
+            double atkW = random.nextDouble(), defW = random.nextDouble();
+            double spaW = random.nextDouble(), spdW = random.nextDouble(), speW = random.nextDouble();
+            
+            double totW = atkW + defW + spaW + spdW + speW;
+            
+            this.attack = (int) Math.max(1, Math.round(atkW / totW * remainingBST) + 11);
+            this.defense = (int) Math.max(1, Math.round(defW / totW * remainingBST) + 11);
+            this.spatk = (int) Math.max(1, Math.round(spaW / totW * remainingBST) + 11);
+            this.spdef = (int) Math.max(1, Math.round(spdW / totW * remainingBST) + 11);
+            this.speed = (int) Math.max(1, Math.round(speW / totW * remainingBST) + 11);
+            
+            // Check for something we can't store
+            if (this.attack > 255 || this.defense > 255 || this.spatk > 255 || this.spdef > 255 || this.speed > 255) {
+                // re roll
+                continue;
+            }
+            break;
+        }
     }
 
     public void copyTypes(Pokemon source) {

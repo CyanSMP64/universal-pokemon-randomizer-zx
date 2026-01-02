@@ -477,7 +477,7 @@ public abstract class AbstractRomHandler implements RomHandler {
         pokemonList.get(Species.basculinB).copyBaseStats(pokemonList.get(Species.basculin));
         pokemonList.get(Species.basculinW).copyBaseStats(pokemonList.get(Species.basculin));
         pokemonList.get(Species.darmanitanZ).copyBaseHpStat(pokemonList.get(Species.darmanitan));
-        pokemonList.get(Species.darmanitanGZ).copyBaseHpStat(pokemonList.get(Species.darmanitanG));
+        pokemonList.get(Species.darmanitanZG).copyBaseHpStat(pokemonList.get(Species.darmanitanG));
         pokemonList.get(Species.tornadusT).copyBaseHpStat(pokemonList.get(Species.tornadus));
         pokemonList.get(Species.thundurusT).copyBaseHpStat(pokemonList.get(Species.thundurus));
         pokemonList.get(Species.landorusT).copyBaseHpStat(pokemonList.get(Species.landorus));
@@ -870,7 +870,7 @@ public abstract class AbstractRomHandler implements RomHandler {
         pokemonList.get(Species.dialgaO).copyAbilities(pokemonList.get(Species.dialga));
         pokemonList.get(Species.palkiaO).copyAbilities(pokemonList.get(Species.palkia));
         pokemonList.get(Species.darmanitanZ).copyAbilities(pokemonList.get(Species.darmanitan));
-        pokemonList.get(Species.darmanitanGZ).copyAbilities(pokemonList.get(Species.darmanitanG));
+        pokemonList.get(Species.darmanitanZG).copyAbilities(pokemonList.get(Species.darmanitanG));
         pokemonList.get(Species.morpekoH).copyAbilities(pokemonList.get(Species.morpeko));
     }
 

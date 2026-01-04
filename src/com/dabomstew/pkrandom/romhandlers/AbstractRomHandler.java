@@ -166,7 +166,7 @@ public abstract class AbstractRomHandler implements RomHandler {
 
             if (restrictions.allow_gen6 && allPokemon.size() > Gen6Constants.pokemonCount) {
                 addPokesFromRange(mainPokemonList, allPokemon, Species.chespin, Species.volcanion);
-                addPokesFromRange(mainPokemonList, allPokemon, Species.greninjaA, Species.gourgeistSuper);
+                addPokesFromRange(mainPokemonList, allPokemon, Species.floetteE, Species.gourgeistSuper);
                 addPokesFromRange(mainPokemonList, allPokemon, Species.hoopaU, Species.hoopaU);
                 if (restrictions.allow_gen1) {
                     addPokesFromRange(mainPokemonList, allPokemon, Species.pikachuCap, Species.pikachuCap);
@@ -187,6 +187,8 @@ public abstract class AbstractRomHandler implements RomHandler {
                     addPokesFromRange(mainPokemonList, allPokemon, Species.eeveePartner, Species.eeveePartner);
                 }
                 if (restrictions.allow_gen6) {
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.greninjaB, Species.greninjaB);
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.greninjaA, Species.greninjaA);
                     addPokesFromRange(mainPokemonList, allPokemon, Species.zygarde10, Species.zygardeC);
                 }
                 if (restrictions.allow_regional_forms) {
@@ -483,6 +485,12 @@ public abstract class AbstractRomHandler implements RomHandler {
         pokemonList.get(Species.landorusT).copyBaseHpStat(pokemonList.get(Species.landorus));
         pokemonList.get(Species.kyuremB).copyBaseHpStat(pokemonList.get(Species.kyurem));
         pokemonList.get(Species.kyuremW).copyBaseHpStat(pokemonList.get(Species.kyurem));
+        pokemonList.get(Species.meloettaP).copyBaseHpStat(pokemonList.get(Species.meloetta));
+        pokemonList.get(Species.greninjaB).copyBaseStats(pokemonList.get(Species.greninja));
+        pokemonList.get(Species.greninjaA).copyBaseHpStat(pokemonList.get(Species.greninja));
+        pokemonList.get(Species.meowsticF).copyBaseStats(pokemonList.get(Species.meowstic));
+        pokemonList.get(Species.aegislashB).copyBaseHpStat(pokemonList.get(Species.aegislash));
+        pokemonList.get(Species.hoopaU).copyBaseHpStat(pokemonList.get(Species.hoopa));
         pokemonList.get(Species.morpekoH).copyBaseStats(pokemonList.get(Species.morpeko));
         pokemonList.get(Species.enamorusT).copyBaseHpStat(pokemonList.get(Species.enamorus));
     }
@@ -709,6 +717,19 @@ public abstract class AbstractRomHandler implements RomHandler {
         pokemonList.get(Species.landorusT).copyTypes(pokemonList.get(Species.landorus));
         pokemonList.get(Species.kyuremB).copyTypes(pokemonList.get(Species.kyurem));
         pokemonList.get(Species.kyuremW).copyTypes(pokemonList.get(Species.kyurem));
+        pokemonList.get(Species.greninjaB).copyTypes(pokemonList.get(Species.greninja));
+        pokemonList.get(Species.greninjaA).copyTypes(pokemonList.get(Species.greninja));
+        pokemonList.get(Species.floetteE).copyTypes(pokemonList.get(Species.floette));
+        pokemonList.get(Species.meowsticF).copyTypes(pokemonList.get(Species.meowstic));
+        pokemonList.get(Species.aegislashB).copyTypes(pokemonList.get(Species.aegislash));
+        pokemonList.get(Species.pumpkabooSmall).copyTypes(pokemonList.get(Species.pumpkaboo));
+        pokemonList.get(Species.pumpkabooLarge).copyTypes(pokemonList.get(Species.pumpkaboo));
+        pokemonList.get(Species.pumpkabooSuper).copyTypes(pokemonList.get(Species.pumpkaboo));
+        pokemonList.get(Species.gourgeistSmall).copyTypes(pokemonList.get(Species.gourgeist));
+        pokemonList.get(Species.gourgeistLarge).copyTypes(pokemonList.get(Species.gourgeist));
+        pokemonList.get(Species.gourgeistSuper).copyTypes(pokemonList.get(Species.gourgeist));
+        pokemonList.get(Species.zygarde10).copyTypes(pokemonList.get(Species.zygarde));
+        pokemonList.get(Species.zygardeC).copyTypes(pokemonList.get(Species.zygarde));
         pokemonList.get(Species.morpekoH).copyTypes(pokemonList.get(Species.morpeko));
         pokemonList.get(Species.enamorusT).copyTypes(pokemonList.get(Species.enamorus));
     }
@@ -871,6 +892,18 @@ public abstract class AbstractRomHandler implements RomHandler {
         pokemonList.get(Species.palkiaO).copyAbilities(pokemonList.get(Species.palkia));
         pokemonList.get(Species.darmanitanZ).copyAbilities(pokemonList.get(Species.darmanitan));
         pokemonList.get(Species.darmanitanZG).copyAbilities(pokemonList.get(Species.darmanitanG));
+        pokemonList.get(Species.meloettaP).copyAbilities(pokemonList.get(Species.meloetta));
+        pokemonList.get(Species.greninjaA).copyAbilities(pokemonList.get(Species.greninjaB));
+        pokemonList.get(Species.floetteE).copyAbilities(pokemonList.get(Species.floette));
+        pokemonList.get(Species.aegislashB).copyAbilities(pokemonList.get(Species.aegislash));
+        pokemonList.get(Species.pumpkabooSmall).copyAbilities(pokemonList.get(Species.pumpkaboo));
+        pokemonList.get(Species.pumpkabooLarge).copyAbilities(pokemonList.get(Species.pumpkaboo));
+        pokemonList.get(Species.pumpkabooSuper).copyAbilities(pokemonList.get(Species.pumpkaboo));
+        pokemonList.get(Species.gourgeistSmall).copyAbilities(pokemonList.get(Species.gourgeist));
+        pokemonList.get(Species.gourgeistLarge).copyAbilities(pokemonList.get(Species.gourgeist));
+        pokemonList.get(Species.gourgeistSuper).copyAbilities(pokemonList.get(Species.gourgeist));
+        pokemonList.get(Species.zygarde10).copyAbilities(pokemonList.get(Species.zygarde));
+        pokemonList.get(Species.hoopaU).copyAbilities(pokemonList.get(Species.hoopa));
         pokemonList.get(Species.morpekoH).copyAbilities(pokemonList.get(Species.morpeko));
     }
 
@@ -2181,6 +2214,7 @@ public abstract class AbstractRomHandler implements RomHandler {
                 bannedList.add(getPokemon().get(Species.pikachuCap));
                 bannedList.add(getPokemon().get(Species.pichuSpiky));
                 bannedList.add(getPokemon().get(Species.cherrimS));
+                bannedList.add(getPokemon().get(Species.greninjaB));
                 bannedList.add(getPokemon().get(Species.morpekoH));
                 if (!abilitiesAreRandomized) {
                     bannedList.add(getPokemon().get(Species.castformF));
@@ -3968,12 +4002,24 @@ public abstract class AbstractRomHandler implements RomHandler {
         copyMoveset(ms, Species.dialga, Species.dialgaO);
         copyMoveset(ms, Species.palkia, Species.palkiaO);
         copyMoveset(ms, Species.giratina, Species.giratinaO);
-        copyMoveset(ms, Species.basculinB, Species.basculin);
-        copyMoveset(ms, Species.tornadusT, Species.tornadus);
-        copyMoveset(ms, Species.thundurusT, Species.thundurus);
-        copyMoveset(ms, Species.landorusT, Species.landorus);
+        copyMoveset(ms, Species.basculin, Species.basculinB);
+        copyMoveset(ms, Species.tornadus, Species.tornadusT);
+        copyMoveset(ms, Species.thundurus, Species.thundurusT);
+        copyMoveset(ms, Species.landorus, Species.landorusT);
+        copyMoveset(ms, Species.meloetta, Species.meloettaP);
+        copyMoveset(ms, Species.greninja, Species.greninjaB);
+        copyMoveset(ms, Species.greninja, Species.greninjaA);
+        copyMoveset(ms, Species.aegislash, Species.aegislashB);
+        copyMoveset(ms, Species.pumpkaboo, Species.pumpkabooSmall);
+        copyMoveset(ms, Species.pumpkaboo, Species.pumpkabooLarge);
+        copyMoveset(ms, Species.pumpkaboo, Species.pumpkabooSuper);
+        copyMoveset(ms, Species.gourgeist, Species.gourgeistSmall);
+        copyMoveset(ms, Species.gourgeist, Species.gourgeistLarge);
+        copyMoveset(ms, Species.gourgeist, Species.gourgeistSuper);
+        copyMoveset(ms, Species.zygarde, Species.zygarde10);
+        copyMoveset(ms, Species.zygarde, Species.zygardeC);
         copyMoveset(ms, Species.morpeko, Species.morpekoH);
-        copyMoveset(ms, Species.enamorusT, Species.enamorus);
+        copyMoveset(ms, Species.enamorus, Species.enamorusT);
 
         // Done, save
         this.setMovesLearnt(movesets);
@@ -4112,8 +4158,11 @@ public abstract class AbstractRomHandler implements RomHandler {
             }
         }
         // cases for certain alt forms
-//        Map<Integer, List<Integer>> em = movesets;
-//        copyEggMoves(em, Species.source, Species.target);
+        Map<Integer, List<Integer>> em = movesets;
+        copyEggMoves(em, Species.basculin, Species.basculinB);
+        copyEggMoves(em, Species.pumpkaboo, Species.pumpkabooSmall);
+        copyEggMoves(em, Species.pumpkaboo, Species.pumpkabooLarge);
+        copyEggMoves(em, Species.pumpkaboo, Species.pumpkabooSuper);
 
         // Done, save
         this.setEggMoves(movesets);
@@ -4436,6 +4485,7 @@ public abstract class AbstractRomHandler implements RomHandler {
         banned.add(pokemonList.get(Species.burmyT));
         banned.add(pokemonList.get(Species.cherrimS));
         banned.add(pokemonList.get(Species.shayminS));
+        banned.add(pokemonList.get(Species.greninjaB));
         banned.add(pokemonList.get(Species.morpekoH));
         if (abilitiesUnchanged) {
             banned.add(pokemonList.get(Species.castformF));
@@ -5056,12 +5106,24 @@ public abstract class AbstractRomHandler implements RomHandler {
         copyTMHMTutorCompatibility(compat, pokemonList.get(Species.dialga), pokemonList.get(Species.dialgaO));
         copyTMHMTutorCompatibility(compat, pokemonList.get(Species.palkia), pokemonList.get(Species.palkiaO));
         copyTMHMTutorCompatibility(compat, pokemonList.get(Species.giratina), pokemonList.get(Species.giratinaO));
-        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.basculinB), pokemonList.get(Species.basculin));
-        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.tornadusT), pokemonList.get(Species.tornadus));
-        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.thundurusT), pokemonList.get(Species.thundurus));
-        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.landorusT), pokemonList.get(Species.landorus));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.basculin), pokemonList.get(Species.basculinB));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.tornadus), pokemonList.get(Species.tornadusT));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.thundurus), pokemonList.get(Species.thundurusT));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.landorus), pokemonList.get(Species.landorusT));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.meloetta), pokemonList.get(Species.meloettaP));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.greninja), pokemonList.get(Species.greninjaB));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.greninja), pokemonList.get(Species.greninjaA));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.aegislash), pokemonList.get(Species.aegislashB));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.pumpkaboo), pokemonList.get(Species.pumpkabooSmall));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.pumpkaboo), pokemonList.get(Species.pumpkabooLarge));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.pumpkaboo), pokemonList.get(Species.pumpkabooSuper));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.gourgeist), pokemonList.get(Species.gourgeistSmall));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.gourgeist), pokemonList.get(Species.gourgeistLarge));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.gourgeist), pokemonList.get(Species.gourgeistSuper));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.zygarde), pokemonList.get(Species.zygarde10));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.zygarde), pokemonList.get(Species.zygardeC));
         copyTMHMTutorCompatibility(compat, pokemonList.get(Species.morpeko), pokemonList.get(Species.morpekoH));
-        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.enamorusT), pokemonList.get(Species.enamorus));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.enamorus), pokemonList.get(Species.enamorusT));
 
         // Set the new compatibility
         this.setTMHMCompatibility(compat);
@@ -5408,12 +5470,24 @@ public abstract class AbstractRomHandler implements RomHandler {
         copyTMHMTutorCompatibility(compat, pokemonList.get(Species.dialga), pokemonList.get(Species.dialgaO));
         copyTMHMTutorCompatibility(compat, pokemonList.get(Species.palkia), pokemonList.get(Species.palkiaO));
         copyTMHMTutorCompatibility(compat, pokemonList.get(Species.giratina), pokemonList.get(Species.giratinaO));
-        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.basculinB), pokemonList.get(Species.basculin));
-        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.tornadusT), pokemonList.get(Species.tornadus));
-        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.thundurusT), pokemonList.get(Species.thundurus));
-        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.landorusT), pokemonList.get(Species.landorus));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.basculin), pokemonList.get(Species.basculinB));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.tornadus), pokemonList.get(Species.tornadusT));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.thundurus), pokemonList.get(Species.thundurusT));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.landorus), pokemonList.get(Species.landorusT));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.meloetta), pokemonList.get(Species.meloettaP));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.greninja), pokemonList.get(Species.greninjaB));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.greninja), pokemonList.get(Species.greninjaA));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.aegislash), pokemonList.get(Species.aegislashB));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.pumpkaboo), pokemonList.get(Species.pumpkabooSmall));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.pumpkaboo), pokemonList.get(Species.pumpkabooLarge));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.pumpkaboo), pokemonList.get(Species.pumpkabooSuper));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.gourgeist), pokemonList.get(Species.gourgeistSmall));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.gourgeist), pokemonList.get(Species.gourgeistLarge));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.gourgeist), pokemonList.get(Species.gourgeistSuper));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.zygarde), pokemonList.get(Species.zygarde10));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.zygarde), pokemonList.get(Species.zygardeC));
         copyTMHMTutorCompatibility(compat, pokemonList.get(Species.morpeko), pokemonList.get(Species.morpekoH));
-        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.enamorusT), pokemonList.get(Species.enamorus));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.enamorus), pokemonList.get(Species.enamorusT));
 
         // Set the new compatibility
         this.setMoveTutorCompatibility(compat);
@@ -6068,6 +6142,7 @@ public abstract class AbstractRomHandler implements RomHandler {
         banned.add(pokemonList.get(Species.burmyT));
         banned.add(pokemonList.get(Species.cherrimS));
         banned.add(pokemonList.get(Species.shayminS));
+        banned.add(pokemonList.get(Species.greninjaB));
         banned.add(pokemonList.get(Species.morpekoH));
         if (!abilitiesAreRandomized) {
             List<Pokemon> abilityDependentFormes = getAbilityDependentFormes();
@@ -6119,6 +6194,19 @@ public abstract class AbstractRomHandler implements RomHandler {
                 Pokemon fromPkmn = findPokemonInPoolWithSpeciesID(pokemonPool, j);
                 if (fromPkmn == null) continue;
                 for (int k : wormadamFormes) {
+                    Pokemon toPkmn = findPokemonInPoolWithSpeciesID(pokemonPool, k);
+                    if (toPkmn != null) {
+                        oldEvoPairs.add(new EvolutionPair(fromPkmn, toPkmn));
+                    }
+                }
+            }
+            // case for pumpkaboo
+            int[] pumpkabooFormes = { Species.pumpkaboo, Species.pumpkabooSmall, Species.pumpkabooLarge, Species.pumpkabooSuper };
+            int[] gourgeistFormes = { Species.gourgeist, Species.gourgeistSmall, Species.gourgeistLarge, Species.gourgeistSuper };
+            for (int j : pumpkabooFormes) {
+                Pokemon fromPkmn = findPokemonInPoolWithSpeciesID(pokemonPool, j);
+                if (fromPkmn == null) continue;
+                for (int k : gourgeistFormes) {
                     Pokemon toPkmn = findPokemonInPoolWithSpeciesID(pokemonPool, k);
                     if (toPkmn != null) {
                         oldEvoPairs.add(new EvolutionPair(fromPkmn, toPkmn));
@@ -6354,6 +6442,32 @@ public abstract class AbstractRomHandler implements RomHandler {
                         if (toPkmn != null) {
                             oldEvoPairs.add(new EvolutionPair(ev.from, toPkmn));
                         }
+                    }
+                }
+            }
+            // case for burmy
+            int[] burmyFormes = { Species.burmy, Species.burmyS, Species.burmyT };
+            int[] wormadamFormes = { Species.wormadam, Species.wormadamS, Species.wormadamT };
+            for (int j : burmyFormes) {
+                Pokemon fromPkmn = findPokemonInPoolWithSpeciesID(pokemonPool, j);
+                if (fromPkmn == null) continue;
+                for (int k : wormadamFormes) {
+                    Pokemon toPkmn = findPokemonInPoolWithSpeciesID(pokemonPool, k);
+                    if (toPkmn != null) {
+                        oldEvoPairs.add(new EvolutionPair(fromPkmn, toPkmn));
+                    }
+                }
+            }
+            // case for pumpkaboo
+            int[] pumpkabooFormes = { Species.pumpkaboo, Species.pumpkabooSmall, Species.pumpkabooLarge, Species.pumpkabooSuper };
+            int[] gourgeistFormes = { Species.gourgeist, Species.gourgeistSmall, Species.gourgeistLarge, Species.gourgeistSuper };
+            for (int j : pumpkabooFormes) {
+                Pokemon fromPkmn = findPokemonInPoolWithSpeciesID(pokemonPool, j);
+                if (fromPkmn == null) continue;
+                for (int k : gourgeistFormes) {
+                    Pokemon toPkmn = findPokemonInPoolWithSpeciesID(pokemonPool, k);
+                    if (toPkmn != null) {
+                        oldEvoPairs.add(new EvolutionPair(fromPkmn, toPkmn));
                     }
                 }
             }

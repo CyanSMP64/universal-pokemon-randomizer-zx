@@ -1806,6 +1806,7 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
         banned.add(pokes[Species.cherrimS]);
         banned.add(pokes[Species.shayminS]);
         banned.add(pokes[Species.greninjaB]);
+        banned.add(pokes[Species.hoopaU]);
         banned.add(pokes[Species.morpekoH]);
         if (!abilitiesAreRandomized) {
             banned.add(pokes[Species.castformF]);
@@ -1826,6 +1827,7 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
         banned.add(pokes[Species.cherrimS]);
         banned.add(pokes[Species.shayminS]);
         banned.add(pokes[Species.greninjaB]);
+        banned.add(pokes[Species.hoopaU]);
         banned.add(pokes[Species.morpekoH]);
         if (!abilitiesAreRandomized) {
             banned.add(pokes[Species.castformF]);

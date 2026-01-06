@@ -4486,6 +4486,7 @@ public abstract class AbstractRomHandler implements RomHandler {
         banned.add(pokemonList.get(Species.cherrimS));
         banned.add(pokemonList.get(Species.shayminS));
         banned.add(pokemonList.get(Species.greninjaB));
+        banned.add(pokemonList.get(Species.hoopaU));
         banned.add(pokemonList.get(Species.morpekoH));
         if (abilitiesUnchanged) {
             banned.add(pokemonList.get(Species.castformF));
@@ -6143,6 +6144,7 @@ public abstract class AbstractRomHandler implements RomHandler {
         banned.add(pokemonList.get(Species.cherrimS));
         banned.add(pokemonList.get(Species.shayminS));
         banned.add(pokemonList.get(Species.greninjaB));
+        banned.add(pokemonList.get(Species.hoopaU));
         banned.add(pokemonList.get(Species.morpekoH));
         if (!abilitiesAreRandomized) {
             List<Pokemon> abilityDependentFormes = getAbilityDependentFormes();

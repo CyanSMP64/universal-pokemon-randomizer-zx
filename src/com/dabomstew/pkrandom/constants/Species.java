@@ -1235,6 +1235,7 @@ public class Species {
     public static final int terapagosT = 1209;
     public static final int terapagosS = 1210;
     public static final int greninjaB = 1211;
+    public static final int squawkabillyW = 1212;
 
     public static final class Gen4Formes {
         public static final int deoxysA = 494;

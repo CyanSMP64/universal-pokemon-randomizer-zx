@@ -1800,6 +1800,8 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
         boolean abilitiesAreRandomized = settings.getAbilitiesMod() == Settings.AbilitiesMod.RANDOMIZE;
         List<Pokemon> banned = new ArrayList<>();
         banned.add(pokes[Species.pikachuCap]);
+        banned.add(pokes[Species.pikachuPartner]);
+        banned.add(pokes[Species.eeveePartner]);
         banned.add(pokes[Species.pichuSpiky]);
         banned.add(pokes[Species.burmyS]);
         banned.add(pokes[Species.burmyT]);
@@ -1821,6 +1823,8 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
         boolean abilitiesAreRandomized = settings.getAbilitiesMod() == Settings.AbilitiesMod.RANDOMIZE;
         List<Pokemon> banned = new ArrayList<>();
         banned.add(pokes[Species.pikachuCap]);
+        banned.add(pokes[Species.pikachuPartner]);
+        banned.add(pokes[Species.eeveePartner]);
         banned.add(pokes[Species.pichuSpiky]);
         banned.add(pokes[Species.burmyS]);
         banned.add(pokes[Species.burmyT]);

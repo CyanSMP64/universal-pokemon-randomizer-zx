@@ -458,6 +458,7 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
         loadPokedex();
         loadPokemonStats();
         constructPokemonList();
+        applyFormeSuffixes();
         populateEvolutions();
         loadMoves();
 
@@ -809,6 +810,26 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
                 deoxys.speed = readWord(offset + 6);
                 deoxys.spatk = readWord(offset + 8);
                 deoxys.spdef = readWord(offset + 10);
+            }
+        }
+//
+//        // Apply form suffixes for mega evolutions and other forms
+//        applyFormeSuffixes();
+    }
+
+    private void applyFormeSuffixes() {
+        for (int pokeNum = 1; pokeNum < pokes.length; pokeNum++) {
+            if (pokes[pokeNum] != null && Gen3Constants.formeSuffixes.containsKey(pokeNum)) {
+                pokes[pokeNum].formeSuffix = Gen3Constants.formeSuffixes.get(pokeNum);
+            }
+        }
+        // Also apply to pokesInternal since evolution code references it
+        for (int internalNum = 1; internalNum < pokesInternal.length; internalNum++) {
+            if (pokesInternal[internalNum] != null) {
+                int pokedexNum = internalToPokedex[internalNum];
+                if (Gen3Constants.formeSuffixes.containsKey(pokedexNum)) {
+                    pokesInternal[internalNum].formeSuffix = Gen3Constants.formeSuffixes.get(pokedexNum);
+                }
             }
         }
     }
@@ -1897,6 +1918,7 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
                     thisPoke.monIsShiny = (readWord(pointerToPokes + poke * 8 + 3) & 0x04) >> 2;
                     thisPoke.forcedGenderFlag = (readWord(pointerToPokes + poke * 8 + 3) & 0x38) >> 3;
                     thisPoke.pokemon = pokesInternal[readWord(pointerToPokes + poke * 8 + 4)];
+                    thisPoke.formeSuffix = thisPoke.pokemon.formeSuffix;
                     tr.pokemon.add(thisPoke);
                 }
             } else if (pokeDataType == 2) {
@@ -1909,6 +1931,7 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
                     thisPoke.monIsShiny = (readWord(pointerToPokes + poke * 8 + 3) & 0x04) >> 2;
                     thisPoke.forcedGenderFlag = (readWord(pointerToPokes + poke * 8 + 3) & 0x38) >> 3;
                     thisPoke.pokemon = pokesInternal[readWord(pointerToPokes + poke * 8 + 4)];
+                    thisPoke.formeSuffix = thisPoke.pokemon.formeSuffix;
                     thisPoke.heldItem = readWord(pointerToPokes + poke * 8 + 6);
                     tr.pokemon.add(thisPoke);
                 }
@@ -1922,6 +1945,7 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
                     thisPoke.monIsShiny = (readWord(pointerToPokes + poke * 16 + 3) & 0x04) >> 2;
                     thisPoke.forcedGenderFlag = (readWord(pointerToPokes + poke * 8 + 3) & 0x38) >> 3;
                     thisPoke.pokemon = pokesInternal[readWord(pointerToPokes + poke * 16 + 4)];
+                    thisPoke.formeSuffix = thisPoke.pokemon.formeSuffix;
                     for (int move = 0; move < 4; move++) {
                         thisPoke.moves[move] = readWord(pointerToPokes + poke * 16 + 6 + (move*2));
                     }
@@ -1937,6 +1961,7 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
                     thisPoke.monIsShiny = (readWord(pointerToPokes + poke * 16 + 3) & 0x04) >> 2;
                     thisPoke.forcedGenderFlag = (readWord(pointerToPokes + poke * 8 + 3) & 0x38) >> 3;
                     thisPoke.pokemon = pokesInternal[readWord(pointerToPokes + poke * 16 + 4)];
+                    thisPoke.formeSuffix = thisPoke.pokemon.formeSuffix;
                     thisPoke.heldItem = readWord(pointerToPokes + poke * 16 + 6);
                     for (int move = 0; move < 4; move++) {
                         thisPoke.moves[move] = readWord(pointerToPokes + poke * 16 + 8 + (move*2));
@@ -3187,6 +3212,7 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
                     int extraInfo = readWord(evoOffset + j * 8 + 2);
                     EvolutionType et = EvolutionType.fromIndex(3, method);
                     Evolution evo = new Evolution(pk, pokesInternal[evolvingTo], true, et, extraInfo);
+                    evo.formeSuffix = pokesInternal[evolvingTo].formeSuffix;
                     if (!pk.evolutionsFrom.contains(evo)) {
                         pk.evolutionsFrom.add(evo);
                         pokesInternal[evolvingTo].evolutionsTo.add(evo);

@@ -60,8 +60,8 @@ public class Gen3Constants {
     public static final String rseMapLabelsPointerPrefix = "C078288030BC01BC00470000";
 
     public static final String pokedexOrderPointerPrefix = "F5D10548814209D0481C0004000C06E0";
-// vanilla : 0448814208D0481C0004000C05E00000
-// modified: F5D10548814209D0481C0004000C06E0
+    // vanilla : 0448814208D0481C0004000C05E00000
+    // modified: F5D10548814209D0481C0004000C06E0
 
     public static final String rsFrontSpritesPointerPrefix = "05E0";
 
@@ -239,6 +239,8 @@ public class Gen3Constants {
             Abilities.embodyAspectHearthflameMask, Abilities.embodyAspectWellspringMask, Abilities.embodyAspectCornerstoneMask,
             Abilities.toxicChain, Abilities.supersweetSyrup, Abilities.teraShift, Abilities.teraShell, Abilities.teraformZero,
             Abilities.poisonPuppeteer);
+
+    public static final Map<Integer,String> formeSuffixes = setupFormeSuffixes();
 
     public static final int frlgMapLabelsStart = 0x58;
 
@@ -560,10 +562,10 @@ public class Gen3Constants {
     }
 
     private static void setupAllowedItems() {
-        allowedItems = new ItemList(Gen3Items.gracidea);
+        allowedItems = new ItemList(Gen3Items.prisonBottle);
         // Key items (+1 unknown item)
         allowedItems.banRange(Gen3Items.machBike, 30);
-        allowedItems.banRange(Gen3Items.oaksParcel, 29);
+        allowedItems.banRange(Gen3Items.oaksParcel, 30);
         // Unknown blank items
         allowedItems.banRange(Gen3Items.unknown53, 10);
         allowedItems.banRange(Gen3Items.unknown87, 2);
@@ -1377,5 +1379,198 @@ public class Gen3Constants {
             {Gen3Items.magmaEmblem, 0},
             {Gen3Items.oldSeaMap, 0},
             {Gen3Items.gracidea, 0},
+            {Gen3Items.prisonBottle, 0},
     }).collect(Collectors.toMap(kv -> kv[0], kv -> kv[1]));
+
+    private static Map<Integer,String> setupFormeSuffixes() {
+        Map<Integer,String> formeSuffixes = new HashMap<>();
+        formeSuffixes.put(Species.venusaurMega, "-M");
+        formeSuffixes.put(Species.charizardMegaX, "-X");
+        formeSuffixes.put(Species.charizardMegaY, "-Y");
+        formeSuffixes.put(Species.blastoiseMega, "-M");
+        formeSuffixes.put(Species.beedrillMega, "-M");
+        formeSuffixes.put(Species.pidgeotMega, "-M");
+        formeSuffixes.put(Species.alakazamMega, "-M");
+        formeSuffixes.put(Species.slowbroMega, "-M");
+        formeSuffixes.put(Species.gengarMega, "-M");
+        formeSuffixes.put(Species.kangaskhanMega, "-M");
+        formeSuffixes.put(Species.pinsirMega, "-M");
+        formeSuffixes.put(Species.gyaradosMega, "-M");
+        formeSuffixes.put(Species.aerodactylMega, "-M");
+        formeSuffixes.put(Species.mewtwoMegaX, "-X");
+        formeSuffixes.put(Species.mewtwoMegaY, "-Y");
+        formeSuffixes.put(Species.ampharosMega, "-M");
+        formeSuffixes.put(Species.steelixMega, "-M");
+        formeSuffixes.put(Species.scizorMega, "-M");
+        formeSuffixes.put(Species.heracrossMega, "-M");
+        formeSuffixes.put(Species.houndoomMega, "-M");
+        formeSuffixes.put(Species.tyranitarMega, "-M");
+        formeSuffixes.put(Species.sceptileMega, "-M");
+        formeSuffixes.put(Species.blazikenMega, "-M");
+        formeSuffixes.put(Species.swampertMega, "-M");
+        formeSuffixes.put(Species.gardevoirMega, "-M");
+        formeSuffixes.put(Species.sableyeMega, "-M");
+        formeSuffixes.put(Species.mawileMega, "-M");
+        formeSuffixes.put(Species.aggronMega, "-M");
+        formeSuffixes.put(Species.medichamMega, "-M");
+        formeSuffixes.put(Species.manectricMega, "-M");
+        formeSuffixes.put(Species.sharpedoMega, "-M");
+        formeSuffixes.put(Species.cameruptMega, "-M");
+        formeSuffixes.put(Species.altariaMega, "-M");
+        formeSuffixes.put(Species.banetteMega, "-M");
+        formeSuffixes.put(Species.absolMega, "-M");
+        formeSuffixes.put(Species.glalieMega, "-M");
+        formeSuffixes.put(Species.salamenceMega, "-M");
+        formeSuffixes.put(Species.metagrossMega, "-M");
+        formeSuffixes.put(Species.latiasMega, "-M");
+        formeSuffixes.put(Species.latiosMega, "-M");
+        formeSuffixes.put(Species.lopunnyMega, "-M");
+        formeSuffixes.put(Species.garchompMega, "-M");
+        formeSuffixes.put(Species.lucarioMega, "-M");
+        formeSuffixes.put(Species.abomasnowMega, "-M");
+        formeSuffixes.put(Species.galladeMega, "-M");
+        formeSuffixes.put(Species.audinoMega, "-M");
+        formeSuffixes.put(Species.diancieMega, "-M");
+        formeSuffixes.put(Species.rayquazaMega, "-M");
+        formeSuffixes.put(Species.kyogreP, "-P");
+        formeSuffixes.put(Species.groudonP, "-P");
+        formeSuffixes.put(Species.rattataA, "-A");
+        formeSuffixes.put(Species.raticateA, "-A");
+        formeSuffixes.put(Species.raichuA, "-A");
+        formeSuffixes.put(Species.sandshrewA, "-A");
+        formeSuffixes.put(Species.sandslashA, "-A");
+        formeSuffixes.put(Species.vulpixA, "-A");
+        formeSuffixes.put(Species.ninetalesA, "-A");
+        formeSuffixes.put(Species.diglettA, "-A");
+        formeSuffixes.put(Species.dugtrioA, "-A");
+        formeSuffixes.put(Species.meowthA, "-A");
+        formeSuffixes.put(Species.persianA, "-A");
+        formeSuffixes.put(Species.geodudeA, "-A");
+        formeSuffixes.put(Species.gravelerA, "-A");
+        formeSuffixes.put(Species.golemA, "-A");
+        formeSuffixes.put(Species.grimerA, "-A");
+        formeSuffixes.put(Species.mukA, "-A");
+        formeSuffixes.put(Species.exeggutorA, "-A");
+        formeSuffixes.put(Species.marowakA, "-A");
+        formeSuffixes.put(Species.meowthG, "-G");
+        formeSuffixes.put(Species.ponytaG, "-G");
+        formeSuffixes.put(Species.rapidashG, "-G");
+        formeSuffixes.put(Species.slowpokeG, "-G");
+        formeSuffixes.put(Species.slowbroG, "-G");
+        formeSuffixes.put(Species.farfetchdG, "-G");
+        formeSuffixes.put(Species.weezingG, "-G");
+        formeSuffixes.put(Species.mrMimeG, "-G");
+        formeSuffixes.put(Species.articunoG, "-G");
+        formeSuffixes.put(Species.zapdogG, "-G");
+        formeSuffixes.put(Species.moltresG, "-G");
+        formeSuffixes.put(Species.slowkingG, "-G");
+        formeSuffixes.put(Species.corsolaG, "-G");
+        formeSuffixes.put(Species.zigzagoonG, "-G");
+        formeSuffixes.put(Species.linooneG, "-G");
+        formeSuffixes.put(Species.darumakaG, "-G");
+        formeSuffixes.put(Species.darmanitanG, "-G");
+        formeSuffixes.put(Species.yamaskG, "-G");
+        formeSuffixes.put(Species.stunfiskG, "-G");
+        formeSuffixes.put(Species.growlitheH, "-H");
+        formeSuffixes.put(Species.arcanineH, "-H");
+        formeSuffixes.put(Species.voltorbH, "-H");
+        formeSuffixes.put(Species.electrodeH, "-H");
+        formeSuffixes.put(Species.typhlosionH, "-H");
+        formeSuffixes.put(Species.qwilfishH, "-H");
+        formeSuffixes.put(Species.sneaselH, "-H");
+        formeSuffixes.put(Species.samurottH, "-H");
+        formeSuffixes.put(Species.lilligantH, "-H");
+        formeSuffixes.put(Species.zoruaH, "-H");
+        formeSuffixes.put(Species.zoroarkH, "-H");
+        formeSuffixes.put(Species.braviaryH, "-H");
+        formeSuffixes.put(Species.sliggooH, "-H");
+        formeSuffixes.put(Species.goodraH, "-H");
+        formeSuffixes.put(Species.avaluggH, "-H");
+        formeSuffixes.put(Species.decidueyeH, "-H");
+        formeSuffixes.put(Species.taurosP, "-P");
+        formeSuffixes.put(Species.wooperP, "-P");
+        formeSuffixes.put(Species.pikachuCap, "-C");
+        formeSuffixes.put(Species.pikachuPartner, "-P");
+        formeSuffixes.put(Species.taurosPF, "-PF");
+        formeSuffixes.put(Species.taurosPW, "-PW");
+        formeSuffixes.put(Species.eeveePartner, "-P");
+        formeSuffixes.put(Species.pichuSpiky, "-S");
+        formeSuffixes.put(Species.castformF, "-F");
+        formeSuffixes.put(Species.castformW, "-W");
+        formeSuffixes.put(Species.castformI, "-I");
+        formeSuffixes.put(Species.deoxysA, "-A");
+        formeSuffixes.put(Species.deoxysD, "-D");
+        formeSuffixes.put(Species.deoxysS, "-S");
+        formeSuffixes.put(Species.burmyS, "-S");
+        formeSuffixes.put(Species.burmyT, "-T");
+        formeSuffixes.put(Species.wormadamS, "-S");
+        formeSuffixes.put(Species.wormadamT, "-T");
+        formeSuffixes.put(Species.cherrimS, "-S");
+        formeSuffixes.put(Species.rotomH, "-Heat");
+        formeSuffixes.put(Species.rotomW, "-Wash");
+        formeSuffixes.put(Species.rotomFr, "-Frost");
+        formeSuffixes.put(Species.rotomFa, "-Fan");
+        formeSuffixes.put(Species.rotomM, "-Mow");
+        formeSuffixes.put(Species.dialgaO, "-O");
+        formeSuffixes.put(Species.palkiaO, "-O");
+        formeSuffixes.put(Species.giratinaO, "-O");
+        formeSuffixes.put(Species.shayminS, "-S");
+        formeSuffixes.put(Species.basculinB, "-B");
+        formeSuffixes.put(Species.basculinW, "-W");
+        formeSuffixes.put(Species.darmanitanZ, "-Z");
+        formeSuffixes.put(Species.darmanitanZG, "-GZ");
+        formeSuffixes.put(Species.tornadusT, "-T");
+        formeSuffixes.put(Species.thundurusT, "-T");
+        formeSuffixes.put(Species.landorusT, "-T");
+        formeSuffixes.put(Species.kyuremW, "-W");
+        formeSuffixes.put(Species.kyuremB, "-B");
+        formeSuffixes.put(Species.meloettaP, "-P");
+        formeSuffixes.put(Species.greninjaA, "-A");
+        formeSuffixes.put(Species.floetteE, "-E");
+        formeSuffixes.put(Species.meowsticF, "-F");
+        formeSuffixes.put(Species.aegislashB, "-B");
+        formeSuffixes.put(Species.pumpkabooSmall, "-S");
+        formeSuffixes.put(Species.pumpkabooLarge, "-L");
+        formeSuffixes.put(Species.pumpkabooSuper, "-J");
+        formeSuffixes.put(Species.gourgeistSmall, "-S");
+        formeSuffixes.put(Species.gourgeistLarge, "-L");
+        formeSuffixes.put(Species.gourgeistSuper, "-J");
+        formeSuffixes.put(Species.zygarde10, "-10");
+        formeSuffixes.put(Species.zygardeC, "-C");
+        formeSuffixes.put(Species.hoopaU, "-U");
+        formeSuffixes.put(Species.oricorioE, "-E");
+        formeSuffixes.put(Species.oricorioP, "-P");
+        formeSuffixes.put(Species.oricorioG, "-G");
+        formeSuffixes.put(Species.lycanrocM, "-M");
+        formeSuffixes.put(Species.lycanrocD, "-D");
+        formeSuffixes.put(Species.wishiwashiS, "-S");
+        formeSuffixes.put(Species.miniorC, "-C");
+        formeSuffixes.put(Species.necrozmaDM, "-DM");
+        formeSuffixes.put(Species.necrozmaDW, "-DW");
+        formeSuffixes.put(Species.necrozmaU, "-U");
+        formeSuffixes.put(Species.toxtricityL, "-L");
+        formeSuffixes.put(Species.eiscueN, "-N");
+        formeSuffixes.put(Species.indeedeeF, "-F");
+        formeSuffixes.put(Species.morpekoH, "-H");
+        formeSuffixes.put(Species.zacianC, "-C");
+        formeSuffixes.put(Species.zamazentaC, "-C");
+        formeSuffixes.put(Species.eternatusE, "-E");
+        formeSuffixes.put(Species.urshifuR, "-R");
+        formeSuffixes.put(Species.calyrexI, "-I");
+        formeSuffixes.put(Species.calyrexS, "-S");
+        formeSuffixes.put(Species.ursalunaB, "-B");
+        formeSuffixes.put(Species.basculegionF, "-F");
+        formeSuffixes.put(Species.enamorusT, "-T");
+        formeSuffixes.put(Species.oinkologneF, "-F");
+        formeSuffixes.put(Species.palafinH, "-H");
+        formeSuffixes.put(Species.gimmighoulR, "-R");
+        formeSuffixes.put(Species.ogerponW, "-W");
+        formeSuffixes.put(Species.ogerponF, "-F");
+        formeSuffixes.put(Species.ogerponR, "-R");
+        formeSuffixes.put(Species.terapagosT, "-T");
+        formeSuffixes.put(Species.terapagosS, "-S");
+        formeSuffixes.put(Species.greninjaB, "-B");
+        formeSuffixes.put(Species.squawkabillyW, "-W");
+        return formeSuffixes;
+    }
 }

@@ -508,6 +508,11 @@ public abstract class AbstractRomHandler implements RomHandler {
         pokemonList.get(Species.zamazentaC).copyBaseHpStat(pokemonList.get(Species.zamazenta));
         pokemonList.get(Species.urshifuR).copyBaseStats(pokemonList.get(Species.urshifu));
         pokemonList.get(Species.enamorusT).copyBaseHpStat(pokemonList.get(Species.enamorus));
+        pokemonList.get(Species.squawkabillyW).copyBaseStats(pokemonList.get(Species.squawkabilly));
+        pokemonList.get(Species.palafinH).copyBaseHpStat(pokemonList.get(Species.palafin));
+        pokemonList.get(Species.ogerponW).copyBaseStats(pokemonList.get(Species.ogerpon));
+        pokemonList.get(Species.ogerponF).copyBaseStats(pokemonList.get(Species.ogerpon));
+        pokemonList.get(Species.ogerponR).copyBaseStats(pokemonList.get(Species.ogerpon));
     }
 
     @Override
@@ -757,6 +762,11 @@ public abstract class AbstractRomHandler implements RomHandler {
         pokemonList.get(Species.basculegionF).copyTypes(pokemonList.get(Species.basculegion));
         pokemonList.get(Species.enamorusT).copyTypes(pokemonList.get(Species.enamorus));
         pokemonList.get(Species.oinkologneF).copyTypes(pokemonList.get(Species.oinkologne));
+        pokemonList.get(Species.squawkabillyW).copyTypes(pokemonList.get(Species.squawkabilly));
+        pokemonList.get(Species.palafinH).copyTypes(pokemonList.get(Species.palafin));
+        pokemonList.get(Species.gimmighoulR).copyTypes(pokemonList.get(Species.gimmighoul));
+        pokemonList.get(Species.terapagosT).copyTypes(pokemonList.get(Species.terapagos));
+        pokemonList.get(Species.terapagosS).copyTypes(pokemonList.get(Species.terapagos));
     }
 
     @Override
@@ -943,6 +953,7 @@ public abstract class AbstractRomHandler implements RomHandler {
         pokemonList.get(Species.eternatusE).copyAbilities(pokemonList.get(Species.eternatus));
         pokemonList.get(Species.basculegionF).copyAbilities(pokemonList.get(Species.basculegion));
         pokemonList.get(Species.urshifuR).copyAbilities(pokemonList.get(Species.urshifu));
+        pokemonList.get(Species.palafinH).copyAbilities(pokemonList.get(Species.palafin));
     }
 
     private int pickRandomAbility(int maxAbility, List<Integer> bannedAbilities, boolean useVariations,
@@ -4073,6 +4084,14 @@ public abstract class AbstractRomHandler implements RomHandler {
         copyMoveset(ms, Species.eternatus, Species.eternatusE);
         copyMoveset(ms, Species.basculegion, Species.basculegionF);
         copyMoveset(ms, Species.enamorus, Species.enamorusT);
+        copyMoveset(ms, Species.squawkabilly, Species.squawkabillyW);
+        copyMoveset(ms, Species.palafin, Species.palafinH);
+        copyMoveset(ms, Species.gimmighoul, Species.gimmighoulR);
+        copyMoveset(ms, Species.ogerpon, Species.ogerponF);
+        copyMoveset(ms, Species.ogerpon, Species.ogerponR);
+        copyMoveset(ms, Species.ogerpon, Species.ogerponW);
+        copyMoveset(ms, Species.terapagos, Species.terapagosT);
+        copyMoveset(ms, Species.terapagos, Species.terapagosS);
 
         // Done, save
         this.setMovesLearnt(movesets);
@@ -5196,6 +5215,14 @@ public abstract class AbstractRomHandler implements RomHandler {
         copyTMHMTutorCompatibility(compat, pokemonList.get(Species.eternatus), pokemonList.get(Species.eternatusE));
         copyTMHMTutorCompatibility(compat, pokemonList.get(Species.basculegion), pokemonList.get(Species.basculegionF));
         copyTMHMTutorCompatibility(compat, pokemonList.get(Species.enamorus), pokemonList.get(Species.enamorusT));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.squawkabilly), pokemonList.get(Species.squawkabillyW));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.palafin), pokemonList.get(Species.palafinH));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.gimmighoul), pokemonList.get(Species.gimmighoulR));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.ogerpon), pokemonList.get(Species.ogerponF));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.ogerpon), pokemonList.get(Species.ogerponR));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.ogerpon), pokemonList.get(Species.ogerponW));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.terapagos), pokemonList.get(Species.terapagosT));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.terapagos), pokemonList.get(Species.terapagosS));
 
         // Set the new compatibility
         this.setTMHMCompatibility(compat);
@@ -5573,6 +5600,14 @@ public abstract class AbstractRomHandler implements RomHandler {
         copyTMHMTutorCompatibility(compat, pokemonList.get(Species.eternatus), pokemonList.get(Species.eternatusE));
         copyTMHMTutorCompatibility(compat, pokemonList.get(Species.basculegion), pokemonList.get(Species.basculegionF));
         copyTMHMTutorCompatibility(compat, pokemonList.get(Species.enamorus), pokemonList.get(Species.enamorusT));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.squawkabilly), pokemonList.get(Species.squawkabillyW));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.palafin), pokemonList.get(Species.palafinH));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.gimmighoul), pokemonList.get(Species.gimmighoulR));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.ogerpon), pokemonList.get(Species.ogerponF));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.ogerpon), pokemonList.get(Species.ogerponR));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.ogerpon), pokemonList.get(Species.ogerponW));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.terapagos), pokemonList.get(Species.terapagosT));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.terapagos), pokemonList.get(Species.terapagosS));
 
         // Set the new compatibility
         this.setMoveTutorCompatibility(compat);
@@ -6452,10 +6487,10 @@ public abstract class AbstractRomHandler implements RomHandler {
 
                     // Step 4: add it to the new evos pool
                     Evolution newEvo = new Evolution(fromPK, picked, ev.carryStats, ev.type, ev.extraInfo);
+                    newEvo.formeSuffix = picked.formeSuffix;
                     boolean checkCosmetics = true;
                     if (picked.formeNumber > 0) {
                         newEvo.forme = picked.formeNumber;
-                        newEvo.formeSuffix = picked.formeSuffix;
                         checkCosmetics = false;
                     }
                     if (checkCosmetics && newEvo.to.cosmeticForms > 0) {
@@ -6644,10 +6679,10 @@ public abstract class AbstractRomHandler implements RomHandler {
                 // Step 4: create new level 1 evo and add it to the new evos pool
                 Evolution newEvo = new Evolution(fromPK, picked, false, EvolutionType.LEVEL, 1);
                 newEvo.level = 1;
+                newEvo.formeSuffix = picked.formeSuffix;
                 boolean checkCosmetics = true;
                 if (picked.formeNumber > 0) {
                     newEvo.forme = picked.formeNumber;
-                    newEvo.formeSuffix = picked.formeSuffix;
                     checkCosmetics = false;
                 }
                 if (checkCosmetics && newEvo.to.cosmeticForms > 0) {

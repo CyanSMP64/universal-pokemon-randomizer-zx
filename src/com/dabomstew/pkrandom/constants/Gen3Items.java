@@ -410,4 +410,5 @@ public class Gen3Items {
 
     /* Exclusive to nat dex */
     public static final int gracidea = 377;
+    public static final int prisonBottle = 378;
 }

@@ -56,6 +56,7 @@ public abstract class AbstractRomHandler implements RomHandler {
     private Map<Pokemon, Integer> placementHistory = new HashMap<>();
     private Map<Integer, Integer> itemPlacementHistory = new HashMap<>();
     private int fullyEvolvedRandomSeed;
+    private Map<Integer, Double> speciesWeights;
     boolean isORAS = false;
     boolean isSM = false;
     int perfectAccuracy = 100;
@@ -67,17 +68,173 @@ public abstract class AbstractRomHandler implements RomHandler {
         this.cosmeticRandom = RandomSource.cosmeticInstance();
         this.fullyEvolvedRandomSeed = -1;
         this.logStream = logStream;
+        initializeSpeciesWeights(null);
     }
 
     /*
      * Public Methods, implemented here for all gens. Unlikely to be overridden.
      */
 
+    private void initializeSpeciesWeights(Settings settings) {
+        boolean abilitiesAreRandomized = settings != null && settings.getAbilitiesMod() == Settings.AbilitiesMod.RANDOMIZE;
+
+        speciesWeights = new HashMap<>();
+        // all mon forms with same bst as base (except regional forms) have a weighted probability of being rolled
+        // pumpkaboo, gourgeist, gimmighoul, aegislash, toxtricity, eiscue and gendered forms except oinkologne have lower probability, with the weightings of all forms summing to 1
+        speciesWeights.put(Species.taurosP, 0.5);
+        speciesWeights.put(Species.taurosPF, 0.5);
+        speciesWeights.put(Species.taurosPW, 0.5);
+
+        speciesWeights.put(Species.deoxys, 0.5);
+        speciesWeights.put(Species.deoxysA, 0.5);
+        speciesWeights.put(Species.deoxysD, 0.5);
+        speciesWeights.put(Species.deoxysS, 0.5);
+
+        speciesWeights.put(Species.wormadam, 0.5);
+        speciesWeights.put(Species.wormadamS, 0.5);
+        speciesWeights.put(Species.wormadamT, 0.5);
+
+        speciesWeights.put(Species.rotomH, 0.5);
+        speciesWeights.put(Species.rotomW, 0.5);
+        speciesWeights.put(Species.rotomFr, 0.5);
+        speciesWeights.put(Species.rotomFa, 0.5);
+        speciesWeights.put(Species.rotomM, 0.5);
+
+        speciesWeights.put(Species.dialga, 0.75);
+        speciesWeights.put(Species.dialgaO, 0.75);
+
+        speciesWeights.put(Species.palkia, 0.75);
+        speciesWeights.put(Species.palkiaO, 0.75);
+
+        speciesWeights.put(Species.giratina, 0.75);
+        speciesWeights.put(Species.giratinaO, 0.75);
+
+        // white striped basculin is not weighted since it evolves
+        speciesWeights.put(Species.basculin, 0.5);
+        speciesWeights.put(Species.basculinB, 0.5);
+
+        speciesWeights.put(Species.tornadus, 0.75);
+        speciesWeights.put(Species.tornadusT, 0.75);
+
+        speciesWeights.put(Species.thundurus, 0.75);
+        speciesWeights.put(Species.thundurusT, 0.75);
+
+        speciesWeights.put(Species.landorus, 0.75);
+        speciesWeights.put(Species.landorusT, 0.75);
+
+        speciesWeights.put(Species.kyuremW, 0.75);
+        speciesWeights.put(Species.kyuremB, 0.75);
+
+        // remove when relic song is implemented
+        speciesWeights.put(Species.meloetta, 0.75);
+        speciesWeights.put(Species.meloettaP, 0.75);
+
+        speciesWeights.put(Species.meowstic, 0.5);
+        speciesWeights.put(Species.meowsticF, 0.5);
+
+        speciesWeights.put(Species.meowsticMega, 0.5);
+        speciesWeights.put(Species.meowsticFMega, 0.5);
+
+        // move to `if (abilitiesAreRandomized)` when stance change is implemented
+        speciesWeights.put(Species.aegislash, 0.5);
+        speciesWeights.put(Species.aegislashB, 0.5);
+
+        speciesWeights.put(Species.pumpkaboo, 0.25);
+        speciesWeights.put(Species.pumpkabooSmall, 0.25);
+        speciesWeights.put(Species.pumpkabooLarge, 0.25);
+        speciesWeights.put(Species.pumpkabooSuper, 0.25);
+
+        speciesWeights.put(Species.gourgeist, 0.25);
+        speciesWeights.put(Species.gourgeistSmall, 0.25);
+        speciesWeights.put(Species.gourgeistLarge, 0.25);
+        speciesWeights.put(Species.gourgeistSuper, 0.25);
+
+        speciesWeights.put(Species.oricorio, 0.5);
+        speciesWeights.put(Species.oricorioE, 0.5);
+        speciesWeights.put(Species.oricorioP, 0.5);
+        speciesWeights.put(Species.oricorioG, 0.5);
+
+        speciesWeights.put(Species.lycanroc, 0.5);
+        speciesWeights.put(Species.lycanrocM, 0.5);
+        speciesWeights.put(Species.lycanrocD, 0.5);
+
+        speciesWeights.put(Species.toxtricity, 0.5);
+        speciesWeights.put(Species.toxtricityL, 0.5);
+
+        // move to `if (abilitiesAreRandomized)` when ice face is implemented
+        speciesWeights.put(Species.eiscue, 0.5);
+        speciesWeights.put(Species.eiscueN, 0.5);
+
+        speciesWeights.put(Species.indeedee, 0.5);
+        speciesWeights.put(Species.indeedeeF, 0.5);
+
+        speciesWeights.put(Species.urshifu, 0.75);
+        speciesWeights.put(Species.urshifuR, 0.75);
+
+        speciesWeights.put(Species.calyrexI, 0.75);
+        speciesWeights.put(Species.calyrexS, 0.75);
+
+        speciesWeights.put(Species.basculegion, 0.5);
+        speciesWeights.put(Species.basculegionF, 0.5);
+
+        speciesWeights.put(Species.enamorus, 0.75);
+        speciesWeights.put(Species.enamorusT, 0.75);
+
+        speciesWeights.put(Species.oinkologne, 0.75);
+        speciesWeights.put(Species.oinkologneF, 0.75);
+
+        speciesWeights.put(Species.squawkabilly, 0.5);
+        speciesWeights.put(Species.squawkabillyW, 0.5);
+
+        speciesWeights.put(Species.gimmighoul, 0.5);
+        speciesWeights.put(Species.gimmighoulR, 0.5);
+
+        speciesWeights.put(Species.ogerpon, 0.5);
+        speciesWeights.put(Species.ogerponW, 0.5);
+        speciesWeights.put(Species.ogerponF, 0.5);
+        speciesWeights.put(Species.ogerponR, 0.5);
+
+        if (abilitiesAreRandomized) {
+            speciesWeights.put(Species.castform, 0.5);
+            speciesWeights.put(Species.castformF, 0.5);
+            speciesWeights.put(Species.castformW, 0.5);
+            speciesWeights.put(Species.castformI, 0.5);
+        }
+    }
+
+    private Pokemon weightedRandomPokemon(List<Pokemon> pool) {
+        if (pool == null || pool.isEmpty()) {
+            return null;
+        }
+        
+        double totalWeight = 0.0;
+        for (Pokemon pk : pool) {
+            double weight = speciesWeights.getOrDefault(pk.number, 1.0);
+            totalWeight += weight;
+        }
+        
+        double randomValue = random.nextDouble() * totalWeight;
+        
+        double currentWeight = 0.0;
+        for (Pokemon pk : pool) {
+            double weight = speciesWeights.getOrDefault(pk.number, 1.0);
+            currentWeight += weight;
+            if (randomValue < currentWeight) {
+                return pk;
+            }
+        }
+        
+        return pool.get(pool.size() - 1);
+    }
+
     public void setLog(PrintStream logStream) {
         this.logStream = logStream;
     }
 
     public void setPokemonPool(Settings settings) {
+        // Reinitialize species weights based on current settings
+        initializeSpeciesWeights(settings);
+        
         GenRestrictions restrictions = null;
         if (settings != null) {
             restrictions = settings.getCurrentRestrictions();
@@ -116,7 +273,7 @@ public abstract class AbstractRomHandler implements RomHandler {
             if (restrictions.allow_gen2 && allPokemon.size() > Gen2Constants.pokemonCount) {
                 addPokesFromRange(mainPokemonList, allPokemon, Species.chikorita, Species.celebi);
                 if (restrictions.allow_mega) {
-                    addPokesFromRange(mainPokemonList, allPokemon, Species.ampharosMega, Species.tyranitarMega);
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.meganiumMega, Species.tyranitarMega);
                 }
                 if (restrictions.allow_regional_forms) {
                     addPokesFromRange(mainPokemonList, allPokemon, Species.slowkingG, Species.corsolaG);
@@ -145,7 +302,7 @@ public abstract class AbstractRomHandler implements RomHandler {
                     addPokesFromRange(mainPokemonList, allPokemon, Species.pichuSpiky, Species.pichuSpiky);
                 }
                 if (restrictions.allow_mega) {
-                    addPokesFromRange(mainPokemonList, allPokemon, Species.lopunnyMega, Species.galladeMega);
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.staraptorMega, Species.darkraiMega);
                 }
             }
 
@@ -155,7 +312,7 @@ public abstract class AbstractRomHandler implements RomHandler {
                 addPokesFromRange(mainPokemonList, allPokemon, Species.darmanitanZ, Species.darmanitanZ);
                 addPokesFromRange(mainPokemonList, allPokemon, Species.tornadusT, Species.meloettaP);
                 if (restrictions.allow_mega) {
-                    addPokesFromRange(mainPokemonList, allPokemon, Species.audinoMega, Species.audinoMega);
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.emboarMega, Species.golurkMega);
                 }
                 if (restrictions.allow_regional_forms) {
                     addPokesFromRange(mainPokemonList, allPokemon, Species.darumakaG, Species.stunfiskG);
@@ -172,7 +329,7 @@ public abstract class AbstractRomHandler implements RomHandler {
                     addPokesFromRange(mainPokemonList, allPokemon, Species.pikachuCap, Species.pikachuCap);
                 }
                 if (restrictions.allow_mega) {
-                    addPokesFromRange(mainPokemonList, allPokemon, Species.diancieMega, Species.diancieMega);
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.chesnaughtMega, Species.diancieMega);
                 }
                 if (restrictions.allow_regional_forms) {
                     addPokesFromRange(mainPokemonList, allPokemon, Species.sliggooH, Species.avaluggH);
@@ -187,12 +344,14 @@ public abstract class AbstractRomHandler implements RomHandler {
                     addPokesFromRange(mainPokemonList, allPokemon, Species.eeveePartner, Species.eeveePartner);
                 }
                 if (restrictions.allow_gen6) {
-                    addPokesFromRange(mainPokemonList, allPokemon, Species.greninjaB, Species.greninjaB);
-                    addPokesFromRange(mainPokemonList, allPokemon, Species.greninjaA, Species.greninjaA);
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.greninjaB, Species.greninjaA);
                     addPokesFromRange(mainPokemonList, allPokemon, Species.zygarde10, Species.zygardeC);
                 }
                 if (restrictions.allow_regional_forms) {
                     addPokesFromRange(mainPokemonList, allPokemon, Species.decidueyeH, Species.decidueyeH);
+                }
+                if (restrictions.allow_mega) {
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.crabominableMega, Species.zeraoraMega);
                 }
             }
 
@@ -210,14 +369,19 @@ public abstract class AbstractRomHandler implements RomHandler {
                 if(restrictions.allow_eternamax) {
                     addPokesFromRange(mainPokemonList, allPokemon, Species.eternatusE, Species.eternatusE);
                 }
+                if (restrictions.allow_mega) {
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.falinksMega, Species.falinksMega);
+                }
             }
 
             if (restrictions.allow_gen9 && allPokemon.size() > 1025) {
                 addPokesFromRange(mainPokemonList, allPokemon, Species.sprigatito, Species.pecharunt);
                 addPokesFromRange(mainPokemonList, allPokemon, Species.oinkologneF, Species.terapagosS);
-                addPokesFromRange(mainPokemonList, allPokemon, Species.squawkabillyW, Species.squawkabillyW);
                 if (restrictions.allow_gen8) {
                     addPokesFromRange(mainPokemonList, allPokemon, Species.ursalunaB, Species.ursalunaB);
+                }
+                if (restrictions.allow_mega) {
+                    addPokesFromRange(mainPokemonList, allPokemon, Species.scovillainMega, Species.baxcaliburMega);
                 }
             }
 
@@ -453,6 +617,51 @@ public abstract class AbstractRomHandler implements RomHandler {
         pokemonList.get(Species.diancieMega).copyBaseHpStat(pokemonList.get(Species.diancie));
         pokemonList.get(Species.kyogreP).copyBaseHpStat(pokemonList.get(Species.kyogre));
         pokemonList.get(Species.groudonP).copyBaseHpStat(pokemonList.get(Species.groudon));
+        pokemonList.get(Species.clefableMega).copyBaseHpStat(pokemonList.get(Species.clefable));
+        pokemonList.get(Species.victreebelMega).copyBaseHpStat(pokemonList.get(Species.victreebel));
+        pokemonList.get(Species.starmieMega).copyBaseHpStat(pokemonList.get(Species.starmie));
+        pokemonList.get(Species.dragoniteMega).copyBaseHpStat(pokemonList.get(Species.dragonite));
+        pokemonList.get(Species.meganiumMega).copyBaseHpStat(pokemonList.get(Species.meganium));
+        pokemonList.get(Species.feraligatrMega).copyBaseHpStat(pokemonList.get(Species.feraligatr));
+        pokemonList.get(Species.skarmoryMega).copyBaseHpStat(pokemonList.get(Species.skarmory));
+        pokemonList.get(Species.froslassMega).copyBaseHpStat(pokemonList.get(Species.froslass));
+        pokemonList.get(Species.emboarMega).copyBaseHpStat(pokemonList.get(Species.emboar));
+        pokemonList.get(Species.excadrillMega).copyBaseHpStat(pokemonList.get(Species.excadrill));
+        pokemonList.get(Species.scolipedeMega).copyBaseHpStat(pokemonList.get(Species.scolipede));
+        pokemonList.get(Species.scraftyMega).copyBaseHpStat(pokemonList.get(Species.scrafty));
+        pokemonList.get(Species.eelektrossMega).copyBaseHpStat(pokemonList.get(Species.eelektross));
+        pokemonList.get(Species.chandelureMega).copyBaseHpStat(pokemonList.get(Species.chandelure));
+        pokemonList.get(Species.chesnaughtMega).copyBaseHpStat(pokemonList.get(Species.chesnaught));
+        pokemonList.get(Species.delphoxMega).copyBaseHpStat(pokemonList.get(Species.delphox));
+        pokemonList.get(Species.greninjaMega).copyBaseHpStat(pokemonList.get(Species.greninja));
+        pokemonList.get(Species.pyroarMega).copyBaseHpStat(pokemonList.get(Species.pyroar));
+        pokemonList.get(Species.floetteMega).copyBaseHpStat(pokemonList.get(Species.floetteE));
+        pokemonList.get(Species.malamarMega).copyBaseHpStat(pokemonList.get(Species.malamar));
+        pokemonList.get(Species.barbaracleMega).copyBaseHpStat(pokemonList.get(Species.barbaracle));
+        pokemonList.get(Species.dragalgeMega).copyBaseHpStat(pokemonList.get(Species.dragalge));
+        pokemonList.get(Species.hawluchaMega).copyBaseHpStat(pokemonList.get(Species.hawlucha));
+        pokemonList.get(Species.zygardeMega).copyBaseHpStat(pokemonList.get(Species.zygardeC));
+        pokemonList.get(Species.drampaMega).copyBaseHpStat(pokemonList.get(Species.drampa));
+        pokemonList.get(Species.falinksMega).copyBaseHpStat(pokemonList.get(Species.falinks));
+        pokemonList.get(Species.raichuMegaX).copyBaseHpStat(pokemonList.get(Species.raichu));
+        pokemonList.get(Species.raichuMegaY).copyBaseHpStat(pokemonList.get(Species.raichu));
+        pokemonList.get(Species.chimechoMega).copyBaseHpStat(pokemonList.get(Species.chimecho));
+        pokemonList.get(Species.absolMegaZ).copyBaseHpStat(pokemonList.get(Species.absol));
+        pokemonList.get(Species.staraptorMega).copyBaseHpStat(pokemonList.get(Species.staraptor));
+        pokemonList.get(Species.garchompMegaZ).copyBaseHpStat(pokemonList.get(Species.garchomp));
+        pokemonList.get(Species.lucarioMegaZ).copyBaseHpStat(pokemonList.get(Species.lucario));
+        pokemonList.get(Species.heatranMega).copyBaseHpStat(pokemonList.get(Species.heatran));
+        pokemonList.get(Species.darkraiMega).copyBaseHpStat(pokemonList.get(Species.darkrai));
+        pokemonList.get(Species.golurkMega).copyBaseHpStat(pokemonList.get(Species.golurk));
+        pokemonList.get(Species.meowsticMega).copyBaseHpStat(pokemonList.get(Species.meowstic));
+        pokemonList.get(Species.crabominableMega).copyBaseHpStat(pokemonList.get(Species.crabominable));
+        pokemonList.get(Species.golisopodMega).copyBaseHpStat(pokemonList.get(Species.golisopod));
+        pokemonList.get(Species.magearnaMega).copyBaseHpStat(pokemonList.get(Species.magearna));
+        pokemonList.get(Species.zeraoraMega).copyBaseHpStat(pokemonList.get(Species.zeraora));
+        pokemonList.get(Species.scovillainMega).copyBaseHpStat(pokemonList.get(Species.scovillain));
+        pokemonList.get(Species.glimmoraMega).copyBaseHpStat(pokemonList.get(Species.glimmora));
+        pokemonList.get(Species.tatsugiriMega).copyBaseHpStat(pokemonList.get(Species.tatsugiri));
+        pokemonList.get(Species.baxcaliburMega).copyBaseHpStat(pokemonList.get(Species.baxcalibur));
 
         pokemonList.get(Species.pikachuCap).copyBaseStats(pokemonList.get(Species.pikachu));
         pokemonList.get(Species.pichuSpiky).copyBaseStats(pokemonList.get(Species.pichu));
@@ -491,6 +700,7 @@ public abstract class AbstractRomHandler implements RomHandler {
         pokemonList.get(Species.greninjaB).copyBaseStats(pokemonList.get(Species.greninja));
         pokemonList.get(Species.greninjaA).copyBaseHpStat(pokemonList.get(Species.greninja));
         pokemonList.get(Species.meowsticF).copyBaseStats(pokemonList.get(Species.meowstic));
+        pokemonList.get(Species.meowsticFMega).copyBaseStats(pokemonList.get(Species.meowsticMega));
         pokemonList.get(Species.aegislashB).copyBaseHpStat(pokemonList.get(Species.aegislash));
         pokemonList.get(Species.hoopaU).copyBaseHpStat(pokemonList.get(Species.hoopa));
         pokemonList.get(Species.oricorioE).copyBaseStats(pokemonList.get(Species.oricorio));
@@ -566,30 +776,30 @@ public abstract class AbstractRomHandler implements RomHandler {
 
     public Pokemon randomPokemon() {
         checkPokemonRestrictions();
-        return mainPokemonList.get(this.random.nextInt(mainPokemonList.size()));
+        return weightedRandomPokemon(mainPokemonList);
     }
 
     @Override
     public Pokemon randomPokemonInclFormes() {
         checkPokemonRestrictions();
-        return mainPokemonListInclFormes.get(this.random.nextInt(mainPokemonListInclFormes.size()));
+        return weightedRandomPokemon(mainPokemonListInclFormes);
     }
 
     @Override
     public Pokemon randomNonLegendaryPokemon() {
         checkPokemonRestrictions();
-        return noLegendaryList.get(this.random.nextInt(noLegendaryList.size()));
+        return weightedRandomPokemon(noLegendaryList);
     }
 
     private Pokemon randomNonLegendaryPokemonInclFormes() {
         checkPokemonRestrictions();
-        return noLegendaryListInclFormes.get(this.random.nextInt(noLegendaryListInclFormes.size()));
+        return weightedRandomPokemon(noLegendaryListInclFormes);
     }
 
     @Override
     public Pokemon randomLegendaryPokemon() {
         checkPokemonRestrictions();
-        return onlyLegendaryList.get(this.random.nextInt(onlyLegendaryList.size()));
+        return weightedRandomPokemon(onlyLegendaryList);
     }
 
     private List<Pokemon> twoEvoPokes;
@@ -620,7 +830,7 @@ public abstract class AbstractRomHandler implements RomHandler {
                 }
             }
         }
-        return twoEvoPokes.get(this.random.nextInt(twoEvoPokes.size()));
+        return weightedRandomPokemon(twoEvoPokes);
     }
 
     @Override
@@ -741,6 +951,7 @@ public abstract class AbstractRomHandler implements RomHandler {
 //        pokemonList.get(Species.greninjaA).copyTypes(pokemonList.get(Species.greninja));
 //        pokemonList.get(Species.floetteE).copyTypes(pokemonList.get(Species.floette));
         pokemonList.get(Species.meowsticF).copyTypes(pokemonList.get(Species.meowstic));
+        pokemonList.get(Species.meowsticFMega).copyTypes(pokemonList.get(Species.meowsticMega));
         pokemonList.get(Species.aegislashB).copyTypes(pokemonList.get(Species.aegislash));
         pokemonList.get(Species.pumpkabooSmall).copyTypes(pokemonList.get(Species.pumpkaboo));
         pokemonList.get(Species.pumpkabooLarge).copyTypes(pokemonList.get(Species.pumpkaboo));
@@ -1136,9 +1347,9 @@ public abstract class AbstractRomHandler implements RomHandler {
                 }
                 for (Encounter enc : area.encounters) {
                     // Pick a random themed pokemon
-                    enc.pokemon = possiblePokemon.get(this.random.nextInt(possiblePokemon.size()));
+                    enc.pokemon = weightedRandomPokemon(possiblePokemon);
                     while (enc.pokemon.actuallyCosmetic) {
-                        enc.pokemon = possiblePokemon.get(this.random.nextInt(possiblePokemon.size()));
+                        enc.pokemon = weightedRandomPokemon(possiblePokemon);
                     }
                     setFormeForEncounter(enc, enc.pokemon);
                 }
@@ -1727,9 +1938,9 @@ public abstract class AbstractRomHandler implements RomHandler {
                         }
                         for (Encounter enc : area.encounters) {
                             // Pick a random themed pokemon
-                            enc.pokemon = possiblePokemon.get(this.random.nextInt(possiblePokemon.size()));
+                            enc.pokemon = weightedRandomPokemon(possiblePokemon);
                             while (enc.pokemon.actuallyCosmetic) {
-                                enc.pokemon = possiblePokemon.get(this.random.nextInt(possiblePokemon.size()));
+                                enc.pokemon = weightedRandomPokemon(possiblePokemon);
                             }
                             setFormeForEncounter(enc, enc.pokemon);
                         }
@@ -1809,9 +2020,9 @@ public abstract class AbstractRomHandler implements RomHandler {
                         throw new RandomizationException("Could not find a possible Pokemon of the correct type.");
                     }
                     // Pick a random themed pokemon
-                    enc.pokemon = possiblePokemon.get(this.random.nextInt(possiblePokemon.size()));
+                    enc.pokemon = weightedRandomPokemon(possiblePokemon);
                     while (enc.pokemon.actuallyCosmetic) {
-                        enc.pokemon = possiblePokemon.get(this.random.nextInt(possiblePokemon.size()));
+                        enc.pokemon = weightedRandomPokemon(possiblePokemon);
                     }
                     setFormeForEncounter(enc, enc.pokemon);
                 } else if (usePowerLevels) {
@@ -4036,6 +4247,52 @@ public abstract class AbstractRomHandler implements RomHandler {
         copyMoveset(ms, Species.diancie, Species.diancieMega);
         copyMoveset(ms, Species.kyogre, Species.kyogreP);
         copyMoveset(ms, Species.groudon, Species.groudonP);
+        copyMoveset(ms, Species.clefable, Species.clefableMega);
+        copyMoveset(ms, Species.victreebel, Species.victreebelMega);
+        copyMoveset(ms, Species.starmie, Species.starmieMega);
+        copyMoveset(ms, Species.dragonite, Species.dragoniteMega);
+        copyMoveset(ms, Species.meganium, Species.meganiumMega);
+        copyMoveset(ms, Species.feraligatr, Species.feraligatrMega);
+        copyMoveset(ms, Species.skarmory, Species.skarmoryMega);
+        copyMoveset(ms, Species.froslass, Species.froslassMega);
+        copyMoveset(ms, Species.emboar, Species.emboarMega);
+        copyMoveset(ms, Species.excadrill, Species.excadrillMega);
+        copyMoveset(ms, Species.scolipede, Species.scolipedeMega);
+        copyMoveset(ms, Species.scrafty, Species.scraftyMega);
+        copyMoveset(ms, Species.eelektross, Species.eelektrossMega);
+        copyMoveset(ms, Species.chandelure, Species.chandelureMega);
+        copyMoveset(ms, Species.chesnaught, Species.chesnaughtMega);
+        copyMoveset(ms, Species.delphox, Species.delphoxMega);
+        copyMoveset(ms, Species.greninja, Species.greninjaMega);
+        copyMoveset(ms, Species.pyroar, Species.pyroarMega);
+        copyMoveset(ms, Species.floetteE, Species.floetteMega);
+        copyMoveset(ms, Species.malamar, Species.malamarMega);
+        copyMoveset(ms, Species.barbaracle, Species.barbaracleMega);
+        copyMoveset(ms, Species.dragalge, Species.dragalgeMega);
+        copyMoveset(ms, Species.hawlucha, Species.hawluchaMega);
+        copyMoveset(ms, Species.zygardeC, Species.zygardeMega);
+        copyMoveset(ms, Species.drampa, Species.drampaMega);
+        copyMoveset(ms, Species.falinks, Species.falinksMega);
+        copyMoveset(ms, Species.raichu, Species.raichuMegaX);
+        copyMoveset(ms, Species.raichu, Species.raichuMegaY);
+        copyMoveset(ms, Species.chimecho, Species.chimechoMega);
+        copyMoveset(ms, Species.absol, Species.absolMegaZ);
+        copyMoveset(ms, Species.staraptor, Species.staraptorMega);
+        copyMoveset(ms, Species.garchomp, Species.garchompMegaZ);
+        copyMoveset(ms, Species.lucario, Species.lucarioMegaZ);
+        copyMoveset(ms, Species.heatran, Species.heatranMega);
+        copyMoveset(ms, Species.darkrai, Species.darkraiMega);
+        copyMoveset(ms, Species.golurk, Species.golurkMega);
+        copyMoveset(ms, Species.meowstic, Species.meowsticMega);
+        copyMoveset(ms, Species.meowsticF, Species.meowsticFMega);
+        copyMoveset(ms, Species.crabominable, Species.crabominableMega);
+        copyMoveset(ms, Species.golisopod, Species.golisopodMega);
+        copyMoveset(ms, Species.magearna, Species.magearnaMega);
+        copyMoveset(ms, Species.zeraora, Species.zeraoraMega);
+        copyMoveset(ms, Species.scovillain, Species.scovillainMega);
+        copyMoveset(ms, Species.glimmora, Species.glimmoraMega);
+        copyMoveset(ms, Species.tatsugiri, Species.tatsugiriMega);
+        copyMoveset(ms, Species.baxcalibur, Species.baxcaliburMega);
 
         copyMoveset(ms, Species.pikachu, Species.pikachuCap);
         copyMoveset(ms, Species.pichu, Species.pichuSpiky);
@@ -5167,6 +5424,52 @@ public abstract class AbstractRomHandler implements RomHandler {
         copyTMHMTutorCompatibility(compat, pokemonList.get(Species.diancie), pokemonList.get(Species.diancieMega));
         copyTMHMTutorCompatibility(compat, pokemonList.get(Species.kyogre), pokemonList.get(Species.kyogreP));
         copyTMHMTutorCompatibility(compat, pokemonList.get(Species.groudon), pokemonList.get(Species.groudonP));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.clefable), pokemonList.get(Species.clefableMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.victreebel), pokemonList.get(Species.victreebelMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.starmie), pokemonList.get(Species.starmieMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.dragonite), pokemonList.get(Species.dragoniteMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.meganium), pokemonList.get(Species.meganiumMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.feraligatr), pokemonList.get(Species.feraligatrMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.skarmory), pokemonList.get(Species.skarmoryMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.froslass), pokemonList.get(Species.froslassMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.emboar), pokemonList.get(Species.emboarMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.excadrill), pokemonList.get(Species.excadrillMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.scolipede), pokemonList.get(Species.scolipedeMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.scrafty), pokemonList.get(Species.scraftyMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.eelektross), pokemonList.get(Species.eelektrossMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.chandelure), pokemonList.get(Species.chandelureMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.chesnaught), pokemonList.get(Species.chesnaughtMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.delphox), pokemonList.get(Species.delphoxMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.greninja), pokemonList.get(Species.greninjaMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.pyroar), pokemonList.get(Species.pyroarMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.floetteE), pokemonList.get(Species.floetteMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.malamar), pokemonList.get(Species.malamarMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.barbaracle), pokemonList.get(Species.barbaracleMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.dragalge), pokemonList.get(Species.dragalgeMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.hawlucha), pokemonList.get(Species.hawluchaMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.zygardeC), pokemonList.get(Species.zygardeMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.drampa), pokemonList.get(Species.drampaMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.falinks), pokemonList.get(Species.falinksMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.raichu), pokemonList.get(Species.raichuMegaX));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.raichu), pokemonList.get(Species.raichuMegaY));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.chimecho), pokemonList.get(Species.chimechoMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.absol), pokemonList.get(Species.absolMegaZ));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.staraptor), pokemonList.get(Species.staraptorMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.garchomp), pokemonList.get(Species.garchompMegaZ));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.lucario), pokemonList.get(Species.lucarioMegaZ));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.heatran), pokemonList.get(Species.heatranMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.darkrai), pokemonList.get(Species.darkraiMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.golurk), pokemonList.get(Species.golurkMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.meowstic), pokemonList.get(Species.meowsticMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.meowsticF), pokemonList.get(Species.meowsticFMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.crabominable), pokemonList.get(Species.crabominableMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.golisopod), pokemonList.get(Species.golisopodMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.magearna), pokemonList.get(Species.magearnaMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.zeraora), pokemonList.get(Species.zeraoraMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.scovillain), pokemonList.get(Species.scovillainMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.glimmora), pokemonList.get(Species.glimmoraMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.tatsugiri), pokemonList.get(Species.tatsugiriMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.baxcalibur), pokemonList.get(Species.baxcaliburMega));
 
         copyTMHMTutorCompatibility(compat, pokemonList.get(Species.pikachu), pokemonList.get(Species.pikachuCap));
         copyTMHMTutorCompatibility(compat, pokemonList.get(Species.pichu), pokemonList.get(Species.pichuSpiky));
@@ -5552,6 +5855,52 @@ public abstract class AbstractRomHandler implements RomHandler {
         copyTMHMTutorCompatibility(compat, pokemonList.get(Species.diancie), pokemonList.get(Species.diancieMega));
         copyTMHMTutorCompatibility(compat, pokemonList.get(Species.kyogre), pokemonList.get(Species.kyogreP));
         copyTMHMTutorCompatibility(compat, pokemonList.get(Species.groudon), pokemonList.get(Species.groudonP));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.clefable), pokemonList.get(Species.clefableMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.victreebel), pokemonList.get(Species.victreebelMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.starmie), pokemonList.get(Species.starmieMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.dragonite), pokemonList.get(Species.dragoniteMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.meganium), pokemonList.get(Species.meganiumMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.feraligatr), pokemonList.get(Species.feraligatrMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.skarmory), pokemonList.get(Species.skarmoryMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.froslass), pokemonList.get(Species.froslassMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.emboar), pokemonList.get(Species.emboarMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.excadrill), pokemonList.get(Species.excadrillMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.scolipede), pokemonList.get(Species.scolipedeMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.scrafty), pokemonList.get(Species.scraftyMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.eelektross), pokemonList.get(Species.eelektrossMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.chandelure), pokemonList.get(Species.chandelureMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.chesnaught), pokemonList.get(Species.chesnaughtMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.delphox), pokemonList.get(Species.delphoxMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.greninja), pokemonList.get(Species.greninjaMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.pyroar), pokemonList.get(Species.pyroarMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.floetteE), pokemonList.get(Species.floetteMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.malamar), pokemonList.get(Species.malamarMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.barbaracle), pokemonList.get(Species.barbaracleMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.dragalge), pokemonList.get(Species.dragalgeMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.hawlucha), pokemonList.get(Species.hawluchaMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.zygardeC), pokemonList.get(Species.zygardeMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.drampa), pokemonList.get(Species.drampaMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.falinks), pokemonList.get(Species.falinksMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.raichu), pokemonList.get(Species.raichuMegaX));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.raichu), pokemonList.get(Species.raichuMegaY));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.chimecho), pokemonList.get(Species.chimechoMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.absol), pokemonList.get(Species.absolMegaZ));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.staraptor), pokemonList.get(Species.staraptorMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.garchomp), pokemonList.get(Species.garchompMegaZ));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.lucario), pokemonList.get(Species.lucarioMegaZ));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.heatran), pokemonList.get(Species.heatranMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.darkrai), pokemonList.get(Species.darkraiMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.golurk), pokemonList.get(Species.golurkMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.meowstic), pokemonList.get(Species.meowsticMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.meowsticF), pokemonList.get(Species.meowsticFMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.crabominable), pokemonList.get(Species.crabominableMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.golisopod), pokemonList.get(Species.golisopodMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.magearna), pokemonList.get(Species.magearnaMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.zeraora), pokemonList.get(Species.zeraoraMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.scovillain), pokemonList.get(Species.scovillainMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.glimmora), pokemonList.get(Species.glimmoraMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.tatsugiri), pokemonList.get(Species.tatsugiriMega));
+        copyTMHMTutorCompatibility(compat, pokemonList.get(Species.baxcalibur), pokemonList.get(Species.baxcaliburMega));
 
         copyTMHMTutorCompatibility(compat, pokemonList.get(Species.pikachu), pokemonList.get(Species.pikachuCap));
         copyTMHMTutorCompatibility(compat, pokemonList.get(Species.pichu), pokemonList.get(Species.pichuSpiky));
@@ -7531,7 +7880,7 @@ public abstract class AbstractRomHandler implements RomHandler {
             throw new RandomizationException("Random evolution called on a Pokemon without any usable evolutions.");
         }
 
-        return candidates.get(random.nextInt(candidates.size()));
+        return weightedRandomPokemon(candidates);
     }
 
     private int getLevelOfStarter(List<Trainer> currentTrainers, String tag) {
@@ -7788,7 +8137,7 @@ public abstract class AbstractRomHandler implements RomHandler {
             // is actually below the current average placement
             // if not, re-roll
 
-            Pokemon chosenPokemon = canPick.get(this.random.nextInt(canPick.size()));
+            Pokemon chosenPokemon = weightedRandomPokemon(canPick);
             if (usePlacementHistory) {
                 double placementAverage = getPlacementAverage();
                 List<Pokemon> filteredPickList = canPick
@@ -7798,18 +8147,18 @@ public abstract class AbstractRomHandler implements RomHandler {
                 if (filteredPickList.isEmpty()) {
                     filteredPickList = canPick;
                 }
-                chosenPokemon = filteredPickList.get(this.random.nextInt(filteredPickList.size()));
+                chosenPokemon = weightedRandomPokemon(filteredPickList);
             }
             return chosenPokemon;
         } else {
             if (wonderGuardAllowed) {
-                return pickFrom.get(this.random.nextInt(pickFrom.size()));
+                return weightedRandomPokemon(pickFrom);
             } else {
-                Pokemon pk = pickFrom.get(this.random.nextInt(pickFrom.size()));
+                Pokemon pk = weightedRandomPokemon(pickFrom);
                 while (pk.ability1 == Abilities.wonderGuard
                         || pk.ability2 == Abilities.wonderGuard
                         || pk.ability3 == Abilities.wonderGuard) {
-                    pk = pickFrom.get(this.random.nextInt(pickFrom.size()));
+                    pk = weightedRandomPokemon(pickFrom);
                 }
                 return pk;
             }
@@ -7913,7 +8262,7 @@ public abstract class AbstractRomHandler implements RomHandler {
             maxTarget += currentBST / 20;
             expandRounds++;
         }
-        return canPick.get(this.random.nextInt(canPick.size()));
+        return weightedRandomPokemon(canPick);
     }
 
     @Override

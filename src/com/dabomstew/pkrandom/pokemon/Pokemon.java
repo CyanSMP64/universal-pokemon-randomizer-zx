@@ -351,7 +351,13 @@ public class Pokemon implements Comparable<Pokemon> {
             Species.latiosMega, Species.garchompMega, Species.kyuremB, Species.kyuremW, Species.diancieMega, Species.zacianC,
             Species.zamazentaC, Species.zygardeC, Species.arceus, Species.necrozmaU, Species.kyogreP, Species.groudonP, Species.mewtwoMegaX,
             Species.mewtwoMegaY, Species.rayquazaMega, Species.archaludon, Species.pecharunt, Species.terapagosT, Species.terapagosS,
-            Species.eternatusE);
+            Species.eternatusE,
+            // legends z-a megas
+            Species.barbaracleMega, Species.hawluchaMega, Species.pyroarMega, Species.excadrillMega, Species.eelektrossMega,
+            Species.chandelureMega, Species.meganiumMega, Species.lucarioMegaZ, Species.glimmoraMega, Species.emboarMega,
+            Species.feraligatrMega, Species.chesnaughtMega, Species.greninjaMega, Species.golisopodMega, Species.delphoxMega,
+            Species.floetteMega, Species.starmieMega, Species.dragoniteMega, Species.garchompMegaZ, Species.heatranMega,
+            Species.darkraiMega, Species.magearnaMega, Species.zeraoraMega, Species.baxcaliburMega, Species.zygardeMega);
 
     private static final List<Integer> bst641Plus = Arrays.asList(Species.palafinH, Species.kyurem, Species.zacian, Species.zamazenta,
             Species.slaking, Species.kyogre, Species.groudon, Species.regigigas, Species.koraidon, Species.miraidon, Species.mewtwo,
@@ -361,7 +367,10 @@ public class Pokemon implements Comparable<Pokemon> {
             Species.tyranitarMega, Species.salamenceMega, Species.metagrossMega, Species.latiasMega, Species.latiosMega,
             Species.garchompMega, Species.kyuremB, Species.kyuremW, Species.diancieMega, Species.zacianC, Species.zamazentaC,
             Species.zygardeC, Species.arceus, Species.necrozmaU, Species.kyogreP, Species.groudonP, Species.mewtwoMegaX,
-            Species.mewtwoMegaY, Species.rayquazaMega, Species.terapagosS, Species.eternatusE);
+            Species.mewtwoMegaY, Species.rayquazaMega, Species.terapagosS, Species.eternatusE,
+            // legends z-a megas
+            Species.floetteMega, Species.starmieMega, Species.dragoniteMega, Species.garchompMegaZ, Species.heatranMega,
+            Species.darkraiMega, Species.magearnaMega, Species.zeraoraMega, Species.baxcaliburMega, Species.zygardeMega);
 
     private static final List<Integer> strongLegendaries = Arrays.asList(Species.kyurem, Species.zacian, Species.zamazenta, Species.kyogre,
             Species.groudon, Species.regigigas, Species.koraidon, Species.miraidon, Species.mewtwo, Species.lugia, Species.hoOh,
@@ -370,7 +379,9 @@ public class Pokemon implements Comparable<Pokemon> {
             Species.necrozmaDM, Species.necrozmaDW, Species.calyrexI, Species.calyrexS, Species.eternatus, Species.latiasMega,
             Species.latiosMega, Species.kyuremB, Species.kyuremW, Species.diancieMega, Species.zacianC, Species.zamazentaC,
             Species.zygardeC, Species.arceus, Species.necrozmaU, Species.kyogreP, Species.groudonP, Species.mewtwoMegaX,
-            Species.mewtwoMegaY, Species.rayquazaMega, Species.terapagosS, Species.eternatusE);
+            Species.mewtwoMegaY, Species.rayquazaMega, Species.terapagosS, Species.eternatusE,
+            // legends z-a megas
+            Species.heatranMega, Species.darkraiMega, Species.magearnaMega, Species.zeraoraMega, Species.zygardeMega);
 
     private static final List<Integer> ultraBeasts = Arrays.asList();
 

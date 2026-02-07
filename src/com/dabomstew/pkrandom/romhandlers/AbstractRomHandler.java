@@ -2656,14 +2656,43 @@ public abstract class AbstractRomHandler implements RomHandler {
     @Override
     public void forceFullyEvolvedTrainerPokes(Settings settings) {
         int minLevel = settings.getTrainersForceFullyEvolvedLevel();
+        boolean abilitiesAreRandomized = settings.getAbilitiesMod() == Settings.AbilitiesMod.RANDOMIZE;
 
         checkPokemonRestrictions();
+        
+        List<Pokemon> fullyEvolvedPool = new ArrayList<>();
+        List<Pokemon> pokemonList = this.getPokemon();
+        
+        List<Integer> bannedSpecies = new ArrayList<>();
+        bannedSpecies.add(Species.pikachuCap);
+        bannedSpecies.add(Species.pikachuPartner);
+        bannedSpecies.add(Species.eeveePartner);
+        bannedSpecies.add(Species.pichuSpiky);
+        bannedSpecies.add(Species.cherrimS);
+        bannedSpecies.add(Species.greninjaB);
+        bannedSpecies.add(Species.morpekoH);
+        if (!abilitiesAreRandomized) {
+            bannedSpecies.add(Species.castformF);
+            bannedSpecies.add(Species.castformW);
+            bannedSpecies.add(Species.castformI);
+        }
+        
+        for (Pokemon pk : mainPokemonList) {
+            if (pk != null && pk.evolutionsFrom.size() == 0 && !bannedSpecies.contains(pk.number)) {
+                fullyEvolvedPool.add(pk);
+            }
+        }
+        
+        if (fullyEvolvedPool.isEmpty()) {
+            fullyEvolvedPool = new ArrayList<>(mainPokemonList);
+        }
+        
         List<Trainer> currentTrainers = this.getTrainers();
         for (Trainer t : currentTrainers) {
             for (TrainerPokemon tp : t.pokemon) {
                 if (tp.level >= minLevel) {
-                    Pokemon newPokemon = fullyEvolve(tp.pokemon, t.index);
-                    if (newPokemon != tp.pokemon) {
+                    if (tp.pokemon.evolutionsFrom.size() > 0) {
+                        Pokemon newPokemon = weightedRandomPokemon(fullyEvolvedPool);
                         tp.pokemon = newPokemon;
                         setFormeForTrainerPokemon(tp, newPokemon);
                         tp.abilitySlot = getValidAbilitySlotFromOriginal(newPokemon, tp.abilitySlot);

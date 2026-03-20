@@ -4336,12 +4336,6 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
 
     }
 
-    private void applyRunningShoesIndoorsPatch() {
-        if (romEntry.getValue("RunIndoorsTweakOffset") != 0) {
-            rom[romEntry.getValue("RunIndoorsTweakOffset")] = 0x00;
-        }
-    }
-
     private void applyFastestTextPatch() {
         if(romEntry.codeTweaks.get("InstantTextTweak") != null) {
             try {

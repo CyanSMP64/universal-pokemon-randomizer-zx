@@ -25,6 +25,7 @@ package com.dabomstew.pkrandom.pokemon;
 /*--  along with this program. If not, see <http://www.gnu.org/licenses/>.  --*/
 /*----------------------------------------------------------------------------*/
 
+import com.dabomstew.pkrandom.RandomSource;
 import com.dabomstew.pkrandom.constants.Species;
 
 import java.util.ArrayList;
@@ -247,7 +248,7 @@ public class Pokemon implements Comparable<Pokemon> {
         int originalBST = this.bst();
         this.hp = source.hp;
         int remainingBST = originalBST - this.hp - 55;
-        Random random = new Random();
+        Random random = RandomSource.instance();
         
         while (true) {
             // Make weightings

@@ -3804,7 +3804,7 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
             // Emerald, intro sprite: any Pokemon.
             int introPokemon = pokedexToInternal[randomPokemon().number];
             writeWord(romEntry.getValue("IntroSpriteOffset"), introPokemon);
-            writeWord(romEntry.getValue("IntroCryOffset"), introPokemon);
+            //writeWord(romEntry.getValue("IntroCryOffset"), introPokemon);
         }
 
     }

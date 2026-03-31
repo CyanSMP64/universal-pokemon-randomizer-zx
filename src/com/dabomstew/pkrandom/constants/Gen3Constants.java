@@ -238,7 +238,7 @@ public class Gen3Constants {
             Abilities.earthEater, Abilities.myceliumMight, Abilities.hospitality, Abilities.mindsEye, Abilities.embodyAspectTealMask,
             Abilities.embodyAspectHearthflameMask, Abilities.embodyAspectWellspringMask, Abilities.embodyAspectCornerstoneMask,
             Abilities.toxicChain, Abilities.supersweetSyrup, Abilities.teraShift, Abilities.teraShell, Abilities.teraformZero,
-            Abilities.poisonPuppeteer);
+            Abilities.poisonPuppeteer, Abilities.dragonize, Abilities.megaSol);
 
     public static final Map<Integer,String> formeSuffixes = setupFormeSuffixes();
 

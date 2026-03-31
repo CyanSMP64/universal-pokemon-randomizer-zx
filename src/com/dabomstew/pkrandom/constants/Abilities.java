@@ -335,4 +335,6 @@ public class Abilities {
     public static final int teraShell = 309;
     public static final int teraformZero = 310;
     public static final int poisonPuppeteer = 311;
+    public static final int dragonize = 312;
+    public static final int megaSol = 313;
 }

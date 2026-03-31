@@ -4243,9 +4243,9 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
     @Override
     public int miscTweaksAvailable() {
         int available = 0;
-        if (romEntry.getValue("PCPotionOffset") != 0) {
-            available |= MiscTweak.RANDOMIZE_PC_POTION.getValue();
-        }
+        //if (romEntry.getValue("PCPotionOffset") != 0) {
+        //    available |= MiscTweak.RANDOMIZE_PC_POTION.getValue();
+        //}
         available |= MiscTweak.BAN_LUCKY_EGG.getValue();
         if (romEntry.romType == Gen3Constants.RomType_FRLG) {
             available |= MiscTweak.BALANCE_STATIC_LEVELS.getValue();
@@ -4263,8 +4263,8 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
         if (tweak == MiscTweak.BAN_LUCKY_EGG) {
             allowedItems.banSingles(Gen3Items.luckyEgg);
             nonBadItems.banSingles(Gen3Items.luckyEgg);
-        } else if (tweak == MiscTweak.RANDOMIZE_PC_POTION) {
-            randomizePCPotion();
+        //} else if (tweak == MiscTweak.RANDOMIZE_PC_POTION) {
+        //    randomizePCPotion();
         } else if (tweak == MiscTweak.BALANCE_STATIC_LEVELS) {
             int[] fossilLevelOffsets = romEntry.arrayEntries.get("FossilLevelOffsets");
             for (int fossilLevelOffset : fossilLevelOffsets) {

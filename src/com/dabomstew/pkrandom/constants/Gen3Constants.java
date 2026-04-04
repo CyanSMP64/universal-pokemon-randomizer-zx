@@ -171,7 +171,7 @@ public class Gen3Constants {
 
     public static final int unhackedMaxPokedex = 411, unhackedRealPokedex = 386, hoennPokesStart = 252;
 
-    public static final int evolutionMethodCount = 23;
+    public static final int evolutionMethodCount = 24;
 
     public static final int cacophonyIndex = 76, airLockIndex = 77, highestAbilityIndex = 311;
 

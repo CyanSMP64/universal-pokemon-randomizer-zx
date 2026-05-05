@@ -159,6 +159,8 @@ public class NewRandomizerGUI {
     private JCheckBox wpPercentageLevelModifierCheckBox;
     private JSlider wpPercentageLevelModifierSlider;
     private JSlider wpSetMinimumCatchRateSlider;
+    private JCheckBox wpLimitBSTCheckBox;
+    private JSpinner wpBSTLimitSpinner;
     private JRadioButton tmUnchangedRadioButton;
     private JRadioButton tmRandomRadioButton;
     private JCheckBox tmFullHMCompatibilityCheckBox;
@@ -454,6 +456,7 @@ public class NewRandomizerGUI {
         wpRandomizeHeldItemsCheckBox.addActionListener(e -> enableOrDisableSubControls());
         wpPercentageLevelModifierCheckBox.addActionListener(e -> enableOrDisableSubControls());
         wpDontUseLegendariesCheckBox.addActionListener(e -> enableOrDisableSubControls());
+        wpLimitBSTCheckBox.addActionListener(e -> enableOrDisableSubControls());
         tmUnchangedRadioButton.addActionListener(e -> enableOrDisableSubControls());
         tmRandomRadioButton.addActionListener(e -> enableOrDisableSubControls());
         tmForceGoodDamagingCheckBox.addActionListener(e -> enableOrDisableSubControls());
@@ -687,6 +690,12 @@ public class NewRandomizerGUI {
                 2,
                 1
         );
+        SpinnerModel wpBSTLimitModel = new SpinnerNumberModel(
+                600,
+                200,
+                780,
+                1
+        );
 
         List<String> keys = new ArrayList<>(bundle.keySet());
         Collections.sort(keys);
@@ -701,6 +710,7 @@ public class NewRandomizerGUI {
         tpImportantTrainersSpinner.setModel(importantTrainerModel);
         tpRegularTrainersSpinner.setModel(regularTrainerModel);
         tpEliteFourUniquePokemonSpinner.setModel(eliteFourUniquePokemonModel);
+        wpBSTLimitSpinner.setModel(wpBSTLimitModel);
 
         customNamesEditorMenuItem = new JMenuItem();
         customNamesEditorMenuItem.setText(bundle.getString("GUI.customNamesEditorMenuItem.text"));
@@ -1613,6 +1623,13 @@ public class NewRandomizerGUI {
         wpPercentageLevelModifierSlider.setValue(settings.getWildLevelModifier());
         wpAllowAltFormesCheckBox.setSelected(settings.isAllowWildAltFormes());
         wpLimitBSTComboBox.setSelectedIndex(settings.getWildBSTLimit());
+        wpLimitBSTCheckBox.setSelected(settings.getWildPokemonBSTLimit() > 0);
+        if (settings.getWildPokemonBSTLimit() > 0) {
+            wpBSTLimitSpinner.setValue(Math.max(200, Math.min(780, settings.getWildPokemonBSTLimit())));
+        } else {
+            wpBSTLimitSpinner.setValue(600);
+        }
+        ((JSpinner.DefaultEditor) wpBSTLimitSpinner.getEditor()).getTextField().setHorizontalAlignment(SwingConstants.CENTER);
 
         stpUnchangedRadioButton.setSelected(settings.getStaticPokemonMod() == Settings.StaticPokemonMod.UNCHANGED);
         stpSwapLegendariesSwapStandardsRadioButton.setSelected(settings.getStaticPokemonMod() == Settings.StaticPokemonMod.RANDOM_MATCHING);
@@ -1716,6 +1733,7 @@ public class NewRandomizerGUI {
         settings.setUpdateMoves(mdUpdateMovesCheckBox.isSelected() && mdUpdateMovesCheckBox.isVisible());
         settings.setUpdateMovesToGeneration(mdUpdateComboBox.getSelectedIndex() + (romHandler.generationOfPokemon()+1));
         settings.setWildBSTLimit(wpLimitBSTComboBox.getSelectedIndex());
+        settings.setWildPokemonBSTLimit(wpLimitBSTCheckBox.isSelected() ? ((Number) wpBSTLimitSpinner.getValue()).intValue() : 0);
         settings.setRandomizeTrainerNames(tpRandomizeTrainerNamesCheckBox.isSelected());
         settings.setRandomizeTrainerClassNames(tpRandomizeTrainerClassNamesCheckBox.isSelected());
 
@@ -2709,7 +2727,7 @@ public class NewRandomizerGUI {
             pbsShuffleRadioButton.setEnabled(true);
             pbsRandomRadioButton.setEnabled(true);
 
-            pbsStandardizeEXPCurvesCheckBox.setEnabled(false);
+            pbsStandardizeEXPCurvesCheckBox.setEnabled(true);
             pbsLegendariesSlowRadioButton.setSelected(true);
             pbsUpdateBaseStatsCheckBox.setEnabled(false);
             pbsFollowMegaEvosCheckBox.setVisible(romHandler.hasMegaEvolutions());
@@ -3072,6 +3090,10 @@ public class NewRandomizerGUI {
         boolean followMegaEvolutionControlsEnabled = !(peRandomEveryLevelRadioButton.isSelected() && !noIrregularAltFormesCheckBox.isSelected() /*&& peMatchPostEvoTypingCheckBox.isSelected()*/);
 
         if (peRandomEveryLevelRadioButton.isSelected()) {
+            limitPokemonCheckBox.setSelected(false);
+            limitPokemonCheckBox.setEnabled(false);
+            limitPokemonButton.setEnabled(false);
+
             // If Evolve Every Level is enabled, unselect all "Follow Evolutions" controls
             pbsFollowEvolutionsCheckBox.setSelected(false);
             ptRandomFollowEvolutionsRadioButton.setEnabled(false);
@@ -3110,6 +3132,8 @@ public class NewRandomizerGUI {
             tpForceFullyEvolvedAtSlider.setEnabled(false);
             tpForceFullyEvolvedAtSlider.setValue(tpForceFullyEvolvedAtSlider.getMinimum());
         } else {
+            limitPokemonCheckBox.setEnabled(true);
+
             // All other "Follow Evolutions" controls get properly set/unset below
             // except this one, so manually enable it again.
             ptRandomFollowEvolutionsRadioButton.setEnabled(true);
@@ -3205,21 +3229,22 @@ public class NewRandomizerGUI {
         }
 
         if (peRandomRadioButton.isSelected()) {
-            pbsStandardizeEXPCurvesCheckBox.setEnabled(true);
             peSimilarStrengthCheckBox.setEnabled(true);
             peSameTypingCheckBox.setEnabled(true);
             peLimitEvolutionsToThreeCheckBox.setEnabled(true);
             peForceChangeCheckBox.setEnabled(true);
             peMatchPostEvoTypingCheckBox.setEnabled(true);
         } else if (peRandomEveryLevelRadioButton.isSelected()) {
-            pbsStandardizeEXPCurvesCheckBox.setEnabled(true);
             peSimilarStrengthCheckBox.setEnabled(false);
             peSimilarStrengthCheckBox.setSelected(false);
-            peSameTypingCheckBox.setEnabled(true);
+            peSameTypingCheckBox.setEnabled(false);
+            peSameTypingCheckBox.setSelected(false);
             peLimitEvolutionsToThreeCheckBox.setEnabled(false);
             peLimitEvolutionsToThreeCheckBox.setSelected(false);
-            peForceChangeCheckBox.setEnabled(true);
-            peMatchPostEvoTypingCheckBox.setEnabled(true);
+            peForceChangeCheckBox.setEnabled(false);
+            peForceChangeCheckBox.setSelected(false);
+            peMatchPostEvoTypingCheckBox.setEnabled(false);
+            peMatchPostEvoTypingCheckBox.setSelected(false);
         } else {
             peSimilarStrengthCheckBox.setEnabled(false);
             peSimilarStrengthCheckBox.setSelected(false);
@@ -3231,15 +3256,6 @@ public class NewRandomizerGUI {
             peForceChangeCheckBox.setSelected(false);
             peMatchPostEvoTypingCheckBox.setEnabled(false);
             peMatchPostEvoTypingCheckBox.setSelected(false);
-        }
-
-        if (peUnchangedRadioButton.isSelected()) {
-            pbsStandardizeEXPCurvesCheckBox.setEnabled(false);
-            pbsLegendariesSlowRadioButton.setEnabled(false);
-            pbsLegendariesSlowRadioButton.setSelected(true);
-            pbsStrongLegendariesSlowRadioButton.setEnabled(false);
-            pbsAllMediumFastRadioButton.setEnabled(false);
-            pbsEXPCurveComboBox.setEnabled(false);
         }
 
         peMatchPostEvoTypingCheckBox.setEnabled(peSameTypingCheckBox.isSelected());
@@ -3525,11 +3541,14 @@ public class NewRandomizerGUI {
             wpUseTimeBasedEncountersCheckBox.setSelected(false);
             wpDontUseLegendariesCheckBox.setEnabled(false);
             wpDontUseLegendariesCheckBox.setSelected(false);
+            wpLimitBSTCheckBox.setEnabled(false);
+            wpLimitBSTCheckBox.setSelected(false);
             wpAllowAltFormesCheckBox.setEnabled(false);
             wpAllowAltFormesCheckBox.setSelected(false);
         } else {
             wpUseTimeBasedEncountersCheckBox.setEnabled(true);
             wpDontUseLegendariesCheckBox.setEnabled(true);
+            wpLimitBSTCheckBox.setEnabled(true);
             wpAllowAltFormesCheckBox.setEnabled(true);
         }
 
@@ -3560,6 +3579,12 @@ public class NewRandomizerGUI {
             wpLimitBSTComboBox.setEnabled(true);
         } else {
             wpLimitBSTComboBox.setEnabled(false);
+        }
+
+        if (wpLimitBSTCheckBox.isSelected() && wpLimitBSTCheckBox.isEnabled()) {
+            wpBSTLimitSpinner.setEnabled(true);
+        } else {
+            wpBSTLimitSpinner.setEnabled(false);
         }
 
         if (pmsMetronomeOnlyModeRadioButton.isSelected()) {

@@ -49,7 +49,7 @@ public class Settings {
 
     public static final int VERSION = Version.VERSION;
 
-    public static final int LENGTH_OF_SETTINGS_DATA = 51;
+    public static final int LENGTH_OF_SETTINGS_DATA = 64;
 
     private CustomNamesSet customNames;
 
@@ -212,6 +212,7 @@ public class Settings {
     private int wildLevelModifier = 0;
     private boolean allowWildAltFormes;
     private int wildBSTLimit = 0;
+    private int wildPokemonBSTLimit = 0;
 
     public enum StaticPokemonMod {
         UNCHANGED, RANDOM_MATCHING, COMPLETELY_RANDOM, SIMILAR_STRENGTH
@@ -584,6 +585,14 @@ public class Settings {
         // 50 elite four unique pokemon (3 bits) + catch rate level (3 bits)
         out.write(eliteFourUniquePokemonNumber | ((minimumCatchRateLevel - 1) << 3));
 
+        // 51 - 52 Wild Pokemon BST limit
+        write2ByteInt(out, wildPokemonBSTLimit);
+
+        // 53 - 63: Reserved for future use
+        for (int i = 53; i < LENGTH_OF_SETTINGS_DATA; i++) {
+            out.write(0);
+        }
+
         try {
             byte[] romName = this.romName.getBytes("US-ASCII");
             out.write(romName.length);
@@ -873,6 +882,7 @@ public class Settings {
 
         settings.setEliteFourUniquePokemonNumber(data[50] & 0x7);
         settings.setMinimumCatchRateLevel(((data[50] & 0x38) >> 3) + 1);
+        settings.setWildPokemonBSTLimit(FileFunctions.read2ByteInt(data, 51));
 
         int romNameLength = data[LENGTH_OF_SETTINGS_DATA] & 0xFF;
         String romName = new String(data, LENGTH_OF_SETTINGS_DATA + 1, romNameLength, "US-ASCII");
@@ -1879,6 +1889,14 @@ public class Settings {
 
     public void setWildBSTLimit(int wildBSTLimit) {
         this.wildBSTLimit = wildBSTLimit;
+    }
+
+    public int getWildPokemonBSTLimit() {
+        return wildPokemonBSTLimit;
+    }
+
+    public void setWildPokemonBSTLimit(int wildPokemonBSTLimit) {
+        this.wildPokemonBSTLimit = wildPokemonBSTLimit;
     }
 
     public StaticPokemonMod getStaticPokemonMod() {

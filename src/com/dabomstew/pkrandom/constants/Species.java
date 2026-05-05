@@ -1172,7 +1172,7 @@ public class Species {
     public static final int weezingG = 1146;
     public static final int mrMimeG = 1147;
     public static final int articunoG = 1148;
-    public static final int zapdogG = 1149;
+    public static final int zapdosG = 1149;
     public static final int moltresG = 1150;
     public static final int slowkingG = 1151;
     public static final int corsolaG = 1152;

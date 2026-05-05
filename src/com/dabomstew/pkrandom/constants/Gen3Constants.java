@@ -165,7 +165,7 @@ public class Gen3Constants {
 
     public static final String eNatDexScriptPart2 = "3229610825F00129E40825F30116D540010003";
 
-    public static final String friendshipValueForEvoLocator = "DB2900D8";
+    public static final String friendshipValueForEvoLocator = "DB2900D2";
 
     public static final String perfectOddsBranchLocator = "FE2E2FD90020";
 
@@ -173,7 +173,7 @@ public class Gen3Constants {
 
     public static final int evolutionMethodCount = 24;
 
-    public static final int cacophonyIndex = 76, airLockIndex = 77, highestAbilityIndex = 311;
+    public static final int cacophonyIndex = 76, airLockIndex = 77, highestAbilityIndex = 319;
 
     public static final int emMeteorFallsStevenIndex = 804;
 
@@ -238,7 +238,8 @@ public class Gen3Constants {
             Abilities.earthEater, Abilities.myceliumMight, Abilities.hospitality, Abilities.mindsEye, Abilities.embodyAspectTealMask,
             Abilities.embodyAspectHearthflameMask, Abilities.embodyAspectWellspringMask, Abilities.embodyAspectCornerstoneMask,
             Abilities.toxicChain, Abilities.supersweetSyrup, Abilities.teraShift, Abilities.teraShell, Abilities.teraformZero,
-            Abilities.poisonPuppeteer, Abilities.dragonize, Abilities.megaSol);
+            Abilities.poisonPuppeteer, Abilities.piercingDrill, Abilities.dragonize, Abilities.unknown314, Abilities.unknown315,
+            Abilities.megaSol, Abilities.unknown317, Abilities.unknown318, Abilities.spicySpray);
 
     public static final Map<Integer,String> formeSuffixes = setupFormeSuffixes();
 
@@ -1507,7 +1508,7 @@ public class Gen3Constants {
         formeSuffixes.put(Species.weezingG, "-G");
         formeSuffixes.put(Species.mrMimeG, "-G");
         formeSuffixes.put(Species.articunoG, "-G");
-        formeSuffixes.put(Species.zapdogG, "-G");
+        formeSuffixes.put(Species.zapdosG, "-G");
         formeSuffixes.put(Species.moltresG, "-G");
         formeSuffixes.put(Species.slowkingG, "-G");
         formeSuffixes.put(Species.corsolaG, "-G");

@@ -3349,12 +3349,12 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
             // FRLG doesn't have code to handle time-based evolutions.
             if (romEntry.romType != Gen3Constants.RomType_FRLG) {
                 // Amount of required happiness for HAPPINESS_DAY evolutions.
-                if (rom[offset + 38] == (byte)219) {
-                    rom[offset + 38] = (byte)159;
+                if (rom[offset + 34] == (byte)219) {
+                    rom[offset + 34] = (byte)159;
                 }
                 // Amount of required happiness for HAPPINESS_NIGHT evolutions.
-                if (rom[offset + 66] == (byte)219) {
-                    rom[offset + 66] = (byte)159;
+                if (rom[offset + 62] == (byte)219) {
+                    rom[offset + 62] = (byte)159;
                 }
             }
         }
@@ -4366,6 +4366,14 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
 
     private void setModernExpScaleFlag() {
         int offset = romEntry.getValue("ModernExpFlagScript");
+        if (offset > 0 && offset < rom.length) {
+            rom[offset] = (byte) 0x29;
+        }
+    }
+
+    @Override
+    protected void setEvolutionEveryLevelFlag() {
+        int offset = romEntry.getValue("EvoEveryLevelFlagScript");
         if (offset > 0 && offset < rom.length) {
             rom[offset] = (byte) 0x29;
         }

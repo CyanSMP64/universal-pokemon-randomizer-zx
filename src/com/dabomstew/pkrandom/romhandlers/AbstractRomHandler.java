@@ -411,26 +411,40 @@ public abstract class AbstractRomHandler implements RomHandler {
         ultraBeastList = new ArrayList<>();
 
         int bstLimit = settings.getWildBSTLimit();
+        int wildPokemonBSTLimit = settings.getWildPokemonBSTLimit();
         for (Pokemon p : mainPokemonList) {
-            if (bstLimit == 1) {
-                if (p.isBST641Plus()) {
+            if (wildPokemonBSTLimit > 0 && p.bstForPowerLevels() > wildPokemonBSTLimit) {
+                continue;
+            }
+            // ban only strong legendaries and mythicals
+            if (bstLimit == 2) {
+                if (p.isStrongLegendary()) {
                     onlyLegendaryList.add(p);
-                } else if (p.isUltraBeast()) {
-                    ultraBeastList.add(p);
                 } else {
                     noLegendaryList.add(p);
                 }
+            // ban all legendaries and mythicals
+            } else if (bstLimit == 1) {
+                if (p.isLegendary()) {
+                    onlyLegendaryList.add(p);
+                } else {
+                    noLegendaryList.add(p);
+                }
+            // ban legendaries, mythicals, ub and paradox
             } else {
                 if (p.isLegendary()) {
                     onlyLegendaryList.add(p);
-                } else if (p.isUltraBeast()) {
-                    ultraBeastList.add(p);
+                } else if (p.isUBorParadox()) {
+                    onlyLegendaryList.add(p);
                 } else {
                     noLegendaryList.add(p);
                 }
             }
         }
         for (Pokemon p : mainPokemonListInclFormes) {
+            if (wildPokemonBSTLimit > 0 && p.bstForPowerLevels() > wildPokemonBSTLimit) {
+                continue;
+            }
             if (p.isLegendary()) {
                 onlyLegendaryListInclFormes.add(p);
             } else if (!ultraBeastList.contains(p)) {
@@ -438,6 +452,9 @@ public abstract class AbstractRomHandler implements RomHandler {
             }
         }
         for (Pokemon f : altFormesList) {
+            if (wildPokemonBSTLimit > 0 && f.bstForPowerLevels() > wildPokemonBSTLimit) {
+                continue;
+            }
             if (f.isLegendary()) {
                 onlyLegendaryAltsList.add(f);
             } else {
@@ -1141,6 +1158,7 @@ public abstract class AbstractRomHandler implements RomHandler {
         pokemonList.get(Species.meloettaP).copyAbilities(pokemonList.get(Species.meloetta));
         pokemonList.get(Species.greninjaA).copyAbilities(pokemonList.get(Species.greninjaB));
         pokemonList.get(Species.floetteE).copyAbilities(pokemonList.get(Species.floette));
+        pokemonList.get(Species.meowsticFMega).copyAbilities(pokemonList.get(Species.meowsticMega));
         pokemonList.get(Species.aegislashB).copyAbilities(pokemonList.get(Species.aegislash));
         pokemonList.get(Species.pumpkabooSmall).copyAbilities(pokemonList.get(Species.pumpkaboo));
         pokemonList.get(Species.pumpkabooLarge).copyAbilities(pokemonList.get(Species.pumpkaboo));
@@ -2656,13 +2674,12 @@ public abstract class AbstractRomHandler implements RomHandler {
     @Override
     public void forceFullyEvolvedTrainerPokes(Settings settings) {
         int minLevel = settings.getTrainersForceFullyEvolvedLevel();
+        boolean rivalCarriesStarter = settings.isRivalCarriesStarterThroughout();
         boolean abilitiesAreRandomized = settings.getAbilitiesMod() == Settings.AbilitiesMod.RANDOMIZE;
 
         checkPokemonRestrictions();
         
         List<Pokemon> fullyEvolvedPool = new ArrayList<>();
-        List<Pokemon> pokemonList = this.getPokemon();
-        
         List<Integer> bannedSpecies = new ArrayList<>();
         bannedSpecies.add(Species.pikachuCap);
         bannedSpecies.add(Species.pikachuPartner);
@@ -2689,10 +2706,17 @@ public abstract class AbstractRomHandler implements RomHandler {
         
         List<Trainer> currentTrainers = this.getTrainers();
         for (Trainer t : currentTrainers) {
-            for (TrainerPokemon tp : t.pokemon) {
+            int carriedStarterIndex = rivalCarriesStarter ? getCarriedStarterIndex(t) : -1;
+            for (int pokemonIndex = 0; pokemonIndex < t.pokemon.size(); pokemonIndex++) {
+                TrainerPokemon tp = t.pokemon.get(pokemonIndex);
                 if (tp.level >= minLevel) {
                     if (tp.pokemon.evolutionsFrom.size() > 0) {
-                        Pokemon newPokemon = weightedRandomPokemon(fullyEvolvedPool);
+                        Pokemon newPokemon;
+                        if (pokemonIndex == carriedStarterIndex) {
+                            newPokemon = fullyEvolve(tp.pokemon, t.index);
+                        } else {
+                            newPokemon = weightedRandomPokemon(fullyEvolvedPool);
+                        }
                         tp.pokemon = newPokemon;
                         setFormeForTrainerPokemon(tp, newPokemon);
                         tp.abilitySlot = getValidAbilitySlotFromOriginal(newPokemon, tp.abilitySlot);
@@ -2702,6 +2726,28 @@ public abstract class AbstractRomHandler implements RomHandler {
             }
         }
         this.setTrainers(currentTrainers, false, false);
+    }
+
+    private int getCarriedStarterIndex(Trainer trainer) {
+        if (trainer.tag == null || (!trainer.tag.startsWith("RIVAL") && !trainer.tag.startsWith("FRIEND"))) {
+            return -1;
+        }
+
+        if (trainer.forceStarterPosition >= 0) {
+            return trainer.forceStarterPosition;
+        }
+
+        int bestIndex = 0;
+        TrainerPokemon bestPoke = trainer.pokemon.get(bestIndex);
+        int trainerPkmnCount = trainer.pokemon.size();
+        for (int i = 1; i < trainerPkmnCount; i++) {
+            int levelBonus = (i == trainerPkmnCount - 1) ? 2 : 0;
+            if (trainer.pokemon.get(i).level + levelBonus > bestPoke.level) {
+                bestIndex = i;
+                bestPoke = trainer.pokemon.get(i);
+            }
+        }
+        return bestIndex;
     }
 
     @Override
@@ -6907,20 +6953,8 @@ public abstract class AbstractRomHandler implements RomHandler {
 
     @Override
     public void randomizeEvolutionsEveryLevel(Settings settings) {
-        boolean sameType = settings.isEvosSameTyping();
-        boolean forceChange = settings.isEvosForceChange();
-        boolean allowAltFormes = settings.isEvosMatchPostEvoTyping();
-        boolean abilitiesAreRandomized = settings.getAbilitiesMod() == Settings.AbilitiesMod.RANDOMIZE;
-
-        checkPokemonRestrictions();
         List<Pokemon> pokemonPool = new ArrayList<>(mainPokemonList);
         List<Pokemon> actuallyCosmeticPokemonPool = new ArrayList<>();
-
-        List<Pokemon> banned = this.getBannedFormesForPlayerPokemon();
-        if (!abilitiesAreRandomized) {
-            List<Pokemon> abilityDependentFormes = getAbilityDependentFormes();
-            banned.addAll(abilityDependentFormes);
-        }
 
         for (int i = 0; i < pokemonPool.size(); i++) {
             Pokemon pk = pokemonPool.get(i);
@@ -6931,161 +6965,19 @@ public abstract class AbstractRomHandler implements RomHandler {
             }
         }
 
-        Set<EvolutionPair> oldEvoPairs = new HashSet<>();
-
-        if (forceChange) {
-            for (Pokemon pk : pokemonPool) {
-                for (Evolution ev : pk.evolutionsFrom) {
-                    oldEvoPairs.add(new EvolutionPair(ev.from, ev.to));
-                    if (ev.from.number == Species.doublade) {
-                        int oppositeVersionLegendary = ev.to.number == Species.aegislash ? Species.aegislashB : Species.aegislash;
-                        Pokemon toPkmn = findPokemonInPoolWithSpeciesID(pokemonPool, oppositeVersionLegendary);
-                        if (toPkmn != null) {
-                            oldEvoPairs.add(new EvolutionPair(ev.from, toPkmn));
-                        }
-                    }
-                }
-            }
-            // case for burmy
-            int[] burmyFormes = { Species.burmy, Species.burmyS, Species.burmyT };
-            int[] wormadamFormes = { Species.wormadam, Species.wormadamS, Species.wormadamT };
-            for (int j : burmyFormes) {
-                Pokemon fromPkmn = findPokemonInPoolWithSpeciesID(pokemonPool, j);
-                if (fromPkmn == null) continue;
-                for (int k : wormadamFormes) {
-                    Pokemon toPkmn = findPokemonInPoolWithSpeciesID(pokemonPool, k);
-                    if (toPkmn != null) {
-                        oldEvoPairs.add(new EvolutionPair(fromPkmn, toPkmn));
-                    }
-                }
-            }
-            // case for pumpkaboo
-            int[] pumpkabooFormes = { Species.pumpkaboo, Species.pumpkabooSmall, Species.pumpkabooLarge, Species.pumpkabooSuper };
-            int[] gourgeistFormes = { Species.gourgeist, Species.gourgeistSmall, Species.gourgeistLarge, Species.gourgeistSuper };
-            for (int j : pumpkabooFormes) {
-                Pokemon fromPkmn = findPokemonInPoolWithSpeciesID(pokemonPool, j);
-                if (fromPkmn == null) continue;
-                for (int k : gourgeistFormes) {
-                    Pokemon toPkmn = findPokemonInPoolWithSpeciesID(pokemonPool, k);
-                    if (toPkmn != null) {
-                        oldEvoPairs.add(new EvolutionPair(fromPkmn, toPkmn));
-                    }
-                }
-            }
+        for (Pokemon pk : pokemonPool) {
+            pk.evolutionsFrom.clear();
+            pk.evolutionsTo.clear();
         }
 
-        List<Pokemon> replacements = new ArrayList<>();
-
-        int loops = 0;
-        while (loops < 1) {
-            // Setup for this loop.
-            boolean hadError = false;
-            for (Pokemon pk : pokemonPool) {
-                pk.evolutionsFrom.clear();
-                pk.evolutionsTo.clear();
-            }
-
-            // Shuffle pokemon list so the results aren't overly predictable.
-            Collections.shuffle(pokemonPool, this.random);
-
-            for (Pokemon fromPK : pokemonPool) {
-                // Pick a Pokemon as replacement
-                replacements.clear();
-
-                List<Pokemon> chosenList = mainPokemonList;
-                // Step 1: base filters
-                for (Pokemon pk : chosenList) {
-                    // Prevent evolving into oneself (mandatory)
-                    if (pk == fromPK) {
-                        continue;
-                    }
-
-                    // Force same EXP curve (mandatory)
-                    if (pk.growthCurve != fromPK.growthCurve) {
-                        continue;
-                    }
-
-                    // Prevent evolving into banned Pokemon (mandatory)
-                    if (banned.contains(pk)) {
-                        continue;
-                    }
-
-                    // Prevent evolving into old thing if flagged
-                    EvolutionPair ep = new EvolutionPair(fromPK, pk);
-                    if (forceChange && oldEvoPairs.contains(ep)) {
-                        continue;
-                    }
-
-                    // Passes everything, add as a candidate.
-                    replacements.add(pk);
-                }
-
-                // If we don't have any candidates after Step 1, severe failure
-                // exit out of this loop and try again from scratch
-                if (replacements.size() == 0) {
-                    hadError = true;
-                    break;
-                }
-
-                // Step 2: filter by type, if needed
-                if (replacements.size() > 1 && sameType) {
-                    Set<Pokemon> includeType = new HashSet<>();
-                    for (Pokemon pk : replacements) {
-                        if (pk.primaryType == fromPK.primaryType
-                                || (fromPK.secondaryType != null && pk.primaryType == fromPK.secondaryType)
-                                || (pk.secondaryType != null && pk.secondaryType == fromPK.primaryType)
-                                || (pk.secondaryType != null && pk.secondaryType == fromPK.secondaryType)) {
-                            includeType.add(pk);
-                        }
-                    }
-
-                    if (includeType.size() != 0) {
-                        replacements.retainAll(includeType);
-                    }
-                }
-
-                // Step 3: pick - by similar strength or otherwise
-                Pokemon picked;
-
-                if (replacements.size() == 1) {
-                    // Foregone conclusion.
-                    picked = replacements.get(0);
-                } else {
-                    picked = replacements.get(this.random.nextInt(replacements.size()));
-                }
-
-                // Step 4: create new level 1 evo and add it to the new evos pool
-                Evolution newEvo = new Evolution(fromPK, picked, false, EvolutionType.LEVEL, 1);
-                newEvo.level = 1;
-                newEvo.formeSuffix = picked.formeSuffix;
-                boolean checkCosmetics = true;
-                if (picked.formeNumber > 0) {
-                    newEvo.forme = picked.formeNumber;
-                    checkCosmetics = false;
-                }
-                if (checkCosmetics && newEvo.to.cosmeticForms > 0) {
-                    newEvo.forme = newEvo.to.getCosmeticFormNumber(this.random.nextInt(newEvo.to.cosmeticForms));
-                } else if (!checkCosmetics && picked.cosmeticForms > 0) {
-                    newEvo.forme += picked.getCosmeticFormNumber(this.random.nextInt(picked.cosmeticForms));
-                }
-                fromPK.evolutionsFrom.add(newEvo);
-                picked.evolutionsTo.add(newEvo);
-            }
-
-            // If no error, done and return
-            if (!hadError) {
-                for (Pokemon pk: actuallyCosmeticPokemonPool) {
-                    pk.copyBaseFormeEvolutions(pk.baseForme);
-                }
-                return;
-            } else {
-                loops++;
-            }
+        for (Pokemon pk : actuallyCosmeticPokemonPool) {
+            pk.copyBaseFormeEvolutions(pk.baseForme);
         }
 
-        // If we made it out of the loop, we weren't able to randomize evos.
-        throw new RandomizationException("Not able to randomize evolutions in a sane amount of retries.");
+        setEvolutionEveryLevelFlag();
     }
+
+    protected void setEvolutionEveryLevelFlag() {}
 
     @Override
     public void changeCatchRates(Settings settings) {

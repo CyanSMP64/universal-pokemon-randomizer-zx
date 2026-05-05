@@ -333,56 +333,77 @@ public class Pokemon implements Comparable<Pokemon> {
         return number - o.number;
     }
 
-    private static final List<Integer> legendaries = Arrays.asList(Species.alakazamMega, Species.gengarMega, Species.pinsirMega,
-            Species.dragonite, Species.mew, Species.scizorMega, Species.heracrossMega, Species.houndoomMega, Species.tyranitar,
-            Species.celebi, Species.salamence, Species.metagross, Species.latias, Species.latios, Species.jirachi, Species.deoxys,
-            Species.deoxysA, Species.deoxysD, Species.deoxysS, Species.garchomp, Species.heatran, Species.manaphy, Species.darkrai,
-            Species.shaymin, Species.shayminS, Species.victini, Species.hydreigon, Species.landorus, Species.landorusT, Species.meloetta,
-            Species.meloettaP, Species.genesect, Species.goodra, Species.goodraH, Species.zygarde, Species.diancie, Species.hoopa,
-            Species.volcanion, Species.kommoO, Species.necrozma, Species.magearna, Species.marshadow, Species.zeraora, Species.melmetal,
-            Species.dragapult, Species.zarude, Species.baxcalibur, Species.ampharosMega, Species.steelixMega, Species.aerodactylMega,
-            Species.gardevoirMega, Species.galladeMega, Species.wishiwashiS, Species.venusaurMega, Species.lucarioMega,
-            Species.blastoiseMega, Species.sceptileMega, Species.blazikenMega, Species.aggronMega, Species.charizardMegaX,
-            Species.charizardMegaY, Species.swampertMega, Species.gyaradosMega, Species.greninjaA, Species.palafinH, Species.kyurem,
-            Species.zacian, Species.zamazenta, Species.slaking, Species.kyogre, Species.groudon, Species.regigigas, Species.koraidon,
-            Species.miraidon, Species.mewtwo, Species.lugia, Species.hoOh, Species.rayquaza, Species.dialga, Species.dialgaO,
-            Species.palkia, Species.palkiaO, Species.giratina, Species.giratinaO, Species.reshiram, Species.zekrom, Species.xerneas,
-            Species.yveltal, Species.hoopaU, Species.solgaleo, Species.lunala, Species.necrozmaDM, Species.necrozmaDW, Species.calyrexI,
-            Species.calyrexS, Species.eternatus, Species.tyranitarMega, Species.salamenceMega, Species.metagrossMega, Species.latiasMega,
-            Species.latiosMega, Species.garchompMega, Species.kyuremB, Species.kyuremW, Species.diancieMega, Species.zacianC,
-            Species.zamazentaC, Species.zygardeC, Species.arceus, Species.necrozmaU, Species.kyogreP, Species.groudonP, Species.mewtwoMegaX,
-            Species.mewtwoMegaY, Species.rayquazaMega, Species.archaludon, Species.pecharunt, Species.terapagosT, Species.terapagosS,
-            Species.eternatusE,
-            // legends z-a megas
-            Species.barbaracleMega, Species.hawluchaMega, Species.pyroarMega, Species.excadrillMega, Species.eelektrossMega,
-            Species.chandelureMega, Species.meganiumMega, Species.lucarioMegaZ, Species.glimmoraMega, Species.emboarMega,
-            Species.feraligatrMega, Species.chesnaughtMega, Species.greninjaMega, Species.golisopodMega, Species.delphoxMega,
-            Species.floetteMega, Species.starmieMega, Species.dragoniteMega, Species.garchompMegaZ, Species.heatranMega,
-            Species.darkraiMega, Species.magearnaMega, Species.zeraoraMega, Species.baxcaliburMega, Species.zygardeMega);
+    private static final List<Integer> legendaries = Arrays.asList(
+        // sub-legendary pokemon
+        Species.articuno, Species.zapdos, Species.moltres, Species.raikou, Species.entei, Species.suicune,
+        Species.regirock, Species.regice, Species.registeel, Species.latias, Species.latios,
+        Species.uxie, Species.mesprit, Species.azelf, Species.heatran, Species.regigigas, Species.cresselia,
+        Species.cobalion, Species.terrakion, Species.virizion, Species.tornadus, Species.thundurus, Species.landorus,
+        Species.typeNull, Species.silvally, Species.tapuKoko, Species.tapuLele, Species.tapuBulu, Species.tapuFini,
+        Species.kubfu, Species.urshifu, Species.regieleki, Species.regidrago, Species.glastrier, Species.spectrier,
+        Species.enamorus,
+        Species.woChien, Species.chienPao, Species.tingLu, Species.chiYu,
+        Species.okidogi, Species.munkidori, Species.fezandipiti, Species.ogerpon,
+        Species.articunoG, Species.zapdosG, Species.moltresG, Species.latiasMega, Species.latiosMega, Species.heatranMega,
+        Species.tornadusT, Species.thundurusT, Species.landorusT, Species.urshifuR, Species.enamorusT,
+        Species.ogerponW, Species.ogerponF, Species.ogerponR,
+        // legendary Pokemon
+        Species.mewtwo, Species.lugia, Species.hoOh, Species.kyogre, Species.groudon, Species.rayquaza,
+        Species.dialga, Species.palkia, Species.giratina, Species.reshiram, Species.zekrom, Species.kyurem,
+        Species.xerneas, Species.yveltal, Species.zygarde,
+        Species.cosmog, Species.cosmoem, Species.solgaleo, Species.lunala, Species.necrozma,
+        Species.zacian, Species.zamazenta, Species.eternatus, Species.calyrex,
+        Species.koraidon, Species.miraidon, Species.terapagos,
+        Species.mewtwoMegaX, Species.mewtwoMegaY, Species.kyogreP, Species.groudonP, Species.rayquazaMega,
+        Species.dialgaO, Species.palkiaO, Species.giratinaO, Species.kyuremW, Species.kyuremB,
+        Species.zygarde10, Species.zygardeC, Species.zygardeMega, Species.necrozmaDM, Species.necrozmaDW, Species.necrozmaU,
+        Species.zacianC, Species.zamazentaC, Species.eternatusE, Species.calyrexI, Species.calyrexS,
+        Species.terapagosT, Species.terapagosS,
+        // mythical pokemon
+        Species.mew, Species.celebi, Species.jirachi, Species.deoxys,
+        Species.phione, Species.manaphy, Species.darkrai, Species.shaymin, Species.arceus,
+        Species.victini, Species.keldeo, Species.meloetta, Species.genesect,
+        Species.diancie, Species.hoopa, Species.volcanion,
+        Species.magearna, Species.marshadow, Species.zeraora, Species.meltan, Species.melmetal,
+        Species.zarude, Species.pecharunt,
+        Species.deoxysA, Species.deoxysD, Species.deoxysS, Species.darkraiMega, Species.shayminS,
+        Species.meloettaP, Species.diancieMega, Species.hoopaU, Species.magearnaMega, Species.zeraoraMega
+    );
 
-    private static final List<Integer> bst641Plus = Arrays.asList(Species.palafinH, Species.kyurem, Species.zacian, Species.zamazenta,
-            Species.slaking, Species.kyogre, Species.groudon, Species.regigigas, Species.koraidon, Species.miraidon, Species.mewtwo,
-            Species.lugia, Species.hoOh, Species.rayquaza, Species.dialga, Species.dialgaO, Species.palkia, Species.palkiaO,
-            Species.giratina, Species.giratinaO, Species.reshiram, Species.zekrom, Species.xerneas, Species.yveltal, Species.hoopaU,
-            Species.solgaleo, Species.lunala, Species.necrozmaDM, Species.necrozmaDW, Species.calyrexI, Species.calyrexS, Species.eternatus,
-            Species.tyranitarMega, Species.salamenceMega, Species.metagrossMega, Species.latiasMega, Species.latiosMega,
-            Species.garchompMega, Species.kyuremB, Species.kyuremW, Species.diancieMega, Species.zacianC, Species.zamazentaC,
-            Species.zygardeC, Species.arceus, Species.necrozmaU, Species.kyogreP, Species.groudonP, Species.mewtwoMegaX,
-            Species.mewtwoMegaY, Species.rayquazaMega, Species.terapagosS, Species.eternatusE,
-            // legends z-a megas
-            Species.floetteMega, Species.starmieMega, Species.dragoniteMega, Species.garchompMegaZ, Species.heatranMega,
-            Species.darkraiMega, Species.magearnaMega, Species.zeraoraMega, Species.baxcaliburMega, Species.zygardeMega);
+    private static final List<Integer> strongLegendaries = Arrays.asList(
+        // legendary Pokemon
+        Species.mewtwo, Species.lugia, Species.hoOh, Species.kyogre, Species.groudon, Species.rayquaza,
+        Species.dialga, Species.palkia, Species.giratina, Species.reshiram, Species.zekrom, Species.kyurem,
+        Species.xerneas, Species.yveltal, Species.zygarde,
+        Species.cosmog, Species.cosmoem, Species.solgaleo, Species.lunala, Species.necrozma,
+        Species.zacian, Species.zamazenta, Species.eternatus, Species.calyrex,
+        Species.koraidon, Species.miraidon, Species.terapagos,
+        Species.mewtwoMegaX, Species.mewtwoMegaY, Species.kyogreP, Species.groudonP, Species.rayquazaMega,
+        Species.dialgaO, Species.palkiaO, Species.giratinaO, Species.kyuremW, Species.kyuremB,
+        Species.zygarde10, Species.zygardeC, Species.zygardeMega, Species.necrozmaDM, Species.necrozmaDW, Species.necrozmaU,
+        Species.zacianC, Species.zamazentaC, Species.eternatusE, Species.calyrexI, Species.calyrexS,
+        Species.terapagosT, Species.terapagosS,
+        // mythical pokemon
+        Species.mew, Species.celebi, Species.jirachi, Species.deoxys,
+        Species.phione, Species.manaphy, Species.darkrai, Species.shaymin, Species.arceus,
+        Species.victini, Species.keldeo, Species.meloetta, Species.genesect,
+        Species.diancie, Species.hoopa, Species.volcanion,
+        Species.magearna, Species.marshadow, Species.zeraora, Species.meltan, Species.melmetal,
+        Species.zarude, Species.pecharunt,
+        Species.deoxysA, Species.deoxysD, Species.deoxysS, Species.darkraiMega, Species.shayminS,
+        Species.meloettaP, Species.diancieMega, Species.hoopaU, Species.magearnaMega, Species.zeraoraMega
+    );
 
-    private static final List<Integer> strongLegendaries = Arrays.asList(Species.kyurem, Species.zacian, Species.zamazenta, Species.kyogre,
-            Species.groudon, Species.regigigas, Species.koraidon, Species.miraidon, Species.mewtwo, Species.lugia, Species.hoOh,
-            Species.rayquaza, Species.dialga, Species.dialgaO, Species.palkia, Species.palkiaO, Species.giratina, Species.giratinaO,
-            Species.reshiram, Species.zekrom, Species.xerneas, Species.yveltal, Species.hoopaU, Species.solgaleo, Species.lunala,
-            Species.necrozmaDM, Species.necrozmaDW, Species.calyrexI, Species.calyrexS, Species.eternatus, Species.latiasMega,
-            Species.latiosMega, Species.kyuremB, Species.kyuremW, Species.diancieMega, Species.zacianC, Species.zamazentaC,
-            Species.zygardeC, Species.arceus, Species.necrozmaU, Species.kyogreP, Species.groudonP, Species.mewtwoMegaX,
-            Species.mewtwoMegaY, Species.rayquazaMega, Species.terapagosS, Species.eternatusE,
-            // legends z-a megas
-            Species.heatranMega, Species.darkraiMega, Species.magearnaMega, Species.zeraoraMega, Species.zygardeMega);
+    private static final List<Integer> ultraBeastsAndParadox = Arrays.asList(
+        // ultra beasts
+        Species.nihilego, Species.buzzwole, Species.pheromosa, Species.xurkitree, Species.celesteela, Species.kartana,
+        Species.guzzlord, Species.poipole, Species.naganadel, Species.stakataka, Species.blacephalon,
+        // paradox pokemon
+        Species.greatTusk, Species.screamTail, Species.bruteBonnet, Species.flutterMane, Species.slitherWing, Species.sandyShocks,
+        Species.ironTreads, Species.ironBundle, Species.ironHands, Species.ironJugulis, Species.ironMoth, Species.ironThorns,
+        Species.roaringMoon, Species.ironValiant, Species.walkingWake, Species.ironLeaves,
+        Species.gougingFire, Species.ragingBolt, Species.ironBoulder, Species.ironCrown
+    );
 
     private static final List<Integer> ultraBeasts = Arrays.asList();
 
@@ -390,12 +411,12 @@ public class Pokemon implements Comparable<Pokemon> {
         return formeNumber == 0 ? legendaries.contains(this.number) : legendaries.contains(this.baseForme.number);
     }
 
-    public boolean isBST641Plus() {
-        return formeNumber == 0 ? bst641Plus.contains(this.number) : legendaries.contains(this.baseForme.number);
-    }
-
     public boolean isStrongLegendary() {
         return formeNumber == 0 ? strongLegendaries.contains(this.number) : strongLegendaries.contains(this.baseForme.number);
+    }
+
+    public boolean isUBorParadox() {
+        return formeNumber == 0 ? ultraBeastsAndParadox.contains(this.number) : ultraBeastsAndParadox.contains(this.baseForme.number);
     }
 
     // This method can only be used in contexts where alt formes are NOT involved; otherwise, some alt formes

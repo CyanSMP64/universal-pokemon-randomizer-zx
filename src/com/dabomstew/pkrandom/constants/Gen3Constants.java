@@ -165,7 +165,7 @@ public class Gen3Constants {
 
     public static final String eNatDexScriptPart2 = "3229610825F00129E40825F30116D540010003";
 
-    public static final String friendshipValueForEvoLocator = "DB2900D2";
+    public static final String friendshipValueForEvoLocator = "DB2900D8";
 
     public static final String perfectOddsBranchLocator = "FE2E2FD90020";
 

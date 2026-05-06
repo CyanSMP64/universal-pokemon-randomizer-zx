@@ -692,7 +692,7 @@ public class NewRandomizerGUI {
         );
         SpinnerModel wpBSTLimitModel = new SpinnerNumberModel(
                 600,
-                200,
+                307,
                 780,
                 1
         );
@@ -1625,7 +1625,7 @@ public class NewRandomizerGUI {
         wpLimitBSTComboBox.setSelectedIndex(settings.getWildBSTLimit());
         wpLimitBSTCheckBox.setSelected(settings.getWildPokemonBSTLimit() > 0);
         if (settings.getWildPokemonBSTLimit() > 0) {
-            wpBSTLimitSpinner.setValue(Math.max(200, Math.min(780, settings.getWildPokemonBSTLimit())));
+            wpBSTLimitSpinner.setValue(Math.max(307, Math.min(780, settings.getWildPokemonBSTLimit())));
         } else {
             wpBSTLimitSpinner.setValue(600);
         }

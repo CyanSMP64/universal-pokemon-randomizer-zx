@@ -39,6 +39,7 @@ public class TrainerPokemon {
     public String formeSuffix = "";
 
     public int forcedGenderFlag;
+    public int pokeBallId;
     public byte nature;
     public byte hpEVs;
     public byte atkEVs;
@@ -91,6 +92,7 @@ public class TrainerPokemon {
         tpk.moves[3] = moves[3];
 
         tpk.forcedGenderFlag = forcedGenderFlag;
+        tpk.pokeBallId = pokeBallId;
         tpk.nature = nature;
         tpk.IVs = IVs;
         tpk.hpEVs = hpEVs;

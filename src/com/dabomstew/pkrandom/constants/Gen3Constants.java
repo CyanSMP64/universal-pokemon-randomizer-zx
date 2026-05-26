@@ -177,6 +177,8 @@ public class Gen3Constants {
 
     public static final int emMeteorFallsStevenIndex = 804;
 
+    public static final int pokeBallCount = 12;
+
     public static final Map<Integer,List<Integer>> abilityVariations = setupAbilityVariations();
 
     private static Map<Integer,List<Integer>> setupAbilityVariations() {

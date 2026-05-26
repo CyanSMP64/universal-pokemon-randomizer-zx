@@ -1913,6 +1913,7 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
                 for (int poke = 0; poke < numPokes; poke++) {
                     TrainerPokemon thisPoke = new TrainerPokemon();
                     thisPoke.IVs = ((readWord(pointerToPokes + poke * 8) & 0xFF) * 31) / 255;
+                    thisPoke.pokeBallId = readWord(pointerToPokes + poke * 8 + 1) & 0x1f;
                     thisPoke.level = readWord(pointerToPokes + poke * 8 + 2) & 0xff;
                     thisPoke.abilitySlot = (readWord(pointerToPokes + poke * 8 + 3) & 0x03);
                     thisPoke.monIsShiny = (readWord(pointerToPokes + poke * 8 + 3) & 0x04) >> 2;
@@ -1926,6 +1927,7 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
                 for (int poke = 0; poke < numPokes; poke++) {
                     TrainerPokemon thisPoke = new TrainerPokemon();
                     thisPoke.IVs = ((readWord(pointerToPokes + poke * 8) & 0xFF) * 31) / 255;
+                    thisPoke.pokeBallId = readWord(pointerToPokes + poke * 8 + 1) & 0x1f;
                     thisPoke.level = readWord(pointerToPokes + poke * 8 + 2) & 0xff;
                     thisPoke.abilitySlot = (readWord(pointerToPokes + poke * 8 + 3) & 0x03);
                     thisPoke.monIsShiny = (readWord(pointerToPokes + poke * 8 + 3) & 0x04) >> 2;
@@ -1940,10 +1942,11 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
                 for (int poke = 0; poke < numPokes; poke++) {
                     TrainerPokemon thisPoke = new TrainerPokemon();
                     thisPoke.IVs = ((readWord(pointerToPokes + poke * 16) & 0xFF) * 31) / 255;
+                    thisPoke.pokeBallId = readWord(pointerToPokes + poke * 16 + 1) & 0x1f;
                     thisPoke.level = readWord(pointerToPokes + poke * 16 + 2) & 0xff;
                     thisPoke.abilitySlot = (readWord(pointerToPokes + poke * 16 + 3) & 0x03);
                     thisPoke.monIsShiny = (readWord(pointerToPokes + poke * 16 + 3) & 0x04) >> 2;
-                    thisPoke.forcedGenderFlag = (readWord(pointerToPokes + poke * 8 + 3) & 0x38) >> 3;
+                    thisPoke.forcedGenderFlag = (readWord(pointerToPokes + poke * 16 + 3) & 0x38) >> 3;
                     thisPoke.pokemon = pokesInternal[readWord(pointerToPokes + poke * 16 + 4)];
                     thisPoke.formeSuffix = thisPoke.pokemon.formeSuffix;
                     for (int move = 0; move < 4; move++) {
@@ -1956,10 +1959,11 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
                 for (int poke = 0; poke < numPokes; poke++) {
                     TrainerPokemon thisPoke = new TrainerPokemon();
                     thisPoke.IVs = ((readWord(pointerToPokes + poke * 16) & 0xFF) * 31) / 255;
+                    thisPoke.pokeBallId = readWord(pointerToPokes + poke * 16 + 1) & 0x1f;
                     thisPoke.level = readWord(pointerToPokes + poke * 16 + 2) & 0xff;
                     thisPoke.abilitySlot = (readWord(pointerToPokes + poke * 16 + 3) & 0x03);
                     thisPoke.monIsShiny = (readWord(pointerToPokes + poke * 16 + 3) & 0x04) >> 2;
-                    thisPoke.forcedGenderFlag = (readWord(pointerToPokes + poke * 8 + 3) & 0x38) >> 3;
+                    thisPoke.forcedGenderFlag = (readWord(pointerToPokes + poke * 16 + 3) & 0x38) >> 3;
                     thisPoke.pokemon = pokesInternal[readWord(pointerToPokes + poke * 16 + 4)];
                     thisPoke.formeSuffix = thisPoke.pokemon.formeSuffix;
                     thisPoke.heldItem = readWord(pointerToPokes + poke * 16 + 6);
@@ -2089,7 +2093,8 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
                 for (int poke = 0; poke < newPokeCount; poke++) {
                     TrainerPokemon tp = pokes.next();
                     // Add 1 to offset integer division truncation
-                    writeWord(pointerToPokes + poke * 16, Math.min(255, 1 + (tp.IVs * 255) / 31));
+                    rom[pointerToPokes + poke * 16] = (byte) Math.min(255, 1 + (tp.IVs * 255) / 31);
+                    rom[pointerToPokes + poke * 16 + 1] = (byte) tp.pokeBallId; // 5 bits, other 3 currently unused
                     rom[pointerToPokes + poke * 16 + 2] = (byte) tp.level;
                     int abilityShiny = tp.abilitySlot;
                     if (tp.monIsShiny == 1) {
@@ -2122,7 +2127,8 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
                 // no moves, blocks of 8 bytes
                 for (int poke = 0; poke < newPokeCount; poke++) {
                     TrainerPokemon tp = pokes.next();
-                    writeWord(pointerToPokes + poke * 8, Math.min(255, 1 + (tp.IVs * 255) / 31));
+                    rom[pointerToPokes + poke * 8] = (byte) Math.min(255, 1 + (tp.IVs * 255) / 31);
+                    rom[pointerToPokes + poke * 8 + 1] = (byte) tp.pokeBallId; // 5 bits, other 3 currently unused
                     rom[pointerToPokes + poke * 8 + 2] = (byte) tp.level;
                     int abilityShiny = tp.abilitySlot;
                     if (tp.monIsShiny == 1) {

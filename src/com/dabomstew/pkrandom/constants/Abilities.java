@@ -337,10 +337,10 @@ public class Abilities {
     public static final int poisonPuppeteer = 311;
     public static final int piercingDrill = 312;
     public static final int dragonize = 313;
-    public static final int unknown314 = 314;
+    public static final int eelevate = 314;
     public static final int unknown315 = 315;
     public static final int megaSol = 316;
-    public static final int unknown317 = 317;
+    public static final int fireMane = 317;
     public static final int unknown318 = 318;
     public static final int spicySpray = 319;
 }

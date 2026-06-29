@@ -3031,53 +3031,8 @@ public class Gen3RomHandler extends AbstractGBRomHandler {
         }
 
         havePatchedObedience = true;
-        // This routine *appears* to only exist in E/FR/LG...
-        // Look for the deoxys part which is
-        // MOVS R1, 0x19A
-        // CMP R0, R1
-        // BEQ <mew/deoxys case>
-        // Hex is CD214900 8842 0FD0
-        int deoxysObOffset = find(Gen3Constants.deoxysObeyCode);
-        if (deoxysObOffset > 0) {
-            // We found the deoxys check...
-            // Replacing it with MOVS R1, 0x0 would work fine.
-            // This would make it so species 0x0 (glitch only) would disobey.
-            // But MOVS R1, 0x0 (the version I know) is 2-byte
-            // So we just use it twice...
-            // the equivalent of nop'ing the second time.
-            rom[deoxysObOffset] = 0x00;
-            rom[deoxysObOffset + 1] = Gen3Constants.gbaSetRxOpcode | Gen3Constants.gbaR1;
-            rom[deoxysObOffset + 2] = 0x00;
-            rom[deoxysObOffset + 3] = Gen3Constants.gbaSetRxOpcode | Gen3Constants.gbaR1;
-            // Look for the mew check too... it's 0x16 ahead
-            if (readWord(deoxysObOffset + Gen3Constants.mewObeyOffsetFromDeoxysObey) == (((Gen3Constants.gbaCmpRxOpcode | Gen3Constants.gbaR0) << 8) | (Species.mew))) {
-                // Bingo, thats CMP R0, 0x97
-                // change to CMP R0, 0x0
-                writeWord(deoxysObOffset + Gen3Constants.mewObeyOffsetFromDeoxysObey,
-                        (((Gen3Constants.gbaCmpRxOpcode | Gen3Constants.gbaR0) << 8) | (0)));
-            }
-        }
 
-        // Look for evolutions too
-        if (romEntry.romType == Gen3Constants.RomType_FRLG) {
-            int evoJumpOffset = find(Gen3Constants.levelEvoKantoDexCheckCode);
-            if (evoJumpOffset > 0) {
-                // This currently compares species to 0x97 and then allows
-                // evolution if it's <= that.
-                // Allow it regardless by using an unconditional jump instead
-                writeWord(evoJumpOffset, Gen3Constants.gbaNopOpcode);
-                writeWord(evoJumpOffset + 2,
-                        ((Gen3Constants.gbaUnconditionalJumpOpcode << 8) | (Gen3Constants.levelEvoKantoDexJumpAmount)));
-            }
-
-            int stoneJumpOffset = find(Gen3Constants.stoneEvoKantoDexCheckCode);
-            if (stoneJumpOffset > 0) {
-                // same as the above, but for stone evos
-                writeWord(stoneJumpOffset, Gen3Constants.gbaNopOpcode);
-                writeWord(stoneJumpOffset + 2,
-                        ((Gen3Constants.gbaUnconditionalJumpOpcode << 8) | (Gen3Constants.stoneEvoKantoDexJumpAmount)));
-            }
-        }
+        // my hack patches this already, so i deleted this code
     }
 
     private void patchForNationalDex() {

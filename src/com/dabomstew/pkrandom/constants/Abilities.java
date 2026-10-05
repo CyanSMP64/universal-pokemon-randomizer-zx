@@ -343,4 +343,5 @@ public class Abilities {
     public static final int fireMane = 317;
     public static final int unknown318 = 318;
     public static final int spicySpray = 319;
+    public static final int auraGuard = 320;
 }

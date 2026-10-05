@@ -94,8 +94,8 @@ public class Gen3Constants {
 
     public static final byte freeSpaceByte = (byte) 0xFF;
 
-    public static final int rseStarter2Offset = 2, rseStarter3Offset = 4, frlgStarter2Offset = 511,
-            frlgStarter3Offset = 457, frlgStarterRepeatOffset = 5;
+    public static final int rseStarter2Offset = 2, rseStarter3Offset = 4, frlgStarter2Offset = 519,
+            frlgStarter3Offset = 465, frlgStarterRepeatOffset = 5;
 
     public static final int frlgBaseStarter1 = 1, frlgBaseStarter2 = 4, frlgBaseStarter3 = 7;
 
@@ -241,7 +241,7 @@ public class Gen3Constants {
             Abilities.embodyAspectHearthflameMask, Abilities.embodyAspectWellspringMask, Abilities.embodyAspectCornerstoneMask,
             Abilities.toxicChain, Abilities.supersweetSyrup, Abilities.teraShift, Abilities.teraShell, Abilities.teraformZero,
             Abilities.poisonPuppeteer, Abilities.piercingDrill, Abilities.dragonize, Abilities.eelevate, Abilities.unknown315,
-            Abilities.megaSol, Abilities.fireMane, Abilities.unknown318, Abilities.spicySpray);
+            Abilities.megaSol, Abilities.fireMane, Abilities.unknown318, Abilities.spicySpray, Abilities.auraGuard);
 
     public static final Map<Integer,String> formeSuffixes = setupFormeSuffixes();
 
@@ -565,10 +565,10 @@ public class Gen3Constants {
     }
 
     private static void setupAllowedItems() {
-        allowedItems = new ItemList(Gen3Items.prisonBottle);
+        allowedItems = new ItemList(Gen3Items.accelerator);
         // Key items (+1 unknown item)
         allowedItems.banRange(Gen3Items.machBike, 30);
-        allowedItems.banRange(Gen3Items.oaksParcel, 30);
+        allowedItems.banRange(Gen3Items.oaksParcel, 31);
         // Unknown blank items
         allowedItems.banRange(Gen3Items.unknown53, 10);
         allowedItems.banRange(Gen3Items.unknown87, 2);
@@ -1383,6 +1383,7 @@ public class Gen3Constants {
             {Gen3Items.oldSeaMap, 0},
             {Gen3Items.gracidea, 0},
             {Gen3Items.prisonBottle, 0},
+            {Gen3Items.accelerator, 0},
     }).collect(Collectors.toMap(kv -> kv[0], kv -> kv[1]));
 
     private static Map<Integer,String> setupFormeSuffixes() {

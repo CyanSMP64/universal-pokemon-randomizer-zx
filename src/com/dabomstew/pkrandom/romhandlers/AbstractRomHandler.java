@@ -645,6 +645,7 @@ public abstract class AbstractRomHandler implements RomHandler {
         pokemonList.get(Species.meloettaP).copyBaseHpStat(pokemonList.get(Species.meloetta));
         pokemonList.get(Species.greninjaB).copyBaseStats(pokemonList.get(Species.greninja));
         pokemonList.get(Species.greninjaA).copyBaseHpStat(pokemonList.get(Species.greninja));
+        pokemonList.get(Species.meowsticMega).copyBaseHpStat(pokemonList.get(Species.meowstic));
         pokemonList.get(Species.meowsticF).copyBaseStats(pokemonList.get(Species.meowstic));
         pokemonList.get(Species.meowsticFMega).copyBaseStats(pokemonList.get(Species.meowsticMega));
         pokemonList.get(Species.aegislashB).copyBaseHpStat(pokemonList.get(Species.aegislash));
@@ -756,7 +757,6 @@ public abstract class AbstractRomHandler implements RomHandler {
         pokemonList.get(Species.heatranMega).copyBaseHpStat(pokemonList.get(Species.heatran));
         pokemonList.get(Species.darkraiMega).copyBaseHpStat(pokemonList.get(Species.darkrai));
         pokemonList.get(Species.golurkMega).copyBaseHpStat(pokemonList.get(Species.golurk));
-        pokemonList.get(Species.meowsticMega).copyBaseHpStat(pokemonList.get(Species.meowstic));
         pokemonList.get(Species.crabominableMega).copyBaseHpStat(pokemonList.get(Species.crabominable));
         pokemonList.get(Species.golisopodMega).copyBaseHpStat(pokemonList.get(Species.golisopod));
         pokemonList.get(Species.magearnaMega).copyBaseHpStat(pokemonList.get(Species.magearna));
